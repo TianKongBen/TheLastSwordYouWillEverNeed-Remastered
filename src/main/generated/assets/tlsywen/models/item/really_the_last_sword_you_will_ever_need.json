@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "tlsywen:item/really_the_last_sword_you_will_ever_need"
+  }
+}

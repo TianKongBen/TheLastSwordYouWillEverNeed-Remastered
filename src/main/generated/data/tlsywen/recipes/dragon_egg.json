@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "tlsywen:compressed_star"
+    },
+    "D": {
+      "item": "minecraft:diamond_block"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "pattern": [
+    "ODO",
+    "OCO",
+    "OOO"
+  ],
+  "result": {
+    "item": "minecraft:dragon_egg"
+  },
+  "show_notification": true
+}
