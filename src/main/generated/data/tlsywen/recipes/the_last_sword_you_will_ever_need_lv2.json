@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:diamond_block"
+    },
+    "T": {
+      "item": "tlsywen:the_last_sword_you_will_ever_need_lv1"
+    }
+  },
+  "pattern": [
+    " D ",
+    "DTD",
+    " D "
+  ],
+  "result": {
+    "item": "tlsywen:the_last_sword_you_will_ever_need_lv2"
+  },
+  "show_notification": true
+}
