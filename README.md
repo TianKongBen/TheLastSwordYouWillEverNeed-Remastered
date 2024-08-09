@@ -31,3 +31,6 @@ Forge不会，但NeoForge之后会考虑的，目前Forge和NeoForge端可以借
 你是否会制作Quilt版本？
 
 我会尝试去做的，敬请期待!
+
+最终之剑Fabric版本的创建请求
+
