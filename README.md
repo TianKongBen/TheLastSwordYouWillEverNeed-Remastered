@@ -3,6 +3,9 @@
 ## English
 
 ---
+### tips
+The original work is The Last Sword You Will Ever Need, and the original author is QueenofSquiggles.
+
 ### Introduction to the mod
 This is a remastered version of The Last Sword You Will Ever Need, trying to restore the setting of version 1.7.10 as much as possible!
 
@@ -19,6 +22,9 @@ I'll try to do it, stay tuned!
 ## 中文
 
 ---
+### 温馨提示
+原作是最终之剑，原作者是QueenofSquiggles。
+
 ### 模组简介
 这是最终之剑的重制版，尽量还原了1.7.10版本的设定!
 
