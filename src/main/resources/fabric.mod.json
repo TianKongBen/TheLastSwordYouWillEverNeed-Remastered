@@ -1,0 +1,43 @@
+{
+	"schemaVersion": 1,
+	"id": "tlsywen",
+	"version": "${version}",
+	"name": "The Last Sword You Will Ever Need: Remastered",
+	"description": "This is a remastered version of The Last Sword You Will Ever Need, trying to restore the setting of version 1.7.10 as much as possible!",
+	"authors": [
+		"TianBen!"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/the-last-sword-you-will-ever-need-remastered",
+		"sources": "https://github.com/TianKongBen/TheLastSwordYouWillEverNeed-Remastered"
+	},
+	"license": "MIT",
+	"icon": "assets/tlsywen/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.tianben.tlsywen.TheLastSwordYouWillEverNeed"
+		],
+		"fabric-datagen": [
+			"net.tianben.tlsywen.TheLastSwordYouWillEverNeedDataGenerator"
+		],
+		"client": [
+			"net.tianben.tlsywen.TheLastSwordYouWillEverNeedClient"
+		]
+	},
+	"mixins": [
+		"tlsywen.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"detailab": "=>2.6.3"
+	},
+	"custom": {
+		"banner": "tlsywen_banner.png"
+	}
+}

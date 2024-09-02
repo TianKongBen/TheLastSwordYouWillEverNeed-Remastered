@@ -1,0 +1,45 @@
+{
+  "modmenu.nameTranslation.tlsywen": "The Last Sword You Will Ever Need: Remastered",
+  "modmenu.descriptionTranslation.tlsywen": "A mod for minecraft that adds an incredible sword. It is a sword that can one hit KO the Ender Dragon.",
+  "modmenu.summaryTranslation.tlsywen": "This is a remastered version of The Last Sword You Will Ever Need, trying to restore the setting of version 1.7.10 as much as possible!",
+
+  "resourcePack.tlsywen.classic_look.name": "Classic Look",
+  "resourcePack.tlsywen.classic_look.description": "The classic look of The Last Sword You Will Ever Need",
+
+  "itemgroup.the_last_sword_you_will_ever_need": "The Last Sword You Will Ever Need: Remastered",
+
+  "block.tlsywen.compressed_star": "Compressed Star",
+  "block.tlsywen.dragon_crystal_block": "Dragon Crystal Block",
+  "block.tlsywen.dragon_crystal_ore": "Dragon Crystal Ore",
+
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv1": "The Last Sword You Will Ever Need",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv2": "The Last Sword You Will Ever Need",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv3": "The Last Sword You Will Ever Need",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv4": "The Last Sword You Will Ever Need",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv5": "The Last Sword You Will Ever Need",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv6": "The Last Sword You Will Ever Need",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv7": "The Last Sword You Will Ever Need",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv8": "The Last Sword You Will Ever Need",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv9": "The Last Sword You Will Ever Need",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv10": "The Last Sword You Will Ever Need",
+  "item.tlsywen.really_the_last_sword_you_will_ever_need": "REALLY The Last Sword You Will Ever Need",
+
+  "item.tlsywen.dragon_crystal_helmet": "Dragon Crystal Helmet",
+  "item.tlsywen.dragon_crystal_chestplate": "Dragon Crystal Chestplate",
+  "item.tlsywen.dragon_crystal_leggings": "Dragon Crystal Leggings",
+  "item.tlsywen.dragon_crystal_boots": "Dragon Crystal Boots",
+
+  "item.tlsywen.dragon_crystal": "Dragon Crystal",
+
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv1": "Rank: 1",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv2": "Rank: 2",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv3": "Rank: 3",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv4": "Rank: 4",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv5": "Rank: 5",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv6": "Rank: 6",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv7": "Rank: 7",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv8": "Rank: 8",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv9": "Rank: 9",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv10": "Rank: 10",
+  "tooltip.tlsywen.really_the_last_sword_you_will_ever_need": "Rank: AWESOME"
+}

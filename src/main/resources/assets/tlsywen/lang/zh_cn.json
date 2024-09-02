@@ -1,0 +1,45 @@
+{
+  "modmenu.nameTranslation.tlsywen": "最终之剑:重制版",
+  "modmenu.descriptionTranslation.tlsywen": "一个 Minecraft 的模组，增加了一把令人难以置信的剑，这是一把可以一击终结末影龙的剑。",
+  "modmenu.summaryTranslation.tlsywen": "这是最终之剑的重制版，尽量还原了1.7.10版本的设定!",
+
+  "resourcePack.tlsywen.classic_look.name": "经典外观",
+  "resourcePack.tlsywen.classic_look.description": "最终之剑的经典外观",
+
+  "itemgroup.the_last_sword_you_will_ever_need": "最终之剑:重制版",
+
+  "block.tlsywen.compressed_star": "压缩星",
+  "block.tlsywen.dragon_crystal_block": "龙晶块",
+  "block.tlsywen.dragon_crystal_ore": "龙晶矿石",
+
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv1": "最终之剑",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv2": "最终之剑",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv3": "最终之剑",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv4": "最终之剑",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv5": "最终之剑",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv6": "最终之剑",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv7": "最终之剑",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv8": "最终之剑",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv9": "最终之剑",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv10": "最终之剑",
+  "item.tlsywen.really_the_last_sword_you_will_ever_need": "真最终之剑",
+
+  "item.tlsywen.dragon_crystal_helmet": "龙晶头盔",
+  "item.tlsywen.dragon_crystal_chestplate": "龙晶胸甲",
+  "item.tlsywen.dragon_crystal_leggings": "龙晶护腿",
+  "item.tlsywen.dragon_crystal_boots": "龙晶靴子",
+
+  "item.tlsywen.dragon_crystal": "龙晶",
+
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv1": "等级: 1",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv2": "等级: 2",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv3": "等级: 3",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv4": "等级: 4",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv5": "等级: 5",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv6": "等级: 6",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv7": "等级: 7",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv8": "等级: 8",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv9": "等级: 9",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv10": "等级: 10",
+  "tooltip.tlsywen.really_the_last_sword_you_will_ever_need": "等级: AWESOME"
+}

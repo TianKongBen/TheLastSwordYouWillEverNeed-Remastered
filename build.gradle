@@ -1,0 +1,75 @@
+plugins {
+	id 'fabric-loom' version '1.6-SNAPSHOT'
+	id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+	archivesName = project.archives_base_name
+}
+
+repositories {
+	maven {
+		url "https://cursemaven.com"
+	}
+}
+
+fabricApi {
+	configureDataGeneration()
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	modImplementation "curse.maven:detailab-506898:${detailab_fabric_version}"
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 17
+}
+
+java {
+	// Loom 会自动将 sourcesJar 附加到 RemapSourcesJar 任务和“构建”任务
+	// 如果存在。
+	// 如果删除此行，则不会生成源。
+	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
+}
+
+jar {
+	from("LICENSE") {
+		rename { "${it}_${project.base.archivesName.get()}"}
+	}
+}
+
+// 配置 Maven 发布
+publishing {
+	publications {
+		create("mavenJava", MavenPublication) {
+			artifactId = project.archives_base_name
+			from components.java
+		}
+	}
+
+	// 有关如何设置发布的信息，请参阅 https://docs.gradle.org/current/userguide/publishing_maven.html
+	repositories {
+		// 在此处添加要发布的仓库。
+		// 注意：此块与顶层中的块不具有相同的功能。
+		// 此处的存储库将用于发布您的项目，而不是用于
+		// 检索依赖项。
+	}
+}
