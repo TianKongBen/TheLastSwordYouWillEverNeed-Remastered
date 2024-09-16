@@ -20,44 +20,40 @@ public class ModArmorItem extends ArmorItem {
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if (entity instanceof PlayerEntity player) {
-                if(hasFullSuitOfArmorOn(player)) {
-                    player.getAbilities().allowFlying = true;
-                }else{
-                    if(!player.getAbilities().creativeMode){
-                        player.getAbilities().allowFlying = false;
-                        player.getAbilities().flying = false;
-                    }
+            boolean hasFullArmor = hasFullSuitOfArmorOn(player);
 
-                }
+            if (hasFullArmor && !player.getAbilities().allowFlying) {
+                player.getAbilities().allowFlying = true;
+                player.getAbilities().flying = true;
+                player.sendAbilitiesUpdate();
+            } else if (!hasFullArmor && player.getAbilities().allowFlying && !player.getAbilities().creativeMode) {
+                player.getAbilities().allowFlying = false;
+                player.getAbilities().flying = false;
+                player.sendAbilitiesUpdate();
             }
 
-        if(!world.isClient()) {
-            if(entity instanceof PlayerEntity) {
-                PlayerEntity player = (PlayerEntity)entity;
-                if(hasFullSuitOfArmorOn(player)) {
-                    if(player.getStatusEffect(StatusEffects.NIGHT_VISION) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.NIGHT_VISION)).getDuration() < 250){
-                        player.addStatusEffect(new  StatusEffectInstance(StatusEffects.NIGHT_VISION, 20, 127,
-                                false, false, true));
-                    }
+            if (!world.isClient()) {
+                applyStatusEffects(player, hasFullArmor);
+            }
+        }
+    }
 
-                    if(player.getStatusEffect(StatusEffects.HASTE) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.HASTE)).getDuration() < 250){
-                        player.addStatusEffect(new  StatusEffectInstance(StatusEffects.HASTE, 20, 127,
-                                false, false, true));
-                    }
+    private void applyStatusEffects(PlayerEntity player, boolean hasFullArmor) {
+        if (hasFullArmor) {
+            if(player.getStatusEffect(StatusEffects.NIGHT_VISION) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.NIGHT_VISION)).getDuration() < 250) {
+                player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 20, 127, false, false, true));
+            }
 
-                    if(player.getStatusEffect(StatusEffects.STRENGTH) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.STRENGTH)).getDuration() < 250){
-                        player.addStatusEffect(new  StatusEffectInstance(StatusEffects.STRENGTH, 20, 127,
-                                false, false, true));
-                    }
+            if(player.getStatusEffect(StatusEffects.HASTE) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.HASTE)).getDuration() < 250){
+                player.addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, 20, 127, false, false, true));
+            }
 
-                    if(player.getStatusEffect(StatusEffects.REGENERATION) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.RESISTANCE)).getDuration() < 250){
-                        player.addStatusEffect(new  StatusEffectInstance(StatusEffects.RESISTANCE, 20, 127,
-                                false, false, true));
-                    }
+            if(player.getStatusEffect(StatusEffects.STRENGTH) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.STRENGTH)).getDuration() < 250) {
+                player.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 20, 127, false, false, true));
+            }
 
-
-                }
-
+            if(player.getStatusEffect(StatusEffects.RESISTANCE) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.RESISTANCE)).getDuration() < 250) {
+                player.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 20, 127, false, false, true));
             }
         }
     }
@@ -74,4 +70,3 @@ public class ModArmorItem extends ArmorItem {
                 boots.getItem().equals(ModItems.DRAGON_CRYSTAL_BOOTS));
     }
 }
-
