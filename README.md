@@ -33,7 +33,3 @@ I'll try to do it, stay tuned!
 你是否会制作Forge或者NeoForge版本？
 
 Forge应该不会，但NeoForge之后会考虑的，目前Forge和NeoForge端可以借助信雅互联模组使用。
-
-你是否会制作Quilt版本？
-
-我会尝试去做的，敬请期待!

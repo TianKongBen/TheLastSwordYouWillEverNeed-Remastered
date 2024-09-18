@@ -55,7 +55,6 @@ public class ModArmorItem extends ArmorItem {
                                 false, false, true));
                     }
 
-
                 }
 
             }
