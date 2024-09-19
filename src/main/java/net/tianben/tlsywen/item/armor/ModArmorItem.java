@@ -20,14 +20,11 @@ public class ModArmorItem extends ArmorItem {
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         if (entity instanceof PlayerEntity player) {
-            if (hasFullSuitOfArmorOn(player) && !player.getAbilities().allowFlying) {
+            if (hasFullSuitOfArmorOn(player)) {
                 player.getAbilities().allowFlying = true;
-                player.getAbilities().flying = true;
-                player.sendAbilitiesUpdate();
-            } else if (!hasFullSuitOfArmorOn(player) && player.getAbilities().allowFlying && !player.getAbilities().creativeMode) {
+            } else if (!hasFullSuitOfArmorOn(player)) {
                 player.getAbilities().allowFlying = false;
                 player.getAbilities().flying = false;
-                player.sendAbilitiesUpdate();
             }
         }
 
@@ -36,22 +33,22 @@ public class ModArmorItem extends ArmorItem {
                 PlayerEntity player = (PlayerEntity)entity;
                 if(hasFullSuitOfArmorOn(player)) {
                     if(player.getStatusEffect(StatusEffects.NIGHT_VISION) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.NIGHT_VISION)).getDuration() < 250){
-                        player.addStatusEffect(new  StatusEffectInstance(StatusEffects.NIGHT_VISION, 20, 127,
+                        player.addStatusEffect(new  StatusEffectInstance(StatusEffects.NIGHT_VISION, 0, 127,
                                 false, false, true));
                     }
 
                     if(player.getStatusEffect(StatusEffects.HASTE) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.HASTE)).getDuration() < 250){
-                        player.addStatusEffect(new  StatusEffectInstance(StatusEffects.HASTE, 20, 127,
+                        player.addStatusEffect(new  StatusEffectInstance(StatusEffects.HASTE, 0, 127,
                                 false, false, true));
                     }
 
                     if(player.getStatusEffect(StatusEffects.STRENGTH) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.STRENGTH)).getDuration() < 250){
-                        player.addStatusEffect(new  StatusEffectInstance(StatusEffects.STRENGTH, 20, 127,
+                        player.addStatusEffect(new  StatusEffectInstance(StatusEffects.STRENGTH, 0, 127,
                                 false, false, true));
                     }
 
                     if(player.getStatusEffect(StatusEffects.REGENERATION) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.RESISTANCE)).getDuration() < 250){
-                        player.addStatusEffect(new  StatusEffectInstance(StatusEffects.RESISTANCE, 20, 127,
+                        player.addStatusEffect(new  StatusEffectInstance(StatusEffects.RESISTANCE, 0, 127,
                                 false, false, true));
                     }
 

@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
+import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -61,37 +62,37 @@ public class ModItems{
 
     //将压缩星和龙晶块添加到建筑方块
     private static void addItemToBuilding_blocksItemGroup(FabricItemGroupEntries entries) {
-        entries.add(ModBlocks.COMPRESSED_STAR);
-        entries.add(ModBlocks.DRAGON_CRYSTAL_BLOCK);
+        entries.addAfter(Items.NETHERITE_BLOCK, ModBlocks.COMPRESSED_STAR);
+        entries.addAfter(ModBlocks.COMPRESSED_STAR, ModBlocks.DRAGON_CRYSTAL_BLOCK);
     }
 
     //将龙晶矿添加到自然方块
     private static void addItemToNaturalItemGroup(FabricItemGroupEntries entries) {
-        entries.add(ModBlocks.DRAGON_CRYSTAL_ORE);
+        entries.addAfter(Items.ANCIENT_DEBRIS, ModBlocks.DRAGON_CRYSTAL_ORE);
     }
 
     //将最终之剑和龙晶套添加到战斗用品
     private static void addItemToCombatItemGroup(FabricItemGroupEntries entries) {
-        entries.add(THELASTSWORDYOUWILLEVERNEEDLV1);
-        entries.add(THELASTSWORDYOUWILLEVERNEEDLV2);
-        entries.add(THELASTSWORDYOUWILLEVERNEEDLV3);
-        entries.add(THELASTSWORDYOUWILLEVERNEEDLV4);
-        entries.add(THELASTSWORDYOUWILLEVERNEEDLV5);
-        entries.add(THELASTSWORDYOUWILLEVERNEEDLV6);
-        entries.add(THELASTSWORDYOUWILLEVERNEEDLV7);
-        entries.add(THELASTSWORDYOUWILLEVERNEEDLV8);
-        entries.add(THELASTSWORDYOUWILLEVERNEEDLV9);
-        entries.add(THELASTSWORDYOUWILLEVERNEEDLV10);
-        entries.add(REALLYTHELASTSWORDYOUWILLEVERNEED);
-        entries.add(DRAGON_CRYSTAL_HELMET);
-        entries.add(DRAGON_CRYSTAL_CHESTPLATE);
-        entries.add(DRAGON_CRYSTAL_LEGGINGS);
-        entries.add(DRAGON_CRYSTAL_BOOTS);
+        entries.addAfter(Items.NETHERITE_SWORD, THELASTSWORDYOUWILLEVERNEEDLV1);
+        entries.addAfter(THELASTSWORDYOUWILLEVERNEEDLV1, THELASTSWORDYOUWILLEVERNEEDLV2);
+        entries.addAfter(THELASTSWORDYOUWILLEVERNEEDLV2, THELASTSWORDYOUWILLEVERNEEDLV3);
+        entries.addAfter(THELASTSWORDYOUWILLEVERNEEDLV3, THELASTSWORDYOUWILLEVERNEEDLV4);
+        entries.addAfter(THELASTSWORDYOUWILLEVERNEEDLV4, THELASTSWORDYOUWILLEVERNEEDLV5);
+        entries.addAfter(THELASTSWORDYOUWILLEVERNEEDLV5, THELASTSWORDYOUWILLEVERNEEDLV6);
+        entries.addAfter(THELASTSWORDYOUWILLEVERNEEDLV6, THELASTSWORDYOUWILLEVERNEEDLV7);
+        entries.addAfter(THELASTSWORDYOUWILLEVERNEEDLV7, THELASTSWORDYOUWILLEVERNEEDLV8);
+        entries.addAfter(THELASTSWORDYOUWILLEVERNEEDLV8, THELASTSWORDYOUWILLEVERNEEDLV9);
+        entries.addAfter(THELASTSWORDYOUWILLEVERNEEDLV9, THELASTSWORDYOUWILLEVERNEEDLV10);
+        entries.addAfter(THELASTSWORDYOUWILLEVERNEEDLV10, REALLYTHELASTSWORDYOUWILLEVERNEED);
+        entries.addAfter(Items.NETHERITE_BOOTS, DRAGON_CRYSTAL_HELMET);
+        entries.addAfter(DRAGON_CRYSTAL_HELMET, DRAGON_CRYSTAL_CHESTPLATE);
+        entries.addAfter(DRAGON_CRYSTAL_CHESTPLATE, DRAGON_CRYSTAL_LEGGINGS);
+        entries.addAfter(DRAGON_CRYSTAL_LEGGINGS, DRAGON_CRYSTAL_BOOTS);
     }
 
     //将龙晶添加到原材料
     private static void addItemToIngredientItemGroup(FabricItemGroupEntries entries) {
-        entries.add(DRAGON_CRYSTAL);
+        entries.addAfter(Items.NETHERITE_INGOT, DRAGON_CRYSTAL);
     }
 
     public static Item registerItem(String name, Item item) {
