@@ -9,7 +9,9 @@
 	],
 	"contact": {
 		"homepage": "https://modrinth.com/mod/the-last-sword-you-will-ever-need-remastered",
-		"sources": "https://github.com/TianKongBen/TheLastSwordYouWillEverNeed-Remastered"
+		"sources": "https://github.com/TianKongBen/TheLastSwordYouWillEverNeed-Remastered",
+		"issues": "https://github.com/TianKongBen/TheLastSwordYouWillEverNeed-Remastered/issues",
+		"curseforge": "https://www.curseforge.com/minecraft/mc-mods/the-last-sword-you-will-ever-need-remastered"
 	},
 	"license": "MIT",
 	"icon": "assets/tlsywen/icon.png",
@@ -38,6 +40,11 @@
 		"detailab": "=>2.6.3"
 	},
 	"custom": {
-		"banner": "tlsywen_banner.png"
+		"modmenu": {
+			"links": {
+				"modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/the-last-sword-you-will-ever-need-remastered",
+				"modmenu.modrinth": "https://modrinth.com/mod/the-last-sword-you-will-ever-need-remastered"
+			}
+		}
 	}
 }
