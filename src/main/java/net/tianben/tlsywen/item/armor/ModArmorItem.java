@@ -19,12 +19,14 @@ public class ModArmorItem extends ArmorItem {
 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        if (entity instanceof PlayerEntity player) {
-            if (hasFullSuitOfArmorOn(player)) {
+        if(entity instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity)entity;
+            if(hasFullSuitOfArmorOn(player)) {
                 player.getAbilities().allowFlying = true;
-            } else if (!hasFullSuitOfArmorOn(player)) {
-                player.getAbilities().allowFlying = false;
-                player.getAbilities().flying = false;
+            } else {
+                if(!player.getAbilities().creativeMode){
+                    player.getAbilities().allowFlying = false;
+                }
             }
         }
 
