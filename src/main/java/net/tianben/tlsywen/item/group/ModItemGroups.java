@@ -8,7 +8,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.tianben.tlsywen.TheLastSwordYouWillEverNeed;
-import net.tianben.tlsywen.block.ModBlocks;
 import net.tianben.tlsywen.item.ModItems;
 
 public class ModItemGroups {
@@ -16,9 +15,9 @@ public class ModItemGroups {
             new Identifier(TheLastSwordYouWillEverNeed.MOD_ID, "the_last_sword_you_will_ever_need"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.the_last_sword_you_will_ever_need"))
                     .icon(() -> new ItemStack(ModItems.REALLYTHELASTSWORDYOUWILLEVERNEED)).entries((displayContext, entries) -> {
-                        entries.add(ModBlocks.COMPRESSED_STAR);
-                        entries.add(ModBlocks.DRAGON_CRYSTAL_BLOCK);
-                        entries.add(ModBlocks.DRAGON_CRYSTAL_ORE);
+                        entries.add(ModItems.COMPRESSED_STAR);
+                        entries.add(ModItems.DRAGON_CRYSTAL_BLOCK);
+                        entries.add(ModItems.DRAGON_CRYSTAL_ORE);
 
                         entries.add(ModItems.THELASTSWORDYOUWILLEVERNEEDLV1);
                         entries.add(ModItems.THELASTSWORDYOUWILLEVERNEEDLV2);
@@ -39,7 +38,6 @@ public class ModItemGroups {
 
                         entries.add(ModItems.DRAGON_CRYSTAL);
                     }).build());
-
 
     public static void registerItemGroups() {
         TheLastSwordYouWillEverNeed.LOGGER .info("Registering Item Groups for " +TheLastSwordYouWillEverNeed.MOD_ID);

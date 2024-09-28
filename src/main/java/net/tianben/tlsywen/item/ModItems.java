@@ -18,6 +18,11 @@ import net.tianben.tlsywen.item.armor.ModArmorItem;
 import net.tianben.tlsywen.item.sword.*;
 
 public class ModItems{
+    //注册方块物品
+    public static final Item COMPRESSED_STAR = Items.register(ModBlocks.COMPRESSED_STAR);
+    public static final Item DRAGON_CRYSTAL_BLOCK = Items.register(ModBlocks.DRAGON_CRYSTAL_BLOCK);
+    public static final Item DRAGON_CRYSTAL_ORE = Items.register(ModBlocks.DRAGON_CRYSTAL_ORE);
+
     //注册最终之剑
     public static final Item THELASTSWORDYOUWILLEVERNEEDLV1 = registerItem("the_last_sword_you_will_ever_need_lv1",
             new TheLastSwordYouWillEverNeedlv1Item(ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV1));
@@ -42,10 +47,6 @@ public class ModItems{
     public static final Item REALLYTHELASTSWORDYOUWILLEVERNEED = registerItem("really_the_last_sword_you_will_ever_need",
             new ReallyTheLastSwordYouWillEverNeedItem(ModToolMaterial.REALLYTHELASTSWORDYOUWILLEVERNEED));
 
-    //注册材料
-    public static final Item DRAGON_CRYSTAL = registerItem("dragon_crystal",
-            new Item(new FabricItemSettings()));
-
     //注册装备
     public static final Item DRAGON_CRYSTAL_HELMET = registerItem("dragon_crystal_helmet",
             new ModArmorItem(ModArmorMaterials.DRAGON_CRYSTAL, ArmorItem.Type.HELMET,
@@ -60,15 +61,19 @@ public class ModItems{
             new ArmorItem(ModArmorMaterials.DRAGON_CRYSTAL, ArmorItem.Type.BOOTS,
                     new FabricItemSettings()));
 
+    //注册材料
+    public static final Item DRAGON_CRYSTAL = registerItem("dragon_crystal",
+            new Item(new FabricItemSettings()));
+
     //将压缩星和龙晶块添加到建筑方块
     private static void addItemToBuilding_blocksItemGroup(FabricItemGroupEntries entries) {
-        entries.addAfter(Items.NETHERITE_BLOCK, ModBlocks.COMPRESSED_STAR);
-        entries.addAfter(ModBlocks.COMPRESSED_STAR, ModBlocks.DRAGON_CRYSTAL_BLOCK);
+        entries.addAfter(Items.NETHERITE_BLOCK, COMPRESSED_STAR);
+        entries.addAfter(COMPRESSED_STAR, DRAGON_CRYSTAL_BLOCK);
     }
 
     //将龙晶矿添加到自然方块
     private static void addItemToNaturalItemGroup(FabricItemGroupEntries entries) {
-        entries.addAfter(Items.ANCIENT_DEBRIS, ModBlocks.DRAGON_CRYSTAL_ORE);
+        entries.addAfter(Items.ANCIENT_DEBRIS, DRAGON_CRYSTAL_ORE);
     }
 
     //将最终之剑和龙晶套添加到战斗用品
