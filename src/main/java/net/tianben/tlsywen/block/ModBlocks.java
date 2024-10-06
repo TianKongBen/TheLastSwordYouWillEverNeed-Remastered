@@ -17,11 +17,11 @@ public class ModBlocks {
             new Block(FabricBlockSettings.create().instrument(Instrument.BASEDRUM).strength(0f, 6.0f)
                     .luminance(state -> 14).solidBlock(Blocks::never)));
     public static final Block DRAGON_CRYSTAL_BLOCK = registerBlock("dragon_crystal_block",
-            new SoundBlock(FabricBlockSettings.create().mapColor(MapColor.STONE_GRAY)
+            new DragonCrystalBlock(FabricBlockSettings.create().mapColor(MapColor.STONE_GRAY)
                     .instrument(Instrument.BASEDRUM).requiresTool().strength(5.5f, 6.0f)
                     .sounds(ModSounds.DRAGON_CRYSTAL_BLOCK_SOUNDS)));
     public static final Block DRAGON_CRYSTAL_ORE = registerBlock("dragon_crystal_ore",
-            new SoundBlock(FabricBlockSettings.create().mapColor(MapColor.STONE_GRAY)
+            new DragonCrystalBlock(FabricBlockSettings.create().mapColor(MapColor.STONE_GRAY)
                     .instrument(Instrument.BASEDRUM).requiresTool().strength(5.5f, 6.0f)
                     .sounds(ModSounds.DRAGON_CRYSTAL_BLOCK_SOUNDS)));
 

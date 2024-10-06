@@ -17,8 +17,7 @@ public enum ModToolMaterial implements ToolMaterial {
     THELASTSWORDYOUWILLEVERNEEDLV8(-1, 10.0f, 7200f, 20, () -> Ingredient.ofItems(ModItems.DRAGON_CRYSTAL)),
     THELASTSWORDYOUWILLEVERNEEDLV9(-1, 10.0f, 8000f, 20, () -> Ingredient.ofItems(ModItems.DRAGON_CRYSTAL)),
     THELASTSWORDYOUWILLEVERNEEDLV10(-1, 10.0f, 8800f, 20, () -> Ingredient.ofItems(ModItems.DRAGON_CRYSTAL)),
-    REALLYTHELASTSWORDYOUWILLEVERNEED(-1, 10.0f, 7999999874453995500f, 20, () -> Ingredient.ofItems(ModItems.DRAGON_CRYSTAL))
-    ;
+    REALLYTHELASTSWORDYOUWILLEVERNEED(-1, 10.0f, 7999999874453995500f, 20, () -> Ingredient.ofItems(ModItems.DRAGON_CRYSTAL));
 
     private final int itemDurability;
     private final float miningSpeed;

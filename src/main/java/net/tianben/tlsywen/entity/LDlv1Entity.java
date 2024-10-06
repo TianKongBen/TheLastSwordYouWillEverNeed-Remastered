@@ -28,6 +28,15 @@ public class LDlv1Entity extends ThrownItemEntity {
     }
 
     @Override
+    public boolean isOnFire() {
+        return false;
+    }
+
+    protected boolean isBurning() {
+        return false;
+    }
+
+    @Override
     public void handleStatus(byte status) {
         if (status == EntityStatuses.PLAY_DEATH_SOUND_OR_ADD_PROJECTILE_HIT_PARTICLES) {
             Vec3d vec3d = this.getVelocity();
@@ -81,6 +90,9 @@ public class LDlv1Entity extends ThrownItemEntity {
         super.tick();
         HitResult hitResult = ProjectileUtil.getCollision(this, this::canHit);
         boolean bl = false;
+        if (this.isBurning()) {
+            this.setOnFireFor(1);
+        }
         if (hitResult.getType() != HitResult.Type.MISS && !bl) {
             this.onCollision(hitResult);
         }
