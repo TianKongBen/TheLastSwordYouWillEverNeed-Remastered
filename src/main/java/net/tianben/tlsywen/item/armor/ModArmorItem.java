@@ -24,7 +24,7 @@ public class ModArmorItem extends ArmorItem {
             if(hasFullSuitOfArmorOn(player)) {
                 player.getAbilities().allowFlying = true;
             } else {
-                if(player.getAbilities().allowFlying && !player.isCreative()) {
+                if(player.getAbilities().allowFlying && !player.isCreative() && !player.isSpectator()) {
                     player.getAbilities().allowFlying = false;
                     player.getAbilities().flying = false;
                     player.sendAbilitiesUpdate();
