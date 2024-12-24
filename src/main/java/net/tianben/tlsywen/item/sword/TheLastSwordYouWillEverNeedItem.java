@@ -15,18 +15,18 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-import net.tianben.tlsywen.entity.LDlv9Entity;
+import net.tianben.tlsywen.entity.LDEntity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class TheLastSwordYouWillEverNeedlv9Item extends PickaxeItem {
+public class TheLastSwordYouWillEverNeedItem extends PickaxeItem {
 
     private final int attackDamage;
 
     private static final float ATTACK_SPEED = -2.4f;
 
-    public TheLastSwordYouWillEverNeedlv9Item(ToolMaterial toolMaterial) {
+    public TheLastSwordYouWillEverNeedItem(ToolMaterial toolMaterial) {
         super(toolMaterial, -1, ATTACK_SPEED, new FabricItemSettings());
 
         attackDamage = (int)toolMaterial.getAttackDamage();
@@ -50,7 +50,7 @@ public class TheLastSwordYouWillEverNeedlv9Item extends PickaxeItem {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
         if (!world.isClient) {
-            LDlv9Entity lightningProjectileEntity = new LDlv9Entity(world, user);
+            LDEntity lightningProjectileEntity = new LDEntity(world, user);
             lightningProjectileEntity.setItem(itemStack);
             lightningProjectileEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 1.5f, 0.0f);
             world.spawnEntity(lightningProjectileEntity);

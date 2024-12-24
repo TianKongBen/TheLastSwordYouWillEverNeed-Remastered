@@ -6,13 +6,5 @@ import org.jetbrains.annotations.ApiStatus;
 public interface IClientHelper {
     boolean forceDisableDetailArmorBarSupport();
 
-    Platform getPlatform();
-
     boolean isModLoaded(String modId);
-
-    boolean isProduction();
-
-    enum Platform {
-        FABRIC
-    }
 }

@@ -6,13 +6,12 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.tianben.tlsywen.TheLastSwordYouWillEverNeed;
-import net.tianben.tlsywen.item.ModItems;
 
 import java.util.function.Supplier;
 
 public enum ModArmorMaterials implements ArmorMaterial {
     DRAGON_CRYSTAL("dragon_crystal",  new int[] { 1, 2, 1, 1}, 20,
-            SoundEvents.ENTITY_ENDER_DRAGON_GROWL, 0f, 0f, () -> Ingredient.ofItems(ModItems.DRAGON_CRYSTAL));
+            SoundEvents.ENTITY_ENDER_DRAGON_GROWL, 0f, 0f, () -> Ingredient.EMPTY);
 
     private final String name;
     private final int[] protectionAmounts;

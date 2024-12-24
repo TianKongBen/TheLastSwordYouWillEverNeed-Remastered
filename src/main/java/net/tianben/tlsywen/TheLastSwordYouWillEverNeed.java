@@ -1,6 +1,7 @@
 package net.tianben.tlsywen;
 
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.util.Identifier;
 import net.tianben.tlsywen.block.ModBlocks;
 import net.tianben.tlsywen.detailab.helper.ConfigHelper;
 import net.tianben.tlsywen.detailab.helper.IClientHelper;
@@ -16,6 +17,10 @@ public class TheLastSwordYouWillEverNeed implements ModInitializer {
 	public static final String MOD_ID = "tlsywen";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 	private static IClientHelper platformHelper;
+
+	public static Identifier ID(String path) {
+		return new Identifier(MOD_ID, path);
+	}
 
     @Override
 	public void onInitialize() {

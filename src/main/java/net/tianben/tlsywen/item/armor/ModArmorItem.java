@@ -19,23 +19,10 @@ public class ModArmorItem extends ArmorItem {
 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        if(entity instanceof PlayerEntity) {
-            PlayerEntity player = (PlayerEntity)entity;
-            if(hasFullSuitOfArmorOn(player)) {
-                player.getAbilities().allowFlying = true;
-            } else {
-                if(player.getAbilities().allowFlying && !player.isCreative() && !player.isSpectator()) {
-                    player.getAbilities().allowFlying = false;
-                    player.getAbilities().flying = false;
-                    player.sendAbilitiesUpdate();
-                }
-            }
-        }
-
         if(!world.isClient()) {
             if(entity instanceof PlayerEntity) {
                 PlayerEntity player = (PlayerEntity)entity;
-                if(hasFullSuitOfArmorOn(player)) {
+                if(isWearingDragonCrystalArmor(player)) {
                     if(player.getStatusEffect(StatusEffects.NIGHT_VISION) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.NIGHT_VISION)).getDuration() < 250){
                         player.addStatusEffect(new  StatusEffectInstance(StatusEffects.NIGHT_VISION, 0, 127, false, true, false));
                     }
@@ -57,15 +44,14 @@ public class ModArmorItem extends ArmorItem {
         }
     }
 
-    private boolean hasFullSuitOfArmorOn(PlayerEntity player) {
+    private boolean isWearingDragonCrystalArmor(PlayerEntity player) {
         ItemStack boots = player.getInventory().getArmorStack(0);
         ItemStack leggings = player.getInventory().getArmorStack(1);
         ItemStack chestplate = player.getInventory().getArmorStack(2);
         ItemStack helmet = player.getInventory().getArmorStack(3);
-
-        return (helmet.getItem().equals(ModItems.DRAGON_CRYSTAL_HELMET) &&
-                chestplate.getItem().equals(ModItems.DRAGON_CRYSTAL_CHESTPLATE) &&
-                leggings.getItem().equals(ModItems.DRAGON_CRYSTAL_LEGGINGS) &&
-                boots.getItem().equals(ModItems.DRAGON_CRYSTAL_BOOTS));
+        return helmet.getItem() == ModItems.DRAGON_CRYSTAL_HELMET &&
+                chestplate.getItem() == ModItems.DRAGON_CRYSTAL_CHESTPLATE &&
+                leggings.getItem() == ModItems.DRAGON_CRYSTAL_LEGGINGS &&
+                boots.getItem() == ModItems.DRAGON_CRYSTAL_BOOTS;
     }
 }

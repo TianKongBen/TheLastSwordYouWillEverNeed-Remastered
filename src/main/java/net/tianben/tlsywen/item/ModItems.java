@@ -17,7 +17,7 @@ import net.tianben.tlsywen.item.material.ModToolMaterial;
 import net.tianben.tlsywen.item.armor.ModArmorItem;
 import net.tianben.tlsywen.item.sword.*;
 
-public class ModItems{
+public class ModItems {
     //注册方块物品
     public static final Item COMPRESSED_STAR = Items.register(ModBlocks.COMPRESSED_STAR);
     public static final Item DRAGON_CRYSTAL_BLOCK = Items.register(ModBlocks.DRAGON_CRYSTAL_BLOCK);
@@ -25,40 +25,40 @@ public class ModItems{
 
     //注册最终之剑
     public static final Item THELASTSWORDYOUWILLEVERNEEDLV1 = registerItem("the_last_sword_you_will_ever_need_lv1",
-            new TheLastSwordYouWillEverNeedlv1Item(ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV1));
+            new TheLastSwordYouWillEverNeedItem(ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV1));
     public static final Item THELASTSWORDYOUWILLEVERNEEDLV2 = registerItem("the_last_sword_you_will_ever_need_lv2",
-            new TheLastSwordYouWillEverNeedlv2Item(ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV2));
+            new TheLastSwordYouWillEverNeedItem(ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV2));
     public static final Item THELASTSWORDYOUWILLEVERNEEDLV3 = registerItem("the_last_sword_you_will_ever_need_lv3",
-            new TheLastSwordYouWillEverNeedlv3Item(ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV3));
+            new TheLastSwordYouWillEverNeedItem(ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV3));
     public static final Item THELASTSWORDYOUWILLEVERNEEDLV4 = registerItem("the_last_sword_you_will_ever_need_lv4",
-            new TheLastSwordYouWillEverNeedlv4Item(ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV4));
+            new TheLastSwordYouWillEverNeedItem(ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV4));
     public static final Item THELASTSWORDYOUWILLEVERNEEDLV5 = registerItem("the_last_sword_you_will_ever_need_lv5",
-            new TheLastSwordYouWillEverNeedlv5Item(ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV5));
+            new TheLastSwordYouWillEverNeedItem(ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV5));
     public static final Item THELASTSWORDYOUWILLEVERNEEDLV6 = registerItem("the_last_sword_you_will_ever_need_lv6",
-            new TheLastSwordYouWillEverNeedlv6Item(ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV6));
+            new TheLastSwordYouWillEverNeedItem(ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV6));
     public static final Item THELASTSWORDYOUWILLEVERNEEDLV7 = registerItem("the_last_sword_you_will_ever_need_lv7",
-            new TheLastSwordYouWillEverNeedlv7Item(ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV7));
+            new TheLastSwordYouWillEverNeedItem(ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV7));
     public static final Item THELASTSWORDYOUWILLEVERNEEDLV8 = registerItem("the_last_sword_you_will_ever_need_lv8",
-            new TheLastSwordYouWillEverNeedlv8Item(ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV8));
+            new TheLastSwordYouWillEverNeedItem(ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV8));
     public static final Item THELASTSWORDYOUWILLEVERNEEDLV9 = registerItem("the_last_sword_you_will_ever_need_lv9",
-            new TheLastSwordYouWillEverNeedlv9Item(ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV9));
+            new TheLastSwordYouWillEverNeedItem(ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV9));
     public static final Item THELASTSWORDYOUWILLEVERNEEDLV10 = registerItem("the_last_sword_you_will_ever_need_lv10",
-            new TheLastSwordYouWillEverNeedlv10Item(ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV10));
+            new TheLastSwordYouWillEverNeedItem(ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV10));
     public static final Item REALLYTHELASTSWORDYOUWILLEVERNEED = registerItem("really_the_last_sword_you_will_ever_need",
-            new ReallyTheLastSwordYouWillEverNeedItem(ModToolMaterial.REALLYTHELASTSWORDYOUWILLEVERNEED));
+            new TheLastSwordYouWillEverNeedItem(ModToolMaterial.REALLYTHELASTSWORDYOUWILLEVERNEED));
 
     //注册装备
     public static final Item DRAGON_CRYSTAL_HELMET = registerItem("dragon_crystal_helmet",
             new ModArmorItem(ModArmorMaterials.DRAGON_CRYSTAL, ArmorItem.Type.HELMET,
                     new FabricItemSettings()));
     public static final Item DRAGON_CRYSTAL_CHESTPLATE = registerItem("dragon_crystal_chestplate",
-            new ArmorItem(ModArmorMaterials.DRAGON_CRYSTAL, ArmorItem.Type.CHESTPLATE,
+            new ModArmorItem(ModArmorMaterials.DRAGON_CRYSTAL, ArmorItem.Type.CHESTPLATE,
                     new FabricItemSettings()));
     public static final Item DRAGON_CRYSTAL_LEGGINGS = registerItem("dragon_crystal_leggings",
-            new ArmorItem(ModArmorMaterials.DRAGON_CRYSTAL, ArmorItem.Type.LEGGINGS,
+            new ModArmorItem(ModArmorMaterials.DRAGON_CRYSTAL, ArmorItem.Type.LEGGINGS,
                     new FabricItemSettings()));
     public static final Item DRAGON_CRYSTAL_BOOTS = registerItem("dragon_crystal_boots",
-            new ArmorItem(ModArmorMaterials.DRAGON_CRYSTAL, ArmorItem.Type.BOOTS,
+            new ModArmorItem(ModArmorMaterials.DRAGON_CRYSTAL, ArmorItem.Type.BOOTS,
                     new FabricItemSettings()));
 
     //注册材料

@@ -42,17 +42,7 @@ public final class ConfigHelper {
         }
 
         @Override
-        public Platform getPlatform() {
-            return null;
-        }
-
-        @Override
         public boolean isModLoaded(String modId) {
-            return false;
-        }
-
-        @Override
-        public boolean isProduction() {
             return false;
         }
     }

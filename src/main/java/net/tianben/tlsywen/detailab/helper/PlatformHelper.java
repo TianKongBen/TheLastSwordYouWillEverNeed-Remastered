@@ -21,17 +21,7 @@ public final class PlatformHelper implements IClientHelper {
     }
 
     @Override
-    public IClientHelper.Platform getPlatform() {
-        return Platform.FABRIC;
-    }
-
-    @Override
     public boolean isModLoaded(String modId) {
         return FabricLoader.getInstance().isModLoaded(modId);
-    }
-
-    @Override
-    public boolean isProduction() {
-        return !FabricLoader.getInstance().isDevelopmentEnvironment();
     }
 }

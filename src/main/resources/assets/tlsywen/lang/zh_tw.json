@@ -6,7 +6,7 @@
   "resourcePack.tlsywen.classic_look.name": "經典外觀",
   "resourcePack.tlsywen.classic_look.description": "最終之劍的經典外觀",
 
-  "itemgroup.the_last_sword_you_will_ever_need": "§f最終之劍:重製版",
+  "itemgroup.the_last_sword_you_will_ever_need": "最終之劍:重製版",
 
   "block.tlsywen.compressed_star": "壓縮星",
   "block.tlsywen.dragon_crystal_block": "龍晶塊",
@@ -41,5 +41,5 @@
   "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv8": "等級: 8",
   "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv9": "等級: 9",
   "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv10": "等級: 10",
-  "tooltip.tlsywen.really_the_last_sword_you_will_ever_need": "等級: AWESOME"
+  "tooltip.tlsywen.really_the_last_sword_you_will_ever_need": "等級: 終極"
 }

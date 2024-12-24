@@ -11,22 +11,22 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
-import net.tianben.tlsywen.entity.LDlv2Entity;
+import net.tianben.tlsywen.entity.LDEntity;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
 @Environment(value=EnvType.CLIENT)
-public class RenderLDlv2
-        extends EntityRenderer<LDlv2Entity> {
+public class RenderLD
+        extends EntityRenderer<LDEntity> {
     private static final Identifier TEXTURE = new Identifier("textures/item/diamond.png");
     private static final RenderLayer LAYER = RenderLayer.getEntityCutout(TEXTURE);
 
-    public RenderLDlv2(EntityRendererFactory.Context context) {
+    public RenderLD(EntityRendererFactory.Context context) {
         super(context);
     }
 
     @Override
-    public void render(LDlv2Entity lDlv2Entity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
+    public void render(LDEntity lDEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
         matrixStack.push();
         matrixStack.scale(0.25f, 0.25f, 0.25f);
         matrixStack.multiply(this.dispatcher.getRotation());
@@ -35,12 +35,12 @@ public class RenderLDlv2
         Matrix4f matrix4f = entry.getPositionMatrix();
         Matrix3f matrix3f = entry.getNormalMatrix();
         VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(LAYER);
-        RenderLDlv2.produceVertex(vertexConsumer, matrix4f, matrix3f, i, 0.0f, 0, 0, 1);
-        RenderLDlv2.produceVertex(vertexConsumer, matrix4f, matrix3f, i, 1.0f, 0, 1, 1);
-        RenderLDlv2.produceVertex(vertexConsumer, matrix4f, matrix3f, i, 1.0f, 1, 1, 0);
-        RenderLDlv2.produceVertex(vertexConsumer, matrix4f, matrix3f, i, 0.0f, 1, 0, 0);
+        RenderLD.produceVertex(vertexConsumer, matrix4f, matrix3f, i, 0.0f, 0, 0, 1);
+        RenderLD.produceVertex(vertexConsumer, matrix4f, matrix3f, i, 1.0f, 0, 1, 1);
+        RenderLD.produceVertex(vertexConsumer, matrix4f, matrix3f, i, 1.0f, 1, 1, 0);
+        RenderLD.produceVertex(vertexConsumer, matrix4f, matrix3f, i, 0.0f, 1, 0, 0);
         matrixStack.pop();
-        super.render(lDlv2Entity, f, g, matrixStack, vertexConsumerProvider, i);
+        super.render(lDEntity, f, g, matrixStack, vertexConsumerProvider, i);
     }
 
     private static void produceVertex(VertexConsumer vertexConsumer, Matrix4f positionMatrix, Matrix3f normalMatrix, int light, float x, int y, int textureU, int textureV) {
@@ -48,7 +48,7 @@ public class RenderLDlv2
     }
 
     @Override
-    public Identifier getTexture(LDlv2Entity lDlv2Entity) {
+    public Identifier getTexture(LDEntity lDlv1Entity) {
         return TEXTURE;
     }
 }

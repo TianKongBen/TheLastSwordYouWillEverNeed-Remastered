@@ -1,9 +1,12 @@
 package net.tianben.tlsywen.entity;
 
 import net.minecraft.entity.*;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ToolItem;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
@@ -13,18 +16,18 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.tianben.tlsywen.item.ModItems;
 
-public class LDlv7Entity extends ThrownItemEntity {
-    public LDlv7Entity(EntityType<? extends ThrownItemEntity> entityType, World world) {
+public class LDEntity extends ThrownItemEntity {
+    public LDEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
         super(entityType, world);
     }
 
-    public LDlv7Entity(World world, LivingEntity owner) {
-        super(ModEntities.LDlv7, owner, world);
+    public LDEntity(World world, LivingEntity owner) {
+        super(ModEntities.LD, owner, world);
     }
 
     @Override
     protected Item getDefaultItem() {
-        return ModItems.THELASTSWORDYOUWILLEVERNEEDLV7;
+        return ModItems.THELASTSWORDYOUWILLEVERNEEDLV1;
     }
 
     @Override
@@ -63,9 +66,14 @@ public class LDlv7Entity extends ThrownItemEntity {
             lightning(entityHitResult.getEntity().getBlockPos());
             Entity entity = entityHitResult.getEntity();
             Entity entity2 = this.getOwner();
-            entity.damage(this.getDamageSources().thrown(this, entity2), 6400f);
-            if (entity2 instanceof LivingEntity) {
-                this.applyDamageEffects((LivingEntity) entity2, entity);
+            if (entity2 instanceof PlayerEntity) {
+                PlayerEntity player = (PlayerEntity) entity2;
+                ItemStack heldItem = player.getMainHandStack();
+                float damage = heldItem.getItem() instanceof ToolItem ? ((ToolItem) heldItem.getItem()).getMaterial().getAttackDamage() : 1600.0f;
+                entity.damage(this.getDamageSources().thrown(this, player), damage);
+                this.applyDamageEffects(player, entity);
+            } else if (entity2 != null) {
+                entity.damage(this.getDamageSources().thrown(this, entity2), 1600.0f);
             }
         }
 
@@ -86,7 +94,6 @@ public class LDlv7Entity extends ThrownItemEntity {
 
     @Override
     public void tick() {
-        float h;
         super.tick();
         HitResult hitResult = ProjectileUtil.getCollision(this, this::canHit);
         boolean bl = false;
@@ -104,13 +111,13 @@ public class LDlv7Entity extends ThrownItemEntity {
         this.updateRotation();
         if (this.isTouchingWater()) {
             for (int i = 0; i < 4; ++i) {
-                this.getWorld().addParticle(ParticleTypes.BUBBLE, d - vec3d.x * 0.25, e - vec3d.y * 0.25, f - vec3d.z * 0.25, vec3d.x, vec3d.y, vec3d.z);
+                this.getWorld().addParticle(ParticleTypes.BUBBLE,
+                        d - vec3d.x * 0.25,
+                        e - vec3d.y * 0.25,
+                        f - vec3d.z * 0.25,
+                        vec3d.x, vec3d.y, vec3d.z);
             }
-            h = 0.8f;
-        } else {
-            h = 0.99f;
         }
-        this.setVelocity(vec3d.multiply(h));
         if (!this.hasNoGravity()) {
             Vec3d vec3d2 = this.getVelocity();
             this.setVelocity(vec3d2.x, vec3d2.y - (double)this.getGravity(), vec3d2.z);
