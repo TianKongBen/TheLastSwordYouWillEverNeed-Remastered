@@ -7,7 +7,6 @@ import net.tianben.tlsywen.detailab.helper.ConfigHelper;
 import net.tianben.tlsywen.detailab.DetailArmorBar;
 import net.tianben.tlsywen.entity.ModEntities;
 import net.tianben.tlsywen.registry.Renderers;
-//import net.tianben.tlsywen.render.CustomTabRenderer;
 
 public class TheLastSwordYouWillEverNeedClient implements ClientModInitializer {
     @Override
@@ -22,7 +21,5 @@ public class TheLastSwordYouWillEverNeedClient implements ClientModInitializer {
         {
             DetailArmorBar.register();
         }
-
-//        CustomTabRenderer.registerEvents();
     }
 }
