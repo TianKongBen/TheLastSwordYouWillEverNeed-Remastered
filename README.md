@@ -13,7 +13,7 @@ A mod for minecraft that adds an incredible sword. It is a sword that can one hi
 ### FAQ
 Will you make a Forge or NeoForge version?
 
-Forge probably not, but NeoForge will consider it later, and at present, Forge and NeoForge can be used with the help of Sinytra Connector mod.
+Forge has been completed, and NeoForge will start working after the update to 1.20.2.
 
 ## 中文
 
@@ -28,4 +28,4 @@ Forge probably not, but NeoForge will consider it later, and at present, Forge a
 ### 常见问题
 你是否会制作Forge或者NeoForge版本？
 
-Forge应该不会，但NeoForge之后会考虑的，目前Forge和NeoForge端可以借助信雅互联模组使用。
+Forge已经制作完成，NeoForge会在更新到1.20.2之后开始制作。

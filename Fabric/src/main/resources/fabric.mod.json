@@ -1,0 +1,46 @@
+{
+	"schemaVersion": 1,
+	"id": "tlsywen",
+	"version": "${version}",
+	"name": "The Last Sword You Will Ever Need: Remastered",
+	"description": "This is a remastered version of The Last Sword You Will Ever Need, trying to restore the setting of version 1.7.10 as much as possible!",
+	"authors": [
+		"TianBen!"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/the-last-sword-you-will-ever-need-remastered",
+		"sources": "https://github.com/TianKongBen/TheLastSwordYouWillEverNeed-Remastered",
+		"issues": "https://github.com/TianKongBen/TheLastSwordYouWillEverNeed-Remastered/issues"
+	},
+	"license": "MIT",
+	"icon": "assets/tlsywen/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.tianben.tlsywen.TheLastSwordYouWillEverNeedFabric"
+		],
+		"client": [
+			"net.tianben.tlsywen.TheLastSwordYouWillEverNeedFabricClient"
+		]
+	},
+	"mixins": [
+		"tlsywen.mixins.fabric.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"detailab": "=>2.6.3"
+	},
+	"custom": {
+		"modmenu": {
+			"links": {
+				"modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/the-last-sword-you-will-ever-need-remastered",
+				"modmenu.modrinth": "https://modrinth.com/mod/the-last-sword-you-will-ever-need-remastered"
+			}
+		}
+	}
+}

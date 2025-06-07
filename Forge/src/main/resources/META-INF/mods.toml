@@ -1,0 +1,30 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+issueTrackerURL="https://github.com/TianKongBen/TheLastSwordYouWillEverNeed-Remastered/issues"
+
+[[mods]]
+modId="tlsywen"
+version="${mod_version}"
+displayName="The Last Sword You Will Ever Need: Remastered"
+logoFile="assets/tlsywen/banner.png"
+authors="TianBen!"
+description='''
+This is a remastered version of The Last Sword You Will Ever Need, trying to restore the setting of version 1.7.10 as much as possible!
+'''
+
+[[mods.mixins]]
+config = "mixins.tlsywen.forge.json"
+
+[[dependencies.tlsywen]]
+modId="forge"
+mandatory=true
+versionRange="[47.4.1,)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.tlsywen]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1]"
+ordering="NONE"
+side="BOTH"
