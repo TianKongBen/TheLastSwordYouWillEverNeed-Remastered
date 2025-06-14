@@ -8,7 +8,6 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.tianben.tlsywen.TheLastSwordYouWillEverNeed;
 import net.tianben.tlsywen.block.ModBlocks;
 import net.tianben.tlsywen.item.armor.ModArmorItemFabric;
 import net.tianben.tlsywen.item.material.ModArmorMaterials;

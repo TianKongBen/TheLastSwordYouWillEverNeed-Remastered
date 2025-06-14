@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "net.tianben.tlsywen"
-version = "${mod_version}-${minecraft_version}"
+version = "${mod_version}+mc${minecraft_version}-fabric"
 archivesBaseName = "tlsywen-fabric"
 
 sourceSets.main.resources { srcDir 'src/generated/resources' } // src directory for data generator output

@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'net.tianben.tlsywen'
-version = "${mod_version}-${minecraft_version}"
+version = "${mod_version}"
 archivesBaseName = 'tlsywen-common'
 
 minecraft {

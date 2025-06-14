@@ -4,6 +4,8 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -12,6 +14,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.tianben.tlsywen.block.ModBlocksForge;
+import net.tianben.tlsywen.client.render.ForgeRenderLD;
 import net.tianben.tlsywen.entity.ModEntitiesForge;
 import net.tianben.tlsywen.item.group.ModItemGroupsForge;
 import net.tianben.tlsywen.platform.ForgePlatformBridge;
@@ -168,6 +171,14 @@ public class TheLastSwordYouWillEverNeedForge {
         }
 
         private void clientSetup(final FMLClientSetupEvent event) {
+        }
+    }
+
+    @Mod.EventBusSubscriber(modid = TheLastSwordYouWillEverNeed.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public static class ForgeRenderRegistry {
+        @SubscribeEvent
+        public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+            event.registerEntityRenderer(ModEntitiesForge.LD.get(), ForgeRenderLD::new);
         }
     }
 }
