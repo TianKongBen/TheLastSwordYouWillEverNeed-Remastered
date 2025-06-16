@@ -29,4 +29,6 @@ public final class ModItems {
 
     //注册材料
     public static Item DRAGON_CRYSTAL;
+
+    private ModItems() {}
 }

@@ -6,21 +6,22 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.tianben.tlsywen.TheLastSwordYouWillEverNeed;
+import org.jetbrains.annotations.NotNull;
 
-public class PlayerFlightAttachmentFabric {
+public final class PlayerFlightAttachmentFabric {
     public static final AttachmentType<Boolean> FLIGHT_ATTACHMENT =
             AttachmentRegistry.create(
                     new ResourceLocation(TheLastSwordYouWillEverNeed.MOD_ID, "flight_attachment")
             );
 
-    public static boolean hasFlight(Player player) {
-        if (player instanceof ServerPlayer serverPlayer) {
-            return serverPlayer.getAttachedOrElse(FLIGHT_ATTACHMENT, false);
-        }
-        return false;
+    private PlayerFlightAttachmentFabric() {}
+
+    public static boolean hasFlight(@NotNull Player player) {
+        return player instanceof ServerPlayer serverPlayer &&
+                serverPlayer.getAttachedOrElse(FLIGHT_ATTACHMENT, false);
     }
 
-    public static void setFlight(Player player, boolean enabled) {
+    public static void setFlight(@NotNull Player player, boolean enabled) {
         if (player instanceof ServerPlayer serverPlayer) {
             serverPlayer.setAttached(FLIGHT_ATTACHMENT, enabled);
         }

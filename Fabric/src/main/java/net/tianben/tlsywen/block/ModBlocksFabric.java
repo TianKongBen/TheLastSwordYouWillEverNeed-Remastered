@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import static net.tianben.tlsywen.TheLastSwordYouWillEverNeed.MOD_ID;
 
-public class ModBlocksFabric {
+public final class ModBlocksFabric {
     public static BlockEntityType<DragonCrystalBlockEntity> DRAGON_CRYSTAL_BE;
 
     public static void register() {

@@ -6,42 +6,42 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.tianben.tlsywen.attachment.PlayerFlightAttachmentFabric;
+import org.jetbrains.annotations.NotNull;
 
-public class ModArmorItemFabric extends ModArmorItem {
+public final class ModArmorItemFabric extends ModArmorItem {
     public ModArmorItemFabric(ArmorMaterial material, Type type, Properties settings) {
         super(material, type, settings);
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected) {
+    public void inventoryTick(@NotNull ItemStack stack, @NotNull Level level,
+                              @NotNull Entity entity, int slot, boolean selected) {
         super.inventoryTick(stack, level, entity, slot, selected);
 
         if (!level.isClientSide() && entity instanceof Player player) {
-            boolean isWearingFullSet = isWearingFullSet(player);
-            boolean hasFlight = PlayerFlightAttachmentFabric.hasFlight(player);
-
-            if (isWearingFullSet && !hasFlight) {
-                enableFlight(player);
-                PlayerFlightAttachmentFabric.setFlight(player, true);
-            } else if (!isWearingFullSet && hasFlight) {
-                disableFlight(player);
-                PlayerFlightAttachmentFabric.setFlight(player, false);
-            }
+            updateFlightAbility(player);
         }
     }
 
-    private static void enableFlight(Player player) {
-        if (!player.isCreative() && !player.isSpectator()) {
-            player.getAbilities().mayfly = true;
-            player.onUpdateAbilities();
+    private void updateFlightAbility(@NotNull Player player) {
+        boolean shouldHaveFlight = isWearingFullSet(player);
+        boolean hasFlight = PlayerFlightAttachmentFabric.hasFlight(player);
+
+        if (shouldHaveFlight != hasFlight) {
+            setFlightAbility(player, shouldHaveFlight);
+            PlayerFlightAttachmentFabric.setFlight(player, shouldHaveFlight);
         }
     }
 
-    private static void disableFlight(Player player) {
-        if (!player.isCreative() && !player.isSpectator()) {
-            player.getAbilities().mayfly = false;
+    private void setFlightAbility(@NotNull Player player, boolean enabled) {
+        if (player.isCreative() || player.isSpectator()) {
+            return;
+        }
+
+        player.getAbilities().mayfly = enabled;
+        if (!enabled) {
             player.getAbilities().flying = false;
-            player.onUpdateAbilities();
         }
+        player.onUpdateAbilities();
     }
 }

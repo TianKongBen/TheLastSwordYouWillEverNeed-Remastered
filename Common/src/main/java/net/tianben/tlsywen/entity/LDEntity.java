@@ -7,7 +7,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
@@ -18,6 +17,9 @@ import net.tianben.tlsywen.item.ModItems;
 import net.tianben.tlsywen.platform.PlatformBridgeHolder;
 
 public class LDEntity extends ThrowableItemProjectile {
+    private static final byte PARTICLE_EVENT = 3;
+    private static final float BASE_DAMAGE = 1600.0f;
+
     public LDEntity(EntityType<? extends LDEntity> type, Level level) {
         super(type, level);
     }
@@ -27,7 +29,7 @@ public class LDEntity extends ThrowableItemProjectile {
     }
 
     public LDEntity(Level level, LivingEntity owner) {
-        super(PlatformBridgeHolder.BRIDGE.getLDEntityType(), level);
+        super(PlatformBridgeHolder.getBridge().getLDEntityType(), level);
         setOwner(owner);
         setPos(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
     }
@@ -48,94 +50,98 @@ public class LDEntity extends ThrowableItemProjectile {
 
     @Override
     public void handleEntityEvent(byte status) {
-        if (status == 3) { // Particle effect status
-            Vec3 vec3 = this.getDeltaMovement();
-            double d = this.getX() + vec3.x;
-            double e = this.getY() + vec3.y;
-            double f = this.getZ() + vec3.z;
+        if (status == PARTICLE_EVENT) {
+            var vec3 = this.getDeltaMovement();
+            var pos = new Vec3(
+                    this.getX() + vec3.x,
+                    this.getY() + vec3.y,
+                    this.getZ() + vec3.z
+            );
             for (int i = 0; i < 4; ++i) {
-                this.level().addParticle(ParticleTypes.POOF, 
-                    d - vec3.x * 0.25, 
-                    e - vec3.y * 0.25, 
-                    f - vec3.z * 0.25, 
-                    vec3.x, vec3.y, vec3.z);
+                level().addParticle(ParticleTypes.POOF,
+                        pos.x - vec3.x * 0.25,
+                        pos.y - vec3.y * 0.25,
+                        pos.z - vec3.z * 0.25,
+                        vec3.x, vec3.y, vec3.z);
             }
         }
     }
 
     private void lightning(BlockPos blockPos) {
-        LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(this.level());
+        var lightning = EntityType.LIGHTNING_BOLT.create(level());
         if (lightning != null) {
             lightning.moveTo(Vec3.atBottomCenterOf(blockPos));
-            this.level().addFreshEntity(lightning);
+            level().addFreshEntity(lightning);
         }
     }
 
     @Override
     protected void onHitEntity(EntityHitResult entityHitResult) {
-        if (!this.level().isClientSide()) {
+        if (!level().isClientSide()) {
             lightning(entityHitResult.getEntity().blockPosition());
-            Entity entity = entityHitResult.getEntity();
-            Entity owner = this.getOwner();
-            
-            float damage = 1600.0f;
+            var entity = entityHitResult.getEntity();
+            var owner = getOwner();
+
+            float damage = BASE_DAMAGE;
             if (owner instanceof Player player) {
-                ItemStack heldItem = player.getMainHandItem();
+                var heldItem = player.getMainHandItem();
                 if (heldItem.getItem() instanceof TieredItem tieredItem) {
                     damage = tieredItem.getTier().getAttackDamageBonus();
                 }
-                entity.hurt(this.damageSources().thrown(this, player), damage);
-                this.doEnchantDamageEffects(player, entity);
+                entity.hurt(damageSources().thrown(this, player), damage);
+                doEnchantDamageEffects(player, entity);
             } else if (owner != null) {
-                entity.hurt(this.damageSources().thrown(this, owner), damage);
+                entity.hurt(damageSources().thrown(this, owner), damage);
             }
         }
-        this.discard();
+        discard();
     }
 
     @Override
     protected void onHitBlock(BlockHitResult blockHitResult) {
-        if (!this.level().isClientSide()) {
-            this.level().broadcastEntityEvent(this, (byte)3);
+        if (!level().isClientSide()) {
+            level().broadcastEntityEvent(this, PARTICLE_EVENT);
             lightning(blockHitResult.getBlockPos());
         }
-        this.discard();
+        discard();
     }
 
+    @Override
     public void tick() {
         super.tick();
-        HitResult hitResult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
-        boolean bl = false;
-        if (this.isBurning()) {
-            this.setSecondsOnFire(1);
+        var hitResult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
+        if (isBurning()) {
+            setSecondsOnFire(1);
         }
-        if (hitResult.getType() != HitResult.Type.MISS && !bl) {
-            this.onHit(hitResult);
+        if (hitResult.getType() != HitResult.Type.MISS) {
+            onHit(hitResult);
         }
 
-        this.checkInsideBlocks();
-        Vec3 vec3 = this.getDeltaMovement();
-        double d = this.getX() + vec3.x;
-        double e = this.getY() + vec3.y;
-        double f = this.getZ() + vec3.z;
+        checkInsideBlocks();
+        var vec3 = getDeltaMovement();
+        setPos(
+                getX() + vec3.x,
+                getY() + vec3.y,
+                getZ() + vec3.z
+        );
 
-        this.updateRotation();
+        updateRotation();
 
-        if (this.isInWater()) {
+        if (isInWater()) {
+            var pos = new Vec3(getX(), getY(), getZ());
             for (int i = 0; i < 4; ++i) {
-                this.level().addParticle(ParticleTypes.BUBBLE,
-                        d - vec3.x * 0.25,
-                        e - vec3.y * 0.25,
-                        f - vec3.z * 0.25,
+                level().addParticle(ParticleTypes.BUBBLE,
+                        pos.x - vec3.x * 0.25,
+                        pos.y - vec3.y * 0.25,
+                        pos.z - vec3.z * 0.25,
                         vec3.x, vec3.y, vec3.z);
             }
         }
 
-        if (!this.isNoGravity()) {
-            Vec3 vec3d2 = this.getDeltaMovement();
-            this.setDeltaMovement(vec3d2.x, vec3d2.y - this.getGravity(), vec3d2.z);
+        if (!isNoGravity()) {
+            var movement = getDeltaMovement();
+            setDeltaMovement(movement.x, movement.y - getGravity(), movement.z);
         }
-        this.setPos(d, e, f);
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 
 import static net.tianben.tlsywen.TheLastSwordYouWillEverNeed.MOD_ID;
 
-public class ModBlocksForge {
+public final class ModBlocksForge {
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, MOD_ID);
 
@@ -48,7 +48,7 @@ public class ModBlocksForge {
         DRAGON_CRYSTAL_BE_HOLDER.setSupplier(DRAGON_CRYSTAL_BE::get);
     }
 
-    private static class BlockEntityTypeHolder {
+    private static final class BlockEntityTypeHolder {
         private BlockEntityType<DragonCrystalBlockEntity> type;
         private Supplier<BlockEntityType<DragonCrystalBlockEntity>> supplier;
 

@@ -4,18 +4,31 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 import static net.fabricmc.fabric.api.resource.ResourcePackActivationType.NORMAL;
 import static net.tianben.tlsywen.TheLastSwordYouWillEverNeed.MOD_ID;
 
-public class FabricResourceManager {
+public final class FabricResourceManager {
+    private static final String PACK_NAME = "classic_look";
+    private static final ResourceLocation PACK_ID =
+            new ResourceLocation(MOD_ID, PACK_NAME);
 
-    private static final ResourceLocation MOD_RESOURCE_PACK_ID = new ResourceLocation(MOD_ID, "classic_look");
+    private FabricResourceManager() {}
 
-    //注册资源包
     public static void init() {
-        FabricLoader.getInstance().getModContainer(MOD_ID).ifPresent(modContainer ->
-            ResourceManagerHelper.registerBuiltinResourcePack(MOD_RESOURCE_PACK_ID, modContainer,
-                    Component.translatable("resourcePack.tlsywen.classic_look.name"), NORMAL));
+        FabricLoader.getInstance()
+                .getModContainer(MOD_ID)
+                .ifPresent(container ->
+                        ResourceManagerHelper.registerBuiltinResourcePack(
+                                PACK_ID,
+                                container,
+                                createPackTitle(),
+                                NORMAL
+                        ));
+    }
+
+    private static @NotNull Component createPackTitle() {
+        return Component.translatable("resourcePack." + MOD_ID + "." + PACK_NAME + ".name");
     }
 }

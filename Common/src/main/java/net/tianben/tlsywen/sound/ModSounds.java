@@ -3,15 +3,18 @@ package net.tianben.tlsywen.sound;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.SoundType;
 
-import java.util.function.Supplier;
+public final class ModSounds {
+    private static final float VOLUME = 1.0f;
+    private static final float PITCH = 1.0f;
 
-public class ModSounds {
-    public static final Supplier<SoundType> DRAGON_CRYSTAL_BLOCK_SOUNDS = () -> new SoundType(
-            1.0F, 1.0F,
+    public static final SoundType DRAGON_CRYSTAL_BLOCK_SOUNDS = new SoundType(
+            VOLUME, PITCH,
             SoundEvents.STONE_BREAK,
             SoundEvents.ENDER_DRAGON_GROWL,
             SoundEvents.STONE_PLACE,
             SoundEvents.STONE_HIT,
             SoundEvents.STONE_FALL
     );
+
+    private ModSounds() {}
 }

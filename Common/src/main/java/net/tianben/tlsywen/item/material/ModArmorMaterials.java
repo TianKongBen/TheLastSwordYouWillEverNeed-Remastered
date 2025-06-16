@@ -8,21 +8,28 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.tianben.tlsywen.TheLastSwordYouWillEverNeed;
 
 public enum ModArmorMaterials implements ArmorMaterial {
-    DRAGON_CRYSTAL("dragon_crystal", new int[] { 1, 2, 1, 1}, 20,
-            SoundEvents.ENDER_DRAGON_GROWL, 0F, 0F);
+    DRAGON_CRYSTAL(
+            "dragon_crystal",
+            new int[]{1, 2, 1, 1},
+            20,
+            SoundEvents.ENDER_DRAGON_GROWL,
+            0F,
+            0F
+    );
 
     private final String name;
+    private final int[] protectionForSlot;
     private final int enchantability;
-    private final int[] slotProtections;
-    private final SoundEvent sound;
+    private final SoundEvent equipSound;
     private final float toughness;
     private final float knockbackResistance;
 
-    ModArmorMaterials(String name, int[] slotProtections, int enchantability, SoundEvent sound, float toughness, float knockbackResistance) {
+    ModArmorMaterials(String name, int[] protectionForSlot, int enchantability,
+                      SoundEvent equipSound, float toughness, float knockbackResistance) {
         this.name = name;
-        this.slotProtections = slotProtections;
+        this.protectionForSlot = protectionForSlot;
         this.enchantability = enchantability;
-        this.sound = sound;
+        this.equipSound = equipSound;
         this.toughness = toughness;
         this.knockbackResistance = knockbackResistance;
     }
@@ -34,17 +41,17 @@ public enum ModArmorMaterials implements ArmorMaterial {
 
     @Override
     public int getDefenseForType(ArmorItem.Type type) {
-        return this.slotProtections[type.getSlot().getIndex()];
+        return protectionForSlot[type.getSlot().getIndex()];
     }
 
     @Override
     public int getEnchantmentValue() {
-        return this.enchantability;
+        return enchantability;
     }
 
     @Override
     public SoundEvent getEquipSound() {
-        return this.sound;
+        return equipSound;
     }
 
     @Override
@@ -54,16 +61,16 @@ public enum ModArmorMaterials implements ArmorMaterial {
 
     @Override
     public String getName() {
-        return TheLastSwordYouWillEverNeed.MOD_ID + ":" + this.name;
+        return TheLastSwordYouWillEverNeed.MOD_ID + ":" + name;
     }
 
     @Override
     public float getToughness() {
-        return this.toughness;
+        return toughness;
     }
 
     @Override
     public float getKnockbackResistance() {
-        return this.knockbackResistance;
+        return knockbackResistance;
     }
 }

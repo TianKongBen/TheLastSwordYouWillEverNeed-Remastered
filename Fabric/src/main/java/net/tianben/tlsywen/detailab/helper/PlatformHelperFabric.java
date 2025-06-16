@@ -1,11 +1,14 @@
 package net.tianben.tlsywen.detailab.helper;
 
 import net.fabricmc.loader.api.FabricLoader;
+import org.jetbrains.annotations.NotNull;
 
 public final class PlatformHelperFabric implements IClientHelperFabric {
     private static final PlatformHelperFabric INSTANCE = new PlatformHelperFabric();
 
-    public static PlatformHelperFabric getInstance() {
+    private PlatformHelperFabric() {}
+
+    public static @NotNull PlatformHelperFabric getInstance() {
         return INSTANCE;
     }
 
@@ -15,7 +18,7 @@ public final class PlatformHelperFabric implements IClientHelperFabric {
     }
 
     @Override
-    public boolean isModLoaded(String modId) {
+    public boolean isModLoaded(@NotNull String modId) {
         return FabricLoader.getInstance().isModLoaded(modId);
     }
 }

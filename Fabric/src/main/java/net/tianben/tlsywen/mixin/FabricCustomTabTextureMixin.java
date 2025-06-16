@@ -7,11 +7,15 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.client.gui.GuiGraphics;
 import net.tianben.tlsywen.item.group.ModItemGroupsFabric;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(CreativeModeInventoryScreen.class)
 public abstract class FabricCustomTabTextureMixin {
+    @Unique
+    private static final ResourceLocation TLSYWEH_TAB_TEXTURE =
+            new ResourceLocation("tlsywen", "textures/gui/container/creative_inventory/tabs_tlsywen.png");
 
     @Redirect(
             method = "renderTabButton",
@@ -29,11 +33,7 @@ public abstract class FabricCustomTabTextureMixin {
             @Local(argsOnly = true) CreativeModeTab tab
     ) {
         if (tab == ModItemGroupsFabric.the_last_sword_you_will_ever_need) {
-            ResourceLocation customTabTexture = new ResourceLocation(
-                    "tlsywen",
-                    "textures/gui/container/creative_inventory/tabs_tlsywen.png"
-            );
-            guiGraphics.blit(customTabTexture, x, y, u, v, width, height);
+            guiGraphics.blit(TLSYWEH_TAB_TEXTURE, x, y, u, v, width, height);
         } else {
             guiGraphics.blit(texture, x, y, u, v, width, height);
         }

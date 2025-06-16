@@ -18,7 +18,7 @@ import static net.tianben.tlsywen.TheLastSwordYouWillEverNeed.MOD_ID;
 
 public final class ModItemsFabric {
     public static void registerItems() {
-        //注册方块
+        // 注册方块
         ModItems.COMPRESSED_STAR = Registry.register(BuiltInRegistries.ITEM,
                 new ResourceLocation(MOD_ID, "compressed_star"),
                 new BlockItem(ModBlocks.COMPRESSED_STAR, new Item.Properties()));
@@ -29,7 +29,7 @@ public final class ModItemsFabric {
                 new ResourceLocation(MOD_ID, "dragon_crystal_ore"),
                 new BlockItem(ModBlocks.DRAGON_CRYSTAL_ORE, new Item.Properties()));
 
-        //注册最终之剑
+        // 注册最终之剑
         ModItems.THELASTSWORDYOUWILLEVERNEEDLV1 = registerSword("the_last_sword_you_will_ever_need_lv1",
                 ModToolMaterial.THELASTSWORDYOUWILLEVERNEEDLV1);
         ModItems.THELASTSWORDYOUWILLEVERNEEDLV2 = registerSword("the_last_sword_you_will_ever_need_lv2",
@@ -53,13 +53,14 @@ public final class ModItemsFabric {
         ModItems.REALLYTHELASTSWORDYOUWILLEVERNEED = registerSword("really_the_last_sword_you_will_ever_need",
                 ModToolMaterial.REALLYTHELASTSWORDYOUWILLEVERNEED);
 
-        //注册装备
-        ModItems.DRAGON_CRYSTAL_HELMET = registerArmor("dragon_crystal_helmet", ModArmorMaterials.DRAGON_CRYSTAL, ArmorItem.Type.HELMET);
-        ModItems.DRAGON_CRYSTAL_CHESTPLATE = registerArmor("dragon_crystal_chestplate", ModArmorMaterials.DRAGON_CRYSTAL, ArmorItem.Type.CHESTPLATE);
-        ModItems.DRAGON_CRYSTAL_LEGGINGS = registerArmor("dragon_crystal_leggings", ModArmorMaterials.DRAGON_CRYSTAL, ArmorItem.Type.LEGGINGS);
-        ModItems.DRAGON_CRYSTAL_BOOTS = registerArmor("dragon_crystal_boots", ModArmorMaterials.DRAGON_CRYSTAL, ArmorItem.Type.BOOTS);
+        // 注册装备
+        ArmorMaterial material = ModArmorMaterials.DRAGON_CRYSTAL;
+        ModItems.DRAGON_CRYSTAL_HELMET = registerArmor("dragon_crystal_helmet", material, ArmorItem.Type.HELMET);
+        ModItems.DRAGON_CRYSTAL_CHESTPLATE = registerArmor("dragon_crystal_chestplate", material, ArmorItem.Type.CHESTPLATE);
+        ModItems.DRAGON_CRYSTAL_LEGGINGS = registerArmor("dragon_crystal_leggings", material, ArmorItem.Type.LEGGINGS);
+        ModItems.DRAGON_CRYSTAL_BOOTS = registerArmor("dragon_crystal_boots", material, ArmorItem.Type.BOOTS);
 
-        //注册材料
+        // 注册材料
         ModItems.DRAGON_CRYSTAL = registerItem("dragon_crystal", new Item(new FabricItemSettings()));
     }
 

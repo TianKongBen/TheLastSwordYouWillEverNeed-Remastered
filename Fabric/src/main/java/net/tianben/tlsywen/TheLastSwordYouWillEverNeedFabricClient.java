@@ -14,9 +14,7 @@ public class TheLastSwordYouWillEverNeedFabricClient implements ClientModInitial
         EntityRendererRegistry.register(ModEntitiesFabric.LD, FabricRenderLD::new);
         //细节盔甲
         IClientHelperFabric helper = ConfigHelperFabric.get().getClient();
-        if (helper != null &&
-                helper.isModLoaded("detailab") &&
-                !helper.forceDisableDetailArmorBarSupport()) {
+        if (helper.isModLoaded("detailab") && !helper.forceDisableDetailArmorBarSupport()) {
             DetailArmorBarFabric.register();
         }
     }

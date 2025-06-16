@@ -11,6 +11,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class ModArmorItem extends ArmorItem {
+    private static final int EFFECT_DURATION = 0;
+    private static final int EFFECT_AMPLIFIER = 127;
+    private static final boolean AMBIENT = false;
+    private static final boolean SHOW_ICON = true;
+    private static final boolean SHOW_PARTICLES = false;
+
     public ModArmorItem(ArmorMaterial material, Type type, Properties settings) {
         super(material, type, settings);
     }
@@ -30,7 +36,14 @@ public class ModArmorItem extends ArmorItem {
     }
 
     private void applyEffect(Player player, MobEffect effect) {
-        player.addEffect(new MobEffectInstance(effect, 0, 127, false, true, false));
+        player.addEffect(new MobEffectInstance(
+                effect,
+                EFFECT_DURATION,
+                EFFECT_AMPLIFIER,
+                AMBIENT,
+                SHOW_ICON,
+                SHOW_PARTICLES
+        ));
     }
 
     protected static boolean isWearingFullSet(Player player) {

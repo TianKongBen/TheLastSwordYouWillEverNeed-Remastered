@@ -11,18 +11,25 @@ import net.tianben.tlsywen.TheLastSwordYouWillEverNeed;
 import net.tianben.tlsywen.platform.FabricPlatformBridge;
 import net.tianben.tlsywen.platform.PlatformBridgeHolder;
 
-public class ModEntitiesFabric {
+public final class ModEntitiesFabric {
+    private static final String ENTITY_ID = "lightning_diamond";
+    private static final float ENTITY_SIZE = 0.25f;
+    private static final int TRACK_RANGE = 4;
+    private static final int UPDATE_INTERVAL = 10;
+
     public static final EntityType<LDEntity> LD = Registry.register(
             BuiltInRegistries.ENTITY_TYPE,
-            new ResourceLocation(TheLastSwordYouWillEverNeed.MOD_ID, "lightning_diamond"),
+            new ResourceLocation(TheLastSwordYouWillEverNeed.MOD_ID, ENTITY_ID),
             FabricEntityTypeBuilder.create(MobCategory.MISC, LDEntity::createForRegistration)
-                    .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
-                    .trackRangeBlocks(4)
-                    .trackedUpdateRate(10)
+                    .dimensions(EntityDimensions.fixed(ENTITY_SIZE, ENTITY_SIZE))
+                    .trackRangeBlocks(TRACK_RANGE)
+                    .trackedUpdateRate(UPDATE_INTERVAL)
                     .build()
     );
 
+    private ModEntitiesFabric() {}
+
     public static void register() {
-        PlatformBridgeHolder.BRIDGE = new FabricPlatformBridge();
+        PlatformBridgeHolder.setBridge(new FabricPlatformBridge());
     }
 }

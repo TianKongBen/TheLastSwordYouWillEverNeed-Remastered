@@ -8,15 +8,23 @@ import net.tianben.tlsywen.block.DragonCrystalBlockEntity;
 import net.tianben.tlsywen.entity.LDEntity;
 import net.tianben.tlsywen.block.ModBlocksForge;
 import net.tianben.tlsywen.entity.ModEntitiesForge;
+import org.jetbrains.annotations.NotNull;
 
-public class ForgePlatformBridge implements PlatformBridge {
+public final class ForgePlatformBridge implements PlatformBridge {
+
     @Override
-    public EntityType<? extends LDEntity> getLDEntityType() {
+    public @NotNull EntityType<? extends LDEntity> getLDEntityType() {
         return ModEntitiesForge.LD.get();
     }
 
     @Override
-    public BlockEntity createDragonCrystalBlockEntity(BlockPos pos, BlockState state) {
-        return new DragonCrystalBlockEntity(ModBlocksForge.DRAGON_CRYSTAL_BE.get(), pos, state);
+    public @NotNull BlockEntity createDragonCrystalBlockEntity(
+            @NotNull BlockPos pos,
+            @NotNull BlockState state) {
+        return new DragonCrystalBlockEntity(
+                ModBlocksForge.DRAGON_CRYSTAL_BE.get(),
+                pos,
+                state
+        );
     }
 }

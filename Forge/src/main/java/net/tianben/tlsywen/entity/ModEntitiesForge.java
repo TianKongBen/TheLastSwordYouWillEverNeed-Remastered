@@ -3,15 +3,16 @@ package net.tianben.tlsywen.entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.tianben.tlsywen.TheLastSwordYouWillEverNeed;
 import net.tianben.tlsywen.platform.ForgePlatformBridge;
 import net.tianben.tlsywen.platform.PlatformBridgeHolder;
+import org.jetbrains.annotations.NotNull;
 
-public class ModEntitiesForge {
-    public static final DeferredRegister<EntityType<?>> ENTITIES =
+public final class ModEntitiesForge {
+    private static final DeferredRegister<EntityType<?>> ENTITIES =
             DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, TheLastSwordYouWillEverNeed.MOD_ID);
 
     public static final RegistryObject<EntityType<LDEntity>> LD = ENTITIES.register(
@@ -23,8 +24,10 @@ public class ModEntitiesForge {
                     .build("lightning_diamond")
     );
 
-    public static void register(IEventBus bus) {
+    private ModEntitiesForge() {}
+
+    public static void register(@NotNull IEventBus bus) {
         ENTITIES.register(bus);
-        PlatformBridgeHolder.BRIDGE = new ForgePlatformBridge();
+        PlatformBridgeHolder.setBridge(new ForgePlatformBridge());
     }
 }

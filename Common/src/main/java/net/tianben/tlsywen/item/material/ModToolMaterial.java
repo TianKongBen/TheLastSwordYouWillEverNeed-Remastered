@@ -16,41 +16,42 @@ public enum ModToolMaterial implements Tier {
     THELASTSWORDYOUWILLEVERNEEDLV10(-1, 10.0f, 8800f, 20),
     REALLYTHELASTSWORDYOUWILLEVERNEED(-1, 10.0f, 7999999874453995500f, 20);
 
-    private final float attackDamage;
+    private static final int TOOL_LEVEL = 5;
     private final int durability;
-    private final int speed;
+    private final float miningSpeed;
+    private final float attackDamage;
     private final int enchantability;
 
-    ModToolMaterial(int durability, float speed, float attackDamage, int enchantability) {
+    ModToolMaterial(int durability, float miningSpeed, float attackDamage, int enchantability) {
         this.durability = durability;
-        this.speed = (int) speed;
+        this.miningSpeed = miningSpeed;
         this.attackDamage = attackDamage;
         this.enchantability = enchantability;
     }
 
     @Override
     public int getUses() {
-        return this.durability;
+        return durability;
     }
 
     @Override
     public float getSpeed() {
-        return this.speed;
+        return miningSpeed;
     }
 
     @Override
     public float getAttackDamageBonus() {
-        return this.attackDamage;
+        return attackDamage;
     }
 
     @Override
     public int getLevel() {
-        return 5;
+        return TOOL_LEVEL;
     }
 
     @Override
     public int getEnchantmentValue() {
-        return this.enchantability;
+        return enchantability;
     }
 
     @Override

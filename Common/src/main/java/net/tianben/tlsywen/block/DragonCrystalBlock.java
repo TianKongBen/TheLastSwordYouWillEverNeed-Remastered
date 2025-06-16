@@ -21,12 +21,14 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.tianben.tlsywen.platform.PlatformBridgeHolder;
 import org.jetbrains.annotations.Nullable;
 
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.POWERED;
+
 public class DragonCrystalBlock extends BaseEntityBlock {
-    public static final BooleanProperty ACTIVATED = net.minecraft.world.level.block.state.properties.BlockStateProperties.POWERED;
+    public static final BooleanProperty ACTIVATED = POWERED;
 
     public DragonCrystalBlock(Properties settings) {
         super(settings);
-        this.registerDefaultState(this.stateDefinition.any().setValue(ACTIVATED, false));
+        registerDefaultState(stateDefinition.any().setValue(ACTIVATED, false));
     }
 
     @Override
@@ -37,11 +39,8 @@ public class DragonCrystalBlock extends BaseEntityBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        ItemStack stack = player.getItemInHand(hand);
-        InteractionResult useResult = stack.useOn(new UseOnContext(player, hand, hit));
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        
-        if (blockEntity instanceof DragonCrystalBlockEntity crystal) {
+        var useResult = player.getItemInHand(hand).useOn(new UseOnContext(player, hand, hit));
+        if (world.getBlockEntity(pos) instanceof DragonCrystalBlockEntity crystal) {
             crystal.playSound(world, pos);
             return InteractionResult.sidedSuccess(world.isClientSide());
         }
@@ -50,8 +49,7 @@ public class DragonCrystalBlock extends BaseEntityBlock {
 
     @Override
     public void attack(BlockState state, Level world, BlockPos pos, Player player) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof DragonCrystalBlockEntity crystal) {
+        if (world.getBlockEntity(pos) instanceof DragonCrystalBlockEntity crystal) {
             crystal.playSound(world, pos);
         }
         super.attack(state, world, pos, player);
@@ -59,7 +57,7 @@ public class DragonCrystalBlock extends BaseEntityBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return PlatformBridgeHolder.BRIDGE.createDragonCrystalBlockEntity(pos, state);
+        return PlatformBridgeHolder.getBridge().createDragonCrystalBlockEntity(pos, state);
     }
 
     @Override
@@ -73,7 +71,6 @@ public class DragonCrystalBlock extends BaseEntityBlock {
     }
 
     @Override
-    @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
         return null;
     }
