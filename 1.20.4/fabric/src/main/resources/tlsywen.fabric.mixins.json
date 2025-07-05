@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "net.tianben.tlsywen.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+  ],
+  "client": [
+    "FabricCustomTabTextureMixin",
+    "FabricNoNightVisionFlashingMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+	}
+}

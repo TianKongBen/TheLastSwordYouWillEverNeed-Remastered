@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "net.tianben.tlsywen.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [],
+  "client": [
+    "ForgeCustomTabTextureMixin",
+    "ForgeNoNightVisionFlashingMixin"
+  ],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8.5"
+}

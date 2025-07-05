@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "tlsywen:dragon_crystal"
+    }
+  },
+  "pattern": [
+    "D D",
+    "DDD",
+    "DDD"
+  ],
+  "result": {
+    "item": "tlsywen:dragon_crystal_chestplate"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_last_sword_you_will_ever_need_lv9": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "tlsywen:the_last_sword_you_will_ever_need_lv9"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:the_last_sword_you_will_ever_need_lv10"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_last_sword_you_will_ever_need_lv9",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:the_last_sword_you_will_ever_need_lv10"
+    ]
+  },
+  "sends_telemetry_event": false
+}

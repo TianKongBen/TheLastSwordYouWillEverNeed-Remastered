@@ -1,0 +1,45 @@
+{
+  "modmenu.nameTranslation.tlsywen": "終焉劍:重塑",
+  "modmenu.descriptionTranslation.tlsywen": "礦藝之改囊，增一把不敢信其為真之劍，此劍有一擊必殺終眇龍之力",
+  "modmenu.summaryTranslation.tlsywen": "此為終焉劍:重塑，尽遵1.7.10版本之規!",
+
+  "resourcePack.tlsywen.classic_look.name": "其外如故",
+  "resourcePack.tlsywen.classic_look.description": "終焉劍其外如故",
+
+  "itemgroup.the_last_sword_you_will_ever_need": "終焉劍:重塑",
+
+  "block.tlsywen.compressed_star": "壓縮星",
+  "block.tlsywen.dragon_crystal_block": "龍玉塊",
+  "block.tlsywen.dragon_crystal_ore": "龍玉礦",
+
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv1": "終焉劍",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv2": "終焉劍",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv3": "終焉劍",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv4": "終焉劍",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv5": "終焉劍",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv6": "終焉劍",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv7": "終焉劍",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv8": "終焉劍",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv9": "終焉劍",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv10": "終焉劍",
+  "item.tlsywen.really_the_last_sword_you_will_ever_need": "真·終焉劍",
+
+  "item.tlsywen.dragon_crystal_helmet": "龍玉胄",
+  "item.tlsywen.dragon_crystal_chestplate": "龍玉鎧",
+  "item.tlsywen.dragon_crystal_leggings": "龍玉護腿",
+  "item.tlsywen.dragon_crystal_boots": "龍玉靴",
+
+  "item.tlsywen.dragon_crystal": "龍玉",
+
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv1": "秩: 一階",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv2": "秩: 二階",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv3": "秩: 三階",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv4": "秩: 四階",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv5": "秩: 五階",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv6": "秩: 六階",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv7": "秩: 七階",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv8": "秩: 八階",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv9": "秩: 九階",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv10": "秩: 十階",
+  "tooltip.tlsywen.really_the_last_sword_you_will_ever_need": "秩: 終極"
+}
