@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "minecraft:dragon_egg"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "tlsywen:dragon_crystal"
+  }
+}
