@@ -3,6 +3,7 @@ package net.tianben.tlsywen.sound;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.SoundType;
 
+@SuppressWarnings("deprecation")
 public class ModSounds {
     private static final float VOLUME = 1f;
     private static final float PITCH = 1f;

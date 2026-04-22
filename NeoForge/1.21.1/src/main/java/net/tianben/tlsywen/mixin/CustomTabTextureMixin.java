@@ -17,46 +17,46 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public abstract class CustomTabTextureMixin {
     @Unique
     private static final ResourceLocation TLSYWEN_SCROLLER_SPRITE =
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_scroller");
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_scroller");
     @Unique
     private static final ResourceLocation TLSYWEN_SCROLLER_DISABLED_SPRITE =
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_scroller_disabled");
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_scroller_disabled");
     @Unique
     private static final ResourceLocation[] TLSYWEN_UNSELECTED_TOP_TABS = new ResourceLocation[]{
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_top_unselected_1"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_top_unselected_2"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_top_unselected_3"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_top_unselected_4"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_top_unselected_5"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_top_unselected_6"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_top_unselected_7")};
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_top_unselected_1"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_top_unselected_2"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_top_unselected_3"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_top_unselected_4"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_top_unselected_5"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_top_unselected_6"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_top_unselected_7")};
     @Unique
     private static final ResourceLocation[] TLSYWEN_SELECTED_TOP_TABS = new ResourceLocation[]{
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_top_selected_1"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_top_selected_2"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_top_selected_3"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_top_selected_4"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_top_selected_5"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_top_selected_6"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_top_selected_7")};
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_top_selected_1"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_top_selected_2"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_top_selected_3"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_top_selected_4"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_top_selected_5"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_top_selected_6"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_top_selected_7")};
     @Unique
     private static final ResourceLocation[] TLSYWEN_UNSELECTED_BOTTOM_TABS = new ResourceLocation[]{
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_unselected_1"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_unselected_2"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_unselected_3"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_unselected_4"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_unselected_5"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_unselected_6"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_unselected_7")};
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_unselected_1"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_unselected_2"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_unselected_3"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_unselected_4"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_unselected_5"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_unselected_6"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_unselected_7")};
     @Unique
     private static final ResourceLocation[] TLSYWEN_SELECTED_BOTTOM_TABS = new ResourceLocation[]{
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_selected_1"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_selected_2"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_selected_3"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_selected_4"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_selected_5"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_selected_6"),
-            new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_selected_7")};
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_selected_1"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_selected_2"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_selected_3"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_selected_4"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_selected_5"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_selected_6"),
+            ResourceLocation.fromNamespaceAndPath("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_selected_7")};
 
     @Shadow
     private static CreativeModeTab selectedTab;

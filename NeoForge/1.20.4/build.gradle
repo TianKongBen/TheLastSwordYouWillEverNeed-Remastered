@@ -21,7 +21,7 @@ repositories {
 }
 
 base {
-    archivesName = "${mod_id}-neoforge-${minecraft_version}"
+    archivesName = "${mod_id}+mc${minecraft_version}-neoforge"
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -30,8 +30,8 @@ neoForge {
     version = project.neo_version
 
     parchment {
-        minecraftVersion = parchment_minecraft
-        mappingsVersion = parchment_version
+        mappingsVersion = project.parchment_mappings_version
+        minecraftVersion = project.parchment_minecraft_version
     }
 
     runs {
@@ -53,9 +53,7 @@ neoForge {
 
         data {
             data()
-            programArguments.addAll '--mod', project.mod_id, '--all', '--output',
-                    file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/')
-                    .getAbsolutePath()
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
         }
 
         configureEach {
@@ -86,7 +84,6 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             minecraft_version      : minecraft_version,
             minecraft_version_range: minecraft_version_range,
             neo_version            : neo_version,
-            neo_version_range      : neo_version_range,
             loader_version_range   : loader_version_range,
             mod_id                 : mod_id,
             mod_name               : mod_name,
@@ -100,7 +97,6 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
     from "src/main/templates"
     into "build/generated/sources/modMetadata"
 }
-
 sourceSets.main.resources.srcDir generateModMetadata
 neoForge.ideSyncTask generateModMetadata
 

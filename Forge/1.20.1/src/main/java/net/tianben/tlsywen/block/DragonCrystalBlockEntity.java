@@ -16,6 +16,6 @@ public class DragonCrystalBlockEntity extends BlockEntity {
     }
 
     public void playSound(Level level, BlockPos pos) {
-        level.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, 1.0F);
+        level.playSound(null, pos, sound, SoundSource.BLOCKS, 0.5F, 1.0F);
     }
 }

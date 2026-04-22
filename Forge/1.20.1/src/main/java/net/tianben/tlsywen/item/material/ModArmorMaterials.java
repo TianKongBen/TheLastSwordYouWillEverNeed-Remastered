@@ -13,7 +13,6 @@ import java.util.function.Supplier;
 public enum ModArmorMaterials implements ArmorMaterial {
     DRAGON_CRYSTAL(
             "dragon_crystal",
-            20,
             new int[]{1, 2, 1, 1},
             20,
             () -> SoundEvents.ENDER_DRAGON_GROWL,
@@ -23,7 +22,6 @@ public enum ModArmorMaterials implements ArmorMaterial {
     );
 
     private final String name;
-    private final int durabilityMultiplier;
     private final int[] protectionAmounts;
     private final int enchantability;
     private final Supplier<SoundEvent> equipSound;
@@ -31,11 +29,10 @@ public enum ModArmorMaterials implements ArmorMaterial {
     private final float knockbackResistance;
     private final Supplier<Ingredient> repairIngredient;
 
-    ModArmorMaterials(String name, int durabilityMultiplier, int[] protectionAmounts, int enchantability,
+    ModArmorMaterials(String name, int[] protectionAmounts, int enchantability,
                       Supplier<SoundEvent> equipSound, float toughness, float knockbackResistance,
                       Supplier<Ingredient> repairIngredient) {
         this.name = name;
-        this.durabilityMultiplier = durabilityMultiplier;
         this.protectionAmounts = protectionAmounts;
         this.enchantability = enchantability;
         this.equipSound = equipSound;
@@ -82,9 +79,5 @@ public enum ModArmorMaterials implements ArmorMaterial {
     @Override
     public float getKnockbackResistance() {
         return knockbackResistance;
-    }
-
-    public int getDurabilityMultiplier() {
-        return durabilityMultiplier;
     }
 }

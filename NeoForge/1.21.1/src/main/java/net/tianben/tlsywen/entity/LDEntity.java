@@ -5,14 +5,12 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.tianben.tlsywen.item.ModItems;
 import org.jetbrains.annotations.NotNull;
@@ -30,16 +28,12 @@ public class LDEntity extends ThrowableItemProjectile {
     }
 
     @Override
-    protected Item getDefaultItem() {
+    protected @NotNull Item getDefaultItem() {
         return ModItems.THELASTSWORDYOUWILLEVERNEEDLV1.get();
     }
 
     @Override
     public boolean isOnFire() {
-        return false;
-    }
-
-    protected boolean isBurning() {
         return false;
     }
 
@@ -83,9 +77,11 @@ public class LDEntity extends ThrowableItemProjectile {
                 if (heldItem.getItem() instanceof TieredItem tieredItem) {
                     damage = tieredItem.getTier().getAttackDamageBonus();
                 }
-                entity.hurt(damageSources().thrown(this, player), damage);
-                doEnchantDamageEffects(player, entity);
-            } else if (owner != null) {
+                // 1.21.1 中改用 Entity#hurt 的伤害类型重载，由原版自动处理附魔效果
+                entity.hurt(damageSources().playerAttack(player), damage);
+            } else if (owner instanceof LivingEntity livingOwner) {
+                entity.hurt(damageSources().mobAttack(livingOwner), damage);
+            } else {
                 entity.hurt(damageSources().thrown(this, owner), damage);
             }
         }
@@ -104,26 +100,10 @@ public class LDEntity extends ThrowableItemProjectile {
     @Override
     public void tick() {
         super.tick();
-        var hitResult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
-        if (isBurning()) {
-            isOnFire();
-        }
-        if (hitResult.getType() != HitResult.Type.MISS) {
-            onHit(hitResult);
-        }
-
-        checkInsideBlocks();
-        var vec3 = getDeltaMovement();
-        setPos(
-                getX() + vec3.x,
-                getY() + vec3.y,
-                getZ() + vec3.z
-        );
-
-        updateRotation();
 
         if (isInWater()) {
-            var pos = new Vec3(getX(), getY(), getZ());
+            var vec3 = getDeltaMovement();
+            var pos = position();
             for (int i = 0; i < 4; ++i) {
                 level().addParticle(ParticleTypes.BUBBLE,
                         pos.x - vec3.x * 0.25,
@@ -140,6 +120,6 @@ public class LDEntity extends ThrowableItemProjectile {
     }
 
     protected double getDefaultGravity() {
-        return 0f;
+        return 0.0;
     }
 }

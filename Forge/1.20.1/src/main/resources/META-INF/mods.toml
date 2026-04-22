@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[47,)"
+loaderVersion="${loader_version_range}"
 license="${mod_license}"
 issueTrackerURL="https://github.com/TianKongBen/TheLastSwordYouWillEverNeed-Remastered/issues"
 
@@ -7,22 +7,23 @@ issueTrackerURL="https://github.com/TianKongBen/TheLastSwordYouWillEverNeed-Rema
 modId="${mod_id}"
 version="${mod_version}"
 displayName="${mod_name}"
+displayURL="https://modrinth.com/user/TianKongBen"
 logoFile="assets/tlsywen/banner.png"
-authors="${mod_authors}!"
+authors="${mod_authors}"
 description='''${mod_description}'''
 
 [[mods.mixins]]
 config = "tlsywen.mixins.json"
 
 [[dependencies.${mod_id}]]
-modId="forge"
-mandatory=true
-versionRange="[47.4.0,)"
-ordering="NONE"
-side="BOTH"
+    modId="forge"
+    mandatory=true
+    versionRange="${forge_version_range}"
+    ordering="NONE"
+    side="BOTH"
 [[dependencies.${mod_id}]]
-modId="minecraft"
-mandatory=true
-versionRange="[1.20.1]"
-ordering="NONE"
-side="BOTH"
+    modId="minecraft"
+    mandatory=true
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"

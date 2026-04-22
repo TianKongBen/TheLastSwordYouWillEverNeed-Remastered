@@ -38,7 +38,8 @@ public class ModBlocks {
     // 方块实体注册
     public static final Supplier<BlockEntityType<DragonCrystalBlockEntity>> DRAGON_CRYSTAL_BE =
             BLOCK_ENTITIES.register("dragon_crystal_block_entity", () -> BlockEntityType.Builder.of(
-                            DragonCrystalBlockEntity::new, DRAGON_CRYSTAL_BLOCK.get()).build(null));
+                    DragonCrystalBlockEntity::new, DRAGON_CRYSTAL_BLOCK.get(), DRAGON_CRYSTAL_ORE.get()
+            ).build(null));
 
     public static void register(IEventBus bus) {
         BLOCKS.register(bus);

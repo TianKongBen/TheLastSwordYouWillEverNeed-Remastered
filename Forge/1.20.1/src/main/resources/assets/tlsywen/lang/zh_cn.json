@@ -3,6 +3,14 @@
   "modmenu.descriptionTranslation.tlsywen": "一个 Minecraft 的模组，增加了一把令人难以置信的剑，这是一把可以一击终结末影龙的剑。",
   "modmenu.summaryTranslation.tlsywen": "这是最终之剑的重制版，尽量还原了1.7.10版本的设定!",
 
+  "text.autoconfig.tlsywen.title": "最终之剑 配置",
+  "text.autoconfig.tlsywen.option.enableCustomTab": "启用自定义标签页样式",
+  "text.autoconfig.tlsywen.option.enableCustomTab.@Tooltip": "启用自定义标签页背景纹理和标签页按钮纹理",
+  "text.autoconfig.tlsywen.option.enableCustomTab.@PrefixText": "客户端设置",
+  "text.autoconfig.tlsywen.option.enableModItemGroups": "启用模组物品组",
+  "text.autoconfig.tlsywen.option.enableModItemGroups.@Tooltip": "启用模组自定义创造模式标签页",
+  "text.autoconfig.tlsywen.option.enableModItemGroups.@PrefixText": "客户端设置",
+
   "resourcePack.tlsywen.classic_look.name": "经典外观",
   "resourcePack.tlsywen.classic_look.description": "最终之剑的经典外观",
 
@@ -41,5 +49,9 @@
   "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv8": "等级: 8",
   "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv9": "等级: 9",
   "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv10": "等级: 10",
-  "tooltip.tlsywen.really_the_last_sword_you_will_ever_need": "等级: 终极"
+  "tooltip.tlsywen.really_the_last_sword_you_will_ever_need": "等级: 终极",
+
+  "task.tlsywen.last_sword_attack.name": "最终之剑攻击",
+  "task.tlsywen.last_sword_attack.desc": "女仆会主动用弓箭攻击周围的敌对生物",
+  "task.tlsywen.last_sword_attack.condition.holding_final_sword": "主手持有最终之剑"
 }

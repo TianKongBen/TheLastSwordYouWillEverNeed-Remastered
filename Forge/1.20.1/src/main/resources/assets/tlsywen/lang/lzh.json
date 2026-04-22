@@ -3,6 +3,14 @@
   "modmenu.descriptionTranslation.tlsywen": "礦藝之改囊，增一把不敢信其為真之劍，此劍有一擊必殺終眇龍之力",
   "modmenu.summaryTranslation.tlsywen": "此為終焉劍:重塑，尽遵1.7.10版本之規!",
 
+  "text.autoconfig.tlsywen.title": "終焉劍 配置",
+  "text.autoconfig.tlsywen.option.enableCustomTab": "啟用自定義標籤頁樣式",
+  "text.autoconfig.tlsywen.option.enableCustomTab.@Tooltip": "啟用自定義標籤頁背景紋理和標籤頁按鈕紋理",
+  "text.autoconfig.tlsywen.option.enableCustomTab.@PrefixText": "客戶端設置",
+  "text.autoconfig.tlsywen.option.enableModItemGroups": "啟用模組物品組",
+  "text.autoconfig.tlsywen.option.enableModItemGroups.@Tooltip": "啟用模組自定義創造模式標籤頁",
+  "text.autoconfig.tlsywen.option.enableModItemGroups.@PrefixText": "客戶端設置",
+
   "resourcePack.tlsywen.classic_look.name": "其外如故",
   "resourcePack.tlsywen.classic_look.description": "終焉劍其外如故",
 
@@ -41,5 +49,9 @@
   "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv8": "秩: 八階",
   "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv9": "秩: 九階",
   "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv10": "秩: 十階",
-  "tooltip.tlsywen.really_the_last_sword_you_will_ever_need": "秩: 終極"
+  "tooltip.tlsywen.really_the_last_sword_you_will_ever_need": "秩: 終極",
+
+  "task.tlsywen.last_sword_attack.name": "終焉劍攻擊",
+  "task.tlsywen.last_sword_attack.desc": "女僕會主動用弓箭攻擊周圍的敵對生物",
+  "task.tlsywen.last_sword_attack.condition.holding_final_sword": "主手持有終焉劍"
 }

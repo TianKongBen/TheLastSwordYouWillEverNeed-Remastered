@@ -63,12 +63,12 @@ public class TheLastSwordYouWillEverNeed {
     }
 
     private void addBuildingBlocks(BuildCreativeModeTabContentsEvent event) {
-        event.getEntries().putAfter(
+        event.insertAfter(
                 new ItemStack(Items.NETHERITE_BLOCK),
                 new ItemStack(ModItems.COMPRESSED_STAR.get()),
                 CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
         );
-        event.getEntries().putAfter(
+        event.insertAfter(
                 new ItemStack(ModItems.COMPRESSED_STAR.get()),
                 new ItemStack(ModItems.DRAGON_CRYSTAL_BLOCK.get()),
                 CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
@@ -76,7 +76,7 @@ public class TheLastSwordYouWillEverNeed {
     }
 
     private void addNaturalBlocks(@NotNull BuildCreativeModeTabContentsEvent event) {
-        event.getEntries().putAfter(
+        event.insertAfter(
                 new ItemStack(Items.ANCIENT_DEBRIS),
                 new ItemStack(ModItems.DRAGON_CRYSTAL_ORE.get()),
                 CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
@@ -89,57 +89,57 @@ public class TheLastSwordYouWillEverNeed {
     }
 
     private void addWeapons(@NotNull BuildCreativeModeTabContentsEvent event) {
-        event.getEntries().putAfter(
+        event.insertAfter(
                 new ItemStack(Items.NETHERITE_SWORD),
                 new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV1.get()),
                 CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
         );
-        event.getEntries().putAfter(
+        event.insertAfter(
                 new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV1.get()),
                 new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV2.get()),
                 CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
         );
-        event.getEntries().putAfter(
+        event.insertAfter(
                 new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV2.get()),
                 new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV3.get()),
                 CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
         );
-        event.getEntries().putAfter(
+        event.insertAfter(
                 new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV3.get()),
                 new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV4.get()),
                 CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
         );
-        event.getEntries().putAfter(
+        event.insertAfter(
                 new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV4.get()),
                 new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV5.get()),
                 CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
         );
-        event.getEntries().putAfter(
+        event.insertAfter(
                 new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV5.get()),
                 new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV6.get()),
                 CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
         );
-        event.getEntries().putAfter(
+        event.insertAfter(
                 new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV6.get()),
                 new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV7.get()),
                 CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
         );
-        event.getEntries().putAfter(
+        event.insertAfter(
                 new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV7.get()),
                 new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV8.get()),
                 CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
         );
-        event.getEntries().putAfter(
+        event.insertAfter(
                 new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV8.get()),
                 new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV9.get()),
                 CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
         );
-        event.getEntries().putAfter(
+        event.insertAfter(
                 new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV9.get()),
                 new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV10.get()),
                 CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
         );
-        event.getEntries().putAfter(
+        event.insertAfter(
                 new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV10.get()),
                 new ItemStack(ModItems.REALLYTHELASTSWORDYOUWILLEVERNEED.get()),
                 CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
@@ -147,22 +147,22 @@ public class TheLastSwordYouWillEverNeed {
     }
 
     private void addArmor(@NotNull BuildCreativeModeTabContentsEvent event) {
-        event.getEntries().putAfter(
+        event.insertAfter(
                 new ItemStack(Items.NETHERITE_BOOTS),
                 new ItemStack(ModItems.DRAGON_CRYSTAL_HELMET.get()),
                 CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
         );
-        event.getEntries().putAfter(
+        event.insertAfter(
                 new ItemStack(ModItems.DRAGON_CRYSTAL_HELMET.get()),
                 new ItemStack(ModItems.DRAGON_CRYSTAL_CHESTPLATE.get()),
                 CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
         );
-        event.getEntries().putAfter(
+        event.insertAfter(
                 new ItemStack(ModItems.DRAGON_CRYSTAL_CHESTPLATE.get()),
                 new ItemStack(ModItems.DRAGON_CRYSTAL_LEGGINGS.get()),
                 CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
         );
-        event.getEntries().putAfter(
+        event.insertAfter(
                 new ItemStack(ModItems.DRAGON_CRYSTAL_LEGGINGS.get()),
                 new ItemStack(ModItems.DRAGON_CRYSTAL_BOOTS.get()),
                 CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
@@ -170,7 +170,7 @@ public class TheLastSwordYouWillEverNeed {
     }
 
     private void addIngredients(@NotNull BuildCreativeModeTabContentsEvent event) {
-        event.getEntries().putAfter(
+        event.insertAfter(
                 new ItemStack(Items.NETHERITE_INGOT),
                 new ItemStack(ModItems.DRAGON_CRYSTAL.get()),
                 CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
@@ -181,7 +181,7 @@ public class TheLastSwordYouWillEverNeed {
     public void onServerStarting(ServerStartingEvent event) {
     }
 
-    @EventBusSubscriber(modid = TheLastSwordYouWillEverNeed.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = TheLastSwordYouWillEverNeed.MOD_ID, value = Dist.CLIENT)
     static class ClientModEvents {
         private static boolean hasRegistered = false;
 

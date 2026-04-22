@@ -2,23 +2,29 @@ package net.tianben.tlsywen.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.tianben.tlsywen.item.ModItems;
 import org.jetbrains.annotations.NotNull;
 
 public class LDEntity extends ThrowableItemProjectile {
+
     private static final byte PARTICLE_EVENT = 3;
     private static final float BASE_DAMAGE = 1600.0f;
+    private static final double SPEED_THRESHOLD = 0.001;
+    private static final int MAX_STATIONARY_TICKS = 5;
+
+    private int stationaryTicks;
 
     public LDEntity(EntityType<? extends ThrowableItemProjectile> entityType, Level level) {
         super(entityType, level);
@@ -38,111 +44,110 @@ public class LDEntity extends ThrowableItemProjectile {
         return false;
     }
 
-    protected boolean isBurning() {
-        return false;
-    }
-
     @Override
     public void handleEntityEvent(byte id) {
-        if (id == PARTICLE_EVENT) {
-            Vec3 vec3 = getDeltaMovement();
-            Vec3 pos = new Vec3(
-                    getX() + vec3.x,
-                    getY() + vec3.y,
-                    getZ() + vec3.z
+        if (id != PARTICLE_EVENT) return;
+
+        Vec3 velocity = getDeltaMovement();
+        Vec3 pos = position().add(velocity);
+
+        for (int i = 0; i < 4; i++) {
+            level().addParticle(
+                    ParticleTypes.POOF,
+                    pos.x - velocity.x * 0.25,
+                    pos.y - velocity.y * 0.25,
+                    pos.z - velocity.z * 0.25,
+                    velocity.x, velocity.y, velocity.z
             );
-            for (int i = 0; i < 4; ++i) {
-                level().addParticle(
-                        ParticleTypes.POOF,
-                        pos.x - vec3.x * 0.25,
-                        pos.y - vec3.y * 0.25,
-                        pos.z - vec3.z * 0.25,
-                        vec3.x, vec3.y, vec3.z
-                );
-            }
         }
     }
 
-    private void lightning(BlockPos blockPos) {
+    private void spawnLightning(BlockPos pos) {
         LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(level());
         if (lightning != null) {
-            lightning.moveTo(Vec3.atBottomCenterOf(blockPos));
+            lightning.moveTo(Vec3.atBottomCenterOf(pos));
             level().addFreshEntity(lightning);
         }
     }
 
     @Override
     protected void onHitEntity(@NotNull EntityHitResult result) {
-        if(!level().isClientSide()){
-            lightning(result.getEntity().blockPosition());
-            Entity entity = result.getEntity();
+        if (!level().isClientSide()) {
+            Entity target = result.getEntity();
             Entity owner = getOwner();
 
-            float damage = BASE_DAMAGE;
-            if (owner instanceof Player player) {
-                var heldItem = player.getMainHandItem();
-                if (heldItem.getItem() instanceof TieredItem tieredItem) {
-                    damage = tieredItem.getTier().getAttackDamageBonus();
-                }
+            spawnLightning(target.blockPosition());
 
-                entity.hurt(damageSources().thrown(this, player), damage);
+            float damage = getDamage(owner);
+            if (owner instanceof Player player) {
+                target.hurt(damageSources().thrown(this, player), damage);
             } else if (owner != null) {
-                entity.hurt(damageSources().thrown(this, owner), damage);
+                target.hurt(damageSources().thrown(this, owner), damage);
             }
         }
-
         discard();
+    }
+
+    private float getDamage(Entity owner) {
+        if (owner instanceof Player player) {
+            var heldItem = player.getMainHandItem();
+            if (heldItem.getItem() instanceof TieredItem tieredItem) {
+                return tieredItem.getTier().getAttackDamageBonus();
+            }
+        }
+        return BASE_DAMAGE;
     }
 
     @Override
     protected void onHitBlock(@NotNull BlockHitResult result) {
-        if(!level().isClientSide()) {
+        if (!level().isClientSide()) {
             level().broadcastEntityEvent(this, PARTICLE_EVENT);
-            lightning(result.getBlockPos());
+            spawnLightning(result.getBlockPos());
         }
-
         discard();
     }
 
     @Override
     public void tick() {
         super.tick();
-        HitResult hitResult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
-        boolean bl = false;
-        if (isBurning()) {
-            setSecondsOnFire(1);
-        }
-        if (hitResult.getType() != HitResult.Type.MISS && !bl) {
-            onHit(hitResult);
-        }
 
-        checkInsideBlocks();
-        Vec3 vec3 = getDeltaMovement();
-        setPos(
-                getX() + vec3.x,
-                getY() + vec3.y,
-                getZ() + vec3.z
-        );
-
-        updateRotation();
+        if (isSpeedZero()) {
+            if (++stationaryTicks >= MAX_STATIONARY_TICKS) {
+                discard();
+                return;
+            }
+        } else {
+            stationaryTicks = 0;
+        }
 
         if (isInWater()) {
-            Vec3 pos = new Vec3(getX(), getY(), getZ());
-            for (int i = 0; i < 4; ++i) {
-                level().addParticle(ParticleTypes.BUBBLE,
-                        pos.x - vec3.x * 0.25,
-                        pos.y - vec3.y * 0.25,
-                        pos.z - vec3.z * 0.25,
-                        vec3.x, vec3.y, vec3.z);
+            Vec3 velocity = getDeltaMovement();
+            Vec3 pos = position();
+            for (int i = 0; i < 4; i++) {
+                level().addParticle(
+                        ParticleTypes.BUBBLE,
+                        pos.x - velocity.x * 0.25,
+                        pos.y - velocity.y * 0.25,
+                        pos.z - velocity.z * 0.25,
+                        velocity.x, velocity.y, velocity.z
+                );
             }
         }
 
         if (!isNoGravity()) {
-            Vec3 vec32 = getDeltaMovement();
-            setDeltaMovement(vec32.x, vec32.y - getGravity(), vec32.z);
+            Vec3 velocity = getDeltaMovement();
+            setDeltaMovement(velocity.x, velocity.y - getGravity(), velocity.z);
         }
     }
 
+    private boolean isSpeedZero() {
+        Vec3 movement = getDeltaMovement();
+        return Math.abs(movement.x) <= SPEED_THRESHOLD &&
+                Math.abs(movement.y) <= SPEED_THRESHOLD &&
+                Math.abs(movement.z) <= SPEED_THRESHOLD;
+    }
+
+    @Override
     protected float getGravity() {
         return 0f;
     }

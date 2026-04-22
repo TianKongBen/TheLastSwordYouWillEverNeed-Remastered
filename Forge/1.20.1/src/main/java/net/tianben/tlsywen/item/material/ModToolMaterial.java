@@ -5,28 +5,26 @@ import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 
 public enum ModToolMaterial implements Tier {
-    THELASTSWORDYOUWILLEVERNEEDLV1(10.0f, 1600f, 20, 5),
-    THELASTSWORDYOUWILLEVERNEEDLV2(10.0f, 2400f, 20, 5),
-    THELASTSWORDYOUWILLEVERNEEDLV3(10.0f, 3200f, 20, 5),
-    THELASTSWORDYOUWILLEVERNEEDLV4(10.0f, 4000f, 20, 5),
-    THELASTSWORDYOUWILLEVERNEEDLV5(10.0f, 4800f, 20, 5),
-    THELASTSWORDYOUWILLEVERNEEDLV6(10.0f, 5600f, 20, 5),
-    THELASTSWORDYOUWILLEVERNEEDLV7(10.0f, 6400f, 20, 5),
-    THELASTSWORDYOUWILLEVERNEEDLV8(10.0f, 7200f, 20, 5),
-    THELASTSWORDYOUWILLEVERNEEDLV9(10.0f, 8000f, 20, 5),
-    THELASTSWORDYOUWILLEVERNEEDLV10(10.0f, 8800f, 20, 5),
-    REALLYTHELASTSWORDYOUWILLEVERNEED(10.0f, 7999999874453995500f, 20, 5);
+    THELASTSWORDYOUWILLEVERNEEDLV1(1600f),
+    THELASTSWORDYOUWILLEVERNEEDLV2(2400f),
+    THELASTSWORDYOUWILLEVERNEEDLV3(3200f),
+    THELASTSWORDYOUWILLEVERNEEDLV4(4000f),
+    THELASTSWORDYOUWILLEVERNEEDLV5(4800f),
+    THELASTSWORDYOUWILLEVERNEEDLV6(5600f),
+    THELASTSWORDYOUWILLEVERNEEDLV7(6400f),
+    THELASTSWORDYOUWILLEVERNEEDLV8(7200f),
+    THELASTSWORDYOUWILLEVERNEEDLV9(8000f),
+    THELASTSWORDYOUWILLEVERNEEDLV10(8800f),
+    REALLYTHELASTSWORDYOUWILLEVERNEED(7999999874453995500f);
 
-    private final float speed;
+    private static final float SPEED = 10.0f;
+    private static final int ENCHANTMENT_VALUE = 20;
+    private static final int LEVEL = 5;
+
     private final float attackDamageBonus;
-    private final int enchantmentValue;
-    private final int level;
 
-    ModToolMaterial(float speed, float attackDamageBonus, int enchantmentValue, int level) {
-        this.speed = speed;
+    ModToolMaterial(float attackDamageBonus) {
         this.attackDamageBonus = attackDamageBonus;
-        this.enchantmentValue = enchantmentValue;
-        this.level = level;
     }
 
     @Override
@@ -36,22 +34,22 @@ public enum ModToolMaterial implements Tier {
 
     @Override
     public float getSpeed() {
-        return this.speed;
+        return SPEED;
     }
 
     @Override
     public float getAttackDamageBonus() {
-        return this.attackDamageBonus;
+        return attackDamageBonus;
     }
 
     @Override
     public int getLevel() {
-        return this.level;
+        return LEVEL;
     }
 
     @Override
     public int getEnchantmentValue() {
-        return enchantmentValue;
+        return ENCHANTMENT_VALUE;
     }
 
     @Override

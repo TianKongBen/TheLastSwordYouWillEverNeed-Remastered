@@ -18,11 +18,11 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 
-@EventBusSubscriber(modid = TheLastSwordYouWillEverNeed.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = TheLastSwordYouWillEverNeed.MOD_ID)
 public class ResourceManager {
     private static final String PACK_NAME = "classic_look";
     private static final ResourceLocation PACK_ID =
-            new ResourceLocation(TheLastSwordYouWillEverNeed.MOD_ID, PACK_NAME);
+            ResourceLocation.fromNamespaceAndPath(TheLastSwordYouWillEverNeed.MOD_ID, PACK_NAME);
 
     @SubscribeEvent
     public static void addResourcePack(@NotNull AddPackFindersEvent event) {
@@ -41,12 +41,12 @@ public class ResourceManager {
 
             Pack.ResourcesSupplier resourcesSupplier = new Pack.ResourcesSupplier() {
                 @Override
-                public PackResources openPrimary(PackLocationInfo packLocationInfo) {
+                public @NotNull PackResources openPrimary(@NotNull PackLocationInfo packLocationInfo) {
                     return new PathPackResources(packLocationInfo, resourcePath);
                 }
 
                 @Override
-                public PackResources openFull(PackLocationInfo packLocationInfo, Pack.Metadata metadata) {
+                public @NotNull PackResources openFull(@NotNull PackLocationInfo packLocationInfo, Pack.@NotNull Metadata metadata) {
                     return new PathPackResources(packLocationInfo, resourcePath);
                 }
             };
@@ -55,8 +55,7 @@ public class ResourceManager {
                     Component.translatable("resourcePack." + PACK_ID.getNamespace() + "." + PACK_NAME + ".description"),
                     PackCompatibility.COMPATIBLE,
                     FeatureFlags.DEFAULT_FLAGS,
-                    List.of(),
-                    false
+                    List.of()
             );
 
             PackSelectionConfig selectionConfig = new PackSelectionConfig(false, Pack.Position.TOP, false);

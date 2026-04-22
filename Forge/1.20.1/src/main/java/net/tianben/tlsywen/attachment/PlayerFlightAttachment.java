@@ -3,10 +3,12 @@ package net.tianben.tlsywen.attachment;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.*;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
@@ -16,25 +18,67 @@ import static net.tianben.tlsywen.TheLastSwordYouWillEverNeed.MOD_ID;
 
 @Mod.EventBusSubscriber(modid = MOD_ID)
 public final class PlayerFlightAttachment {
-    public static final Capability<IFlightCapability> FLIGHT_CAPABILITY = 
+    public static final Capability<IFlightCapability> FLIGHT_CAPABILITY =
             CapabilityManager.get(new CapabilityToken<>() {});
 
     private PlayerFlightAttachment() {}
 
-    public static boolean hasFlight(@NotNull Player player) {
-        return player.getCapability(FLIGHT_CAPABILITY).map(IFlightCapability::hasFlight).orElse(false);
+    public static boolean hasFlight(Player player) {
+        return player.getCapability(FLIGHT_CAPABILITY)
+                .map(IFlightCapability::hasFlight)
+                .orElse(false);
     }
 
-    public static void setFlight(@NotNull Player player, boolean enabled) {
-        player.getCapability(FLIGHT_CAPABILITY).ifPresent(cap -> cap.setFlight(enabled));
+    public static void setFlight(Player player, boolean enabled) {
+        player.getCapability(FLIGHT_CAPABILITY)
+                .ifPresent(cap -> cap.setFlight(enabled));
+    }
+
+    public static void applyFlightAbility(Player player, boolean enabled) {
+        var abilities = player.getAbilities();
+        abilities.mayfly = enabled;
+        if (!enabled) {
+            abilities.flying = false;
+        }
+        player.onUpdateAbilities();
     }
 
     @SubscribeEvent
-    public static void onAttachCapabilities(AttachCapabilitiesEvent<net.minecraft.world.entity.Entity> event) {
+    public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player) {
-            FlightCapabilityProvider provider = new FlightCapabilityProvider();
-            event.addCapability(new ResourceLocation(MOD_ID, "flight"), provider);
+            event.addCapability(
+                    ResourceLocation.fromNamespaceAndPath(MOD_ID, "flight"),
+                    new FlightCapabilityProvider()
+            );
         }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+        restoreFlightIfNeeded(event.getEntity());
+    }
+
+    @SubscribeEvent
+    public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
+        restoreFlightIfNeeded(event.getEntity());
+    }
+
+    private static void restoreFlightIfNeeded(Player player) {
+        if (player == null || player.isCreative() || player.isSpectator()) return;
+        if (hasFlight(player)) {
+            applyFlightAbility(player, true);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerClone(PlayerEvent.Clone event) {
+        if (!event.isWasDeath()) return;
+
+        event.getOriginal().getCapability(FLIGHT_CAPABILITY).ifPresent(oldCap ->
+                event.getEntity().getCapability(FLIGHT_CAPABILITY).ifPresent(newCap ->
+                        newCap.setFlight(oldCap.hasFlight())
+                )
+        );
     }
 
     public interface IFlightCapability {
@@ -43,7 +87,7 @@ public final class PlayerFlightAttachment {
     }
 
     public static class FlightCapabilityImpl implements IFlightCapability {
-        private boolean hasFlight = false;
+        private boolean hasFlight;
 
         @Override
         public boolean hasFlight() {
@@ -56,7 +100,7 @@ public final class PlayerFlightAttachment {
         }
 
         public CompoundTag serializeNBT() {
-            CompoundTag tag = new CompoundTag();
+            var tag = new CompoundTag();
             tag.putBoolean("hasFlight", hasFlight);
             return tag;
         }
@@ -83,17 +127,6 @@ public final class PlayerFlightAttachment {
         @Override
         public void deserializeNBT(CompoundTag nbt) {
             instance.deserializeNBT(nbt);
-        }
-    }
-
-    @SubscribeEvent
-    public static void onPlayerClone(net.minecraftforge.event.entity.player.PlayerEvent.Clone event) {
-        if (event.isWasDeath()) {
-            event.getOriginal().getCapability(FLIGHT_CAPABILITY).ifPresent(oldCap -> {
-                event.getEntity().getCapability(FLIGHT_CAPABILITY).ifPresent(newCap -> {
-                    newCap.setFlight(oldCap.hasFlight());
-                });
-            });
         }
     }
 }

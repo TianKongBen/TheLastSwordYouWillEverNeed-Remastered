@@ -16,7 +16,7 @@ import org.joml.Matrix4f;
 import com.mojang.math.Axis;
 
 public class RenderLD extends EntityRenderer<LDEntity> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation("textures/item/diamond.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.parse("textures/item/diamond.png");
     private static final RenderType LAYER = RenderType.entityCutout(TEXTURE);
     private static final float SCALE = 0.25f;
     private static final float ROTATION = 180.0f;

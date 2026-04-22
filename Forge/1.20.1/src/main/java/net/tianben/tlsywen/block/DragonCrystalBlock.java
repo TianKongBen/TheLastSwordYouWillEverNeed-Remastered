@@ -22,6 +22,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+@SuppressWarnings("deprecation")
 public class DragonCrystalBlock extends BaseEntityBlock {
     public static final BooleanProperty ACTIVATED = BlockStateProperties.POWERED;
 
@@ -31,8 +32,8 @@ public class DragonCrystalBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void setPlacedBy(@NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState state,
-                            LivingEntity placer, @NotNull ItemStack stack) {
+    public void setPlacedBy(@NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState state, LivingEntity placer,
+                            @NotNull ItemStack stack) {
         super.setPlacedBy(level, pos, state, placer, stack);
         level.setBlock(pos, state.setValue(ACTIVATED, false), 2);
     }
@@ -41,19 +42,18 @@ public class DragonCrystalBlock extends BaseEntityBlock {
     public @NotNull InteractionResult use(@NotNull BlockState state, Level level, @NotNull BlockPos pos, Player player,
                                           @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
         InteractionResult useResult = player.getItemInHand(hand).useOn(new UseOnContext(player, hand, hit));
-        BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity instanceof DragonCrystalBlockEntity crystal) {
+
+        if (level.getBlockEntity(pos) instanceof DragonCrystalBlockEntity crystal) {
             crystal.playSound(level, pos);
             return InteractionResult.sidedSuccess(level.isClientSide());
-        } else {
-            return useResult;
         }
+
+        return useResult;
     }
 
     @Override
     public void attack(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull Player player) {
-        BlockEntity blockEntity = level.getBlockEntity(pos);
-        if (blockEntity instanceof DragonCrystalBlockEntity crystal) {
+        if (level.getBlockEntity(pos) instanceof DragonCrystalBlockEntity crystal) {
             crystal.playSound(level, pos);
         }
         super.attack(state, level, pos, player);

@@ -19,7 +19,7 @@ import java.nio.file.Path;
 public final class ResourceManager {
     private static final String PACK_NAME = "classic_look";
     private static final ResourceLocation PACK_ID =
-            new ResourceLocation(TheLastSwordYouWillEverNeed.MOD_ID, PACK_NAME);
+            ResourceLocation.fromNamespaceAndPath(TheLastSwordYouWillEverNeed.MOD_ID, PACK_NAME);
 
     private ResourceManager() {}
 

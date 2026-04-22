@@ -15,8 +15,8 @@ import net.tianben.tlsywen.entity.LDEntity;
 
 @OnlyIn(Dist.CLIENT)
 public class RenderLD extends EntityRenderer<LDEntity> {
-    protected static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation("textures/item/diamond.png");
-    private static final RenderType RENDER_TYPE = RenderType.entityCutoutNoCull(TEXTURE_LOCATION);
+    private static final ResourceLocation TEXTURE = ResourceLocation.withDefaultNamespace("textures/item/diamond.png");
+    private static final RenderType LAYER = RenderType.entityCutoutNoCull(TEXTURE);
     private static final float SCALE = 0.25f;
     private static final float ROTATION = 180.0f;
 
@@ -24,7 +24,9 @@ public class RenderLD extends EntityRenderer<LDEntity> {
         super(context);
     }
 
-    public void render(LDEntity ldEntity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+    @Override
+    public void render(LDEntity ldEntity, float entityYaw, float partialTicks, PoseStack poseStack,
+                       MultiBufferSource buffer, int packedLight) {
         poseStack.pushPose();
         preparePose(poseStack);
         renderModel(poseStack, buffer, packedLight);
@@ -34,13 +36,13 @@ public class RenderLD extends EntityRenderer<LDEntity> {
 
     private void preparePose(PoseStack poseStack) {
         poseStack.scale(SCALE, SCALE, SCALE);
-        poseStack.mulPose(entityRenderDispatcher.cameraOrientation());
+        poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
         poseStack.mulPose(Axis.YP.rotationDegrees(ROTATION));
     }
 
     private void renderModel(PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         PoseStack.Pose pose = poseStack.last();
-        VertexConsumer vertexConsumer = buffer.getBuffer(RENDER_TYPE);
+        VertexConsumer vertexConsumer = buffer.getBuffer(LAYER);
 
         addVertex(vertexConsumer, pose, packedLight, 0.0F, 0, 0, 1);
         addVertex(vertexConsumer, pose, packedLight, 1.0F, 0, 1, 1);
@@ -48,17 +50,18 @@ public class RenderLD extends EntityRenderer<LDEntity> {
         addVertex(vertexConsumer, pose, packedLight, 0.0F, 1, 0, 0);
     }
 
-    private static void addVertex(VertexConsumer consumer, PoseStack.Pose pose, int packedLight, float x, int y, int u, int v) {
-        consumer.vertex(pose, x - 0.5F, y - 0.25F, 0.0F)
-                .color(255, 255, 255, 255)
-                .uv(u, v)
-                .overlayCoords(OverlayTexture.NO_OVERLAY)
-                .uv2(packedLight)
-                .normal(pose, 0.0F, 1.0F, 0.0F)
-                .endVertex();
+    private static void addVertex(VertexConsumer vertexConsumer, PoseStack.Pose pose, int packedLight,
+                                  float x, int y, int u, int v) {
+        vertexConsumer.addVertex(pose, x - 0.5F, (float) y - 0.25F, 0.0F)
+                .setColor(255, 255, 255, 255)
+                .setUv(u, v)
+                .setOverlay(OverlayTexture.NO_OVERLAY)
+                .setLight(packedLight)
+                .setNormal(pose, 0.0F, 1.0F, 0.0F);
     }
 
+    @Override
     public ResourceLocation getTextureLocation(LDEntity entity) {
-        return TEXTURE_LOCATION;
+        return TEXTURE;
     }
 }

@@ -1,11 +1,13 @@
 package net.tianben.tlsywen;
 
 import com.mojang.logging.LogUtils;
+import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -14,6 +16,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.tianben.tlsywen.block.ModBlocks;
+import net.tianben.tlsywen.config.ModConfig;
 import net.tianben.tlsywen.entity.ModEntities;
 import net.tianben.tlsywen.item.ModItems;
 import net.tianben.tlsywen.item.group.ModItemGroups;
@@ -27,12 +30,21 @@ public final class TheLastSwordYouWillEverNeed {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public TheLastSwordYouWillEverNeed(FMLJavaModLoadingContext context) {
-        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-        ModItemGroups.registerItemGroups(bus);
-        ModBlocks.registerModBlocks(bus);
-        ModItems.registerModItems(bus);
-        ModEntities.registerModEntities(bus);
-        bus.addListener(this::addCreativeTabItems);
+        IEventBus modEventBus = context.getModEventBus();
+        ModConfig.register();
+
+        context.registerExtensionPoint(
+                ConfigScreenHandler.ConfigScreenFactory.class,
+                () -> new ConfigScreenHandler.ConfigScreenFactory(
+                        (mc, screen) -> AutoConfig.getConfigScreen(ModConfig.class, screen).get()
+                )
+        );
+
+        ModItemGroups.registerItemGroups(modEventBus);
+        ModBlocks.registerModBlocks(modEventBus);
+        ModItems.registerModItems(modEventBus);
+        ModEntities.registerModEntities(modEventBus);
+        modEventBus.addListener(this::addCreativeTabItems);
     }
 
     private void addCreativeTabItems(@NotNull BuildCreativeModeTabContentsEvent event) {

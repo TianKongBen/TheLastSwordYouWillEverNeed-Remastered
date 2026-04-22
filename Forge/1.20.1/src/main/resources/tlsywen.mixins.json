@@ -4,10 +4,13 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "tlsywen.mixins.refmap.json",
   "mixins": [
+    "CreativeModeTabMixin"
   ],
   "client": [
+    "CreativeModeInventoryScreenAccessor",
+    "CreativeModeInventoryScreenMixin",
     "CustomTabTextureMixin",
-    "NoNightVisionFlashingMixin"
+    "EffectDurationDisplayMixin"
   ],
   "minVersion": "0.8.5"
 }
