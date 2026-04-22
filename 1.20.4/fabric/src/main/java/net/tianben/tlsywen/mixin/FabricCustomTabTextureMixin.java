@@ -57,6 +57,7 @@ public abstract class FabricCustomTabTextureMixin {
             new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_selected_5"),
             new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_selected_6"),
             new ResourceLocation("tlsywen", "container/creative_inventory/tlsywen_tab_bottom_selected_7")};
+
     @Shadow
     private static CreativeModeTab selectedTab;
 
@@ -69,7 +70,7 @@ public abstract class FabricCustomTabTextureMixin {
             ),
             index = 0
     )
-    private ResourceLocation redirectTabTexture(ResourceLocation original,
+    private ResourceLocation redirectTabTexture(ResourceLocation location,
                                                 @Local CreativeModeTab tab) {
         if (tab == ModItemGroupsFabric.the_last_sword_you_will_ever_need) {
             boolean isTopRow = tab.row() == CreativeModeTab.Row.TOP;
@@ -82,7 +83,7 @@ public abstract class FabricCustomTabTextureMixin {
                 return isSelected ? TLSYWEN_SELECTED_BOTTOM_TABS[column] : TLSYWEN_UNSELECTED_BOTTOM_TABS[column];
             }
         }
-        return original;
+        return location;
     }
 
     @Redirect(
@@ -93,12 +94,12 @@ public abstract class FabricCustomTabTextureMixin {
                     ordinal = 0
             )
     )
-    private void redirectScroller(GuiGraphics graphics, ResourceLocation original, int x, int y, int width, int height) {
+    private void redirectScroller(GuiGraphics graphics, ResourceLocation location, int x, int y, int width, int height) {
         if (selectedTab == ModItemGroupsFabric.the_last_sword_you_will_ever_need) {
             ResourceLocation custom = canScroll() ? TLSYWEN_SCROLLER_SPRITE : TLSYWEN_SCROLLER_DISABLED_SPRITE;
             graphics.blitSprite(custom, x, y, width, height);
         } else {
-            graphics.blitSprite(original, x, y, width, height);
+            graphics.blitSprite(location, x, y, width, height);
         }
     }
 

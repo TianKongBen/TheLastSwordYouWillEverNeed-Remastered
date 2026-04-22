@@ -179,10 +179,5 @@ The mythic blade makes its triumphant comeback! "The Last Sword You Will Ever Ne
 
 ![ ](https://cdn.modrinth.com/data/cached_images/69202bb8633a4f908d601af2e6037e8ee1fe0873.png)
 
----
-### 常见问题解答
-**Q：** 会推出Forge和NeoForge版本吗？
-
-**A：**
-- Forge版：已发布
-- NeoForge版：计划在1.20.2更新后推出
+Refactored almost all the code and fixed incompatibility with other flight mods
+重构了近乎所有代码，并修复了与其他飞行模组不兼容的问题
