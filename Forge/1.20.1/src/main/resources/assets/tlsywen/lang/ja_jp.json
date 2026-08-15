@@ -1,0 +1,57 @@
+{
+  "modmenu.nameTranslation.tlsywen": "最終の剣:リマスター版",
+  "modmenu.descriptionTranslation.tlsywen": "Minecraft の Mod で、信じられないほどの剣を追加します。これはエンダードラゴンを一撃で倒すことができる剣です。",
+  "modmenu.summaryTranslation.tlsywen": "これは最終の剣のリマスター版で、1.7.10 バージョンの設定を可能な限り再現しています！",
+
+  "text.autoconfig.tlsywen.title": "最終の剣 設定",
+  "text.autoconfig.tlsywen.option.enableCustomTab": "カスタムタブスタイルを有効化",
+  "text.autoconfig.tlsywen.option.enableCustomTab.@Tooltip": "カスタムタブの背景テクスチャとタブボタンのテクスチャを有効にします",
+  "text.autoconfig.tlsywen.option.enableCustomTab.@PrefixText": "クライアント設定",
+  "text.autoconfig.tlsywen.option.enableModItemGroups": "Modアイテムグループを有効化",
+  "text.autoconfig.tlsywen.option.enableModItemGroups.@Tooltip": "Modカスタムクリエイティブタブを有効にします",
+  "text.autoconfig.tlsywen.option.enableModItemGroups.@PrefixText": "クライアント設定",
+
+  "resourcePack.tlsywen.classic_look.name": "クラシックルック",
+  "resourcePack.tlsywen.classic_look.description": "最終の剣のクラシックな外観",
+
+  "itemgroup.the_last_sword_you_will_ever_need": "最終の剣:リマスター版",
+
+  "block.tlsywen.compressed_star": "圧縮された星",
+  "block.tlsywen.dragon_crystal_block": "ドラゴンクリスタルブロック",
+  "block.tlsywen.dragon_crystal_ore": "ドラゴンクリスタル鉱石",
+
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv1": "最終の剣",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv2": "最終の剣",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv3": "最終の剣",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv4": "最終の剣",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv5": "最終の剣",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv6": "最終の剣",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv7": "最終の剣",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv8": "最終の剣",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv9": "最終の剣",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv10": "最終の剣",
+  "item.tlsywen.really_the_last_sword_you_will_ever_need": "真最終の剣",
+
+  "item.tlsywen.dragon_crystal_helmet": "ドラゴンクリスタルのヘルメット",
+  "item.tlsywen.dragon_crystal_chestplate": "ドラゴンクリスタルのチェストプレート",
+  "item.tlsywen.dragon_crystal_leggings": "ドラゴンクリスタルのレギンス",
+  "item.tlsywen.dragon_crystal_boots": "ドラゴンクリスタルのブーツ",
+
+  "item.tlsywen.dragon_crystal": "ドラゴンクリスタル",
+
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv1": "レベル: 1",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv2": "レベル: 2",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv3": "レベル: 3",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv4": "レベル: 4",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv5": "レベル: 5",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv6": "レベル: 6",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv7": "レベル: 7",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv8": "レベル: 8",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv9": "レベル: 9",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv10": "レベル: 10",
+  "tooltip.tlsywen.really_the_last_sword_you_will_ever_need": "レベル: 究極",
+
+  "task.tlsywen.last_sword_attack.name": "最終の剣攻撃",
+  "task.tlsywen.last_sword_attack.desc": "メイドが弓を使って周囲の敵対Mobを能動的に攻撃します",
+  "task.tlsywen.last_sword_attack.condition.holding_final_sword": "メインハンドに最終の剣を所持"
+}

@@ -15,8 +15,9 @@ import net.tianben.tlsywen.entity.LDEntity;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
-@Environment(value=EnvType.CLIENT)
+@Environment(EnvType.CLIENT)
 public class RenderLD extends EntityRenderer<LDEntity> {
+
     private static final Identifier TEXTURE = new Identifier("textures/item/diamond.png");
     private static final RenderLayer LAYER = RenderLayer.getEntityCutout(TEXTURE);
     private static final float SCALE = 0.25f;
@@ -26,33 +27,35 @@ public class RenderLD extends EntityRenderer<LDEntity> {
         super(context);
     }
 
-    public void render(LDEntity ldEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
-        matrixStack.push();
-        preparePose(matrixStack);
-        renderModel(matrixStack, vertexConsumerProvider, i);
-        matrixStack.pop();
-        super.render(ldEntity, f, g, matrixStack, vertexConsumerProvider, i);
+    @Override
+    public void render(LDEntity entity, float yaw, float tickDelta, MatrixStack matrices,
+                       VertexConsumerProvider vertexConsumers, int light) {
+        matrices.push();
+        preparePose(matrices);
+        renderModel(matrices, vertexConsumers, light);
+        matrices.pop();
+        super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
     }
 
-    private void preparePose(MatrixStack matrixStack) {
-        matrixStack.scale(SCALE, SCALE, SCALE);
-        matrixStack.multiply(dispatcher.getRotation());
-        matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(ROTATION));
+    private void preparePose(MatrixStack matrices) {
+        matrices.scale(SCALE, SCALE, SCALE);
+        matrices.multiply(dispatcher.getRotation());
+        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(ROTATION));
     }
 
-    private void renderModel(MatrixStack poseStack, VertexConsumerProvider vertexConsumerProvider, int i) {
-        MatrixStack.Entry entry = poseStack.peek();
-        VertexConsumer vertexConsumer = vertexConsumerProvider.getBuffer(LAYER);
+    private void renderModel(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+        MatrixStack.Entry entry = matrices.peek();
+        VertexConsumer vertexConsumer = vertexConsumers.getBuffer(LAYER);
 
-        addVertex(vertexConsumer, entry.getPositionMatrix(), entry.getNormalMatrix(), i, 0.0F, 0, 0, 1);
-        addVertex(vertexConsumer, entry.getPositionMatrix(), entry.getNormalMatrix(), i, 1.0F, 0, 1, 1);
-        addVertex(vertexConsumer, entry.getPositionMatrix(), entry.getNormalMatrix(), i, 1.0F, 1, 1, 0);
-        addVertex(vertexConsumer, entry.getPositionMatrix(), entry.getNormalMatrix(), i, 0.0F, 1, 0, 0);
+        addVertex(vertexConsumer, entry.getPositionMatrix(), entry.getNormalMatrix(), light, 0.0F, 0, 0, 1);
+        addVertex(vertexConsumer, entry.getPositionMatrix(), entry.getNormalMatrix(), light, 1.0F, 0, 1, 1);
+        addVertex(vertexConsumer, entry.getPositionMatrix(), entry.getNormalMatrix(), light, 1.0F, 1, 1, 0);
+        addVertex(vertexConsumer, entry.getPositionMatrix(), entry.getNormalMatrix(), light, 0.0F, 1, 0, 0);
     }
 
     private static void addVertex(VertexConsumer vertexConsumer, Matrix4f positionMatrix, Matrix3f normalMatrix,
                                   int light, float x, int y, int textureU, int textureV) {
-        vertexConsumer.vertex(positionMatrix, x - 0.5f, (float)y - 0.25f, 0.0f)
+        vertexConsumer.vertex(positionMatrix, x - 0.5f, (float) y - 0.25f, 0.0f)
                 .color(255, 255, 255, 255)
                 .texture(textureU, textureV)
                 .overlay(OverlayTexture.DEFAULT_UV)
@@ -62,7 +65,7 @@ public class RenderLD extends EntityRenderer<LDEntity> {
     }
 
     @Override
-    public Identifier getTexture(LDEntity ldEntity) {
+    public Identifier getTexture(LDEntity entity) {
         return TEXTURE;
     }
 }

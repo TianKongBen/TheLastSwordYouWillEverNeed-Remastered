@@ -1,6 +1,8 @@
 package net.tianben.tlsywen.item.armor;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,11 +12,21 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.tianben.tlsywen.attachment.PlayerFlightAttachment;
 import net.tianben.tlsywen.item.ModItems;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
+import java.util.Set;
 
 public class ModArmorItem extends ArmorItem {
+
+    private static final Set<StatusEffect> ARMOR_EFFECTS = Set.of(
+            StatusEffects.NIGHT_VISION,
+            StatusEffects.HASTE,
+            StatusEffects.STRENGTH,
+            StatusEffects.RESISTANCE
+    );
+
+    private static final int EFFECT_AMPLIFIER = 127;
+    private static final int EFFECT_DURATION = -1;
+
     public ModArmorItem(ArmorMaterial material, Type type, Settings settings) {
         super(material, type, settings);
     }
@@ -22,68 +34,64 @@ public class ModArmorItem extends ArmorItem {
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
         super.inventoryTick(stack, world, entity, slot, selected);
-        if(!world.isClient() && world.getTime() % 10 == 0) {
-            if(entity instanceof PlayerEntity player) {
-                updateFlightAbility(player);
-                if(isWearingDragonCrystalArmor(player)) {
-                    if(player.getStatusEffect(StatusEffects.NIGHT_VISION) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.NIGHT_VISION)).getDuration() < 250){
-                        player.addStatusEffect(new  StatusEffectInstance(StatusEffects.NIGHT_VISION, 10, 127, false, true, false));
-                    }
 
-                    if(player.getStatusEffect(StatusEffects.HASTE) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.HASTE)).getDuration() < 250){
-                        player.addStatusEffect(new  StatusEffectInstance(StatusEffects.HASTE, 10,127, false, true, false));
-                    }
+        if (world.isClient() || world.getTime() % 10 != 0) return;
+        if (entity instanceof PlayerEntity player) {
+            updatePlayerState(player);
+        }
+    }
 
-                    if(player.getStatusEffect(StatusEffects.STRENGTH) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.STRENGTH)).getDuration() < 250){
-                        player.addStatusEffect(new  StatusEffectInstance(StatusEffects.STRENGTH, 10, 127, false, true, false));
-                    }
+    private static void updatePlayerState(PlayerEntity player) {
+        boolean isFullSet = isWearingDragonCrystalArmor(player);
+        updateEffects(player, isFullSet);
+        updateFlightAbility(player);
+    }
 
-                    if(player.getStatusEffect(StatusEffects.REGENERATION) == null || Objects.requireNonNull(player.getStatusEffect(StatusEffects.RESISTANCE)).getDuration() < 250){
-                        player.addStatusEffect(new  StatusEffectInstance(StatusEffects.RESISTANCE, 10, 127, false, true, false));
-                    }
-                }
+    public static void updateEffects(LivingEntity entity, boolean isFullSet) {
+        for (StatusEffect effect : ARMOR_EFFECTS) {
+            var current = entity.getStatusEffect(effect);
+            boolean hasInfiniteEffect = current != null &&
+                    current.getAmplifier() == EFFECT_AMPLIFIER &&
+                    current.getDuration() == EFFECT_DURATION;
+
+            if (isFullSet && !hasInfiniteEffect) {
+                entity.addStatusEffect(new StatusEffectInstance(effect, EFFECT_DURATION, EFFECT_AMPLIFIER, false, true, false));
+            } else if (!isFullSet && hasInfiniteEffect) {
+                entity.removeStatusEffect(effect);
             }
         }
     }
 
-    private void updateFlightAbility(@NotNull PlayerEntity player) {
+    private static void updateFlightAbility(PlayerEntity player) {
         boolean shouldHaveFlight = isWearingDragonCrystalArmor(player);
         boolean hasFlight = PlayerFlightAttachment.hasFlight(player);
 
-        if(player.isCreative() || player.isSpectator()) {
-            if(hasFlight) {
+        if (player.isCreative() || player.isSpectator()) {
+            if (hasFlight) {
                 PlayerFlightAttachment.setFlight(player, false);
             }
             return;
         }
 
-        if(!hasFlight && shouldHaveFlight) {
-            player.getAbilities().flying = false;
-            setFlightAbility(player, true);
-            PlayerFlightAttachment.setFlight(player, true);
-        }
-        else if(hasFlight && !shouldHaveFlight) {
-            setFlightAbility(player, false);
-            PlayerFlightAttachment.setFlight(player, false);
+        if (shouldHaveFlight != hasFlight) {
+            setFlightAbility(player, shouldHaveFlight);
+            PlayerFlightAttachment.setFlight(player, shouldHaveFlight);
         }
     }
 
-    private void setFlightAbility(@NotNull PlayerEntity playerEntity, boolean enabled) {
-        playerEntity.getAbilities().allowFlying = enabled;
+    private static void setFlightAbility(PlayerEntity player, boolean enabled) {
+        player.getAbilities().allowFlying = enabled;
         if (!enabled) {
-            playerEntity.getAbilities().flying = false;
+            player.getAbilities().flying = false;
         }
-        playerEntity.sendAbilitiesUpdate();
+        player.sendAbilitiesUpdate();
     }
 
-    private boolean isWearingDragonCrystalArmor(PlayerEntity player) {
-        ItemStack boots = player.getInventory().getArmorStack(0);
-        ItemStack leggings = player.getInventory().getArmorStack(1);
-        ItemStack chestplate = player.getInventory().getArmorStack(2);
-        ItemStack helmet = player.getInventory().getArmorStack(3);
-        return helmet.getItem() == ModItems.DRAGON_CRYSTAL_HELMET &&
-                chestplate.getItem() == ModItems.DRAGON_CRYSTAL_CHESTPLATE &&
-                leggings.getItem() == ModItems.DRAGON_CRYSTAL_LEGGINGS &&
-                boots.getItem() == ModItems.DRAGON_CRYSTAL_BOOTS;
+    public static boolean isWearingDragonCrystalArmor(PlayerEntity player) {
+        var armor = player.getInventory().armor;
+        return armor.get(0).getItem() == ModItems.DRAGON_CRYSTAL_BOOTS &&
+                armor.get(1).getItem() == ModItems.DRAGON_CRYSTAL_LEGGINGS &&
+                armor.get(2).getItem() == ModItems.DRAGON_CRYSTAL_CHESTPLATE &&
+                armor.get(3).getItem() == ModItems.DRAGON_CRYSTAL_HELMET;
     }
 }

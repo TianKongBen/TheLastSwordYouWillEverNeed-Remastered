@@ -8,26 +8,28 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.tianben.tlsywen.TheLastSwordYouWillEverNeed;
 import net.tianben.tlsywen.item.ModItems;
 
 import static net.tianben.tlsywen.TheLastSwordYouWillEverNeed.MOD_ID;
 
-public class ModItemGroups {
+public final class ModItemGroups {
+
     private static final String GROUP_ID = "the_last_sword_you_will_ever_need";
     private static final String BACKGROUND = "tlsywen_items.png";
 
-    public static final RegistryKey<ItemGroup> THE_LAST_SWORD_YOU_WILL_EVER_NEED_GROUP = RegistryKey
-            .of(RegistryKeys.ITEM_GROUP, TheLastSwordYouWillEverNeed.ID(GROUP_ID));
+    public static final RegistryKey<ItemGroup> THE_LAST_SWORD_YOU_WILL_EVER_NEED_GROUP =
+            RegistryKey.of(RegistryKeys.ITEM_GROUP, TheLastSwordYouWillEverNeed.ID(GROUP_ID));
 
-    public static final ItemGroup the_last_sword_you_will_ever_need = Registry.register(Registries.ITEM_GROUP,
+    public static final ItemGroup the_last_sword_you_will_ever_need = Registry.register(
+            Registries.ITEM_GROUP,
             new Identifier(MOD_ID, GROUP_ID),
-            FabricItemGroup.builder().displayName(Text.translatable("itemgroup" + "." +GROUP_ID).formatted(Formatting.WHITE))
+            FabricItemGroup.builder()
+                    .displayName(Text.translatable("itemgroup." + GROUP_ID))
                     .texture(BACKGROUND)
                     .icon(() -> new ItemStack(ModItems.REALLYTHELASTSWORDYOUWILLEVERNEED))
-                    .entries((displayContext, entries) -> {
+                    .entries((context, entries) -> {
                         //添加方块
                         entries.add(ModItems.COMPRESSED_STAR);
                         entries.add(ModItems.DRAGON_CRYSTAL_BLOCK);
@@ -51,9 +53,12 @@ public class ModItemGroups {
                         entries.add(ModItems.DRAGON_CRYSTAL_BOOTS);
                         //添加材料
                         entries.add(ModItems.DRAGON_CRYSTAL);
-                    }).build());
+                    })
+                    .build());
+
+    private ModItemGroups() {}
 
     public static void registerItemGroups() {
-        TheLastSwordYouWillEverNeed.LOGGER .info("注册模组物品组" + MOD_ID);
+        TheLastSwordYouWillEverNeed.LOGGER.info("注册模组物品组" + MOD_ID);
     }
 }

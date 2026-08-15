@@ -1,18 +1,18 @@
 package net.tianben.tlsywen.detailab.helper;
 
 import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 
 public final class ConfigHelper {
+
     private static final AtomicReference<Supplier<IClientHelper>> CLIENT_CONFIG =
             new AtomicReference<>(() -> DefaultClient.INSTANCE);
 
     private ConfigHelper() {}
 
-    public static @NotNull ConfigHelper get() {
+    public static ConfigHelper get() {
         return InstanceHolder.INSTANCE;
     }
 
@@ -21,7 +21,7 @@ public final class ConfigHelper {
         CLIENT_CONFIG.set(clientConfig != null ? clientConfig : () -> DefaultClient.INSTANCE);
     }
 
-    public @NotNull IClientHelper getClient() {
+    public IClientHelper getClient() {
         return CLIENT_CONFIG.get().get();
     }
 
@@ -38,7 +38,7 @@ public final class ConfigHelper {
         }
 
         @Override
-        public boolean isModLoaded(@NotNull String modId) {
+        public boolean isModLoaded(String modId) {
             return false;
         }
     }
