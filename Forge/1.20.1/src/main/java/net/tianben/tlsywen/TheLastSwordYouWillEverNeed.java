@@ -17,6 +17,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.tianben.tlsywen.block.ModBlocks;
 import net.tianben.tlsywen.config.ModConfig;
+import net.tianben.tlsywen.config.ConfigManager;
 import net.tianben.tlsywen.entity.ModEntities;
 import net.tianben.tlsywen.item.ModItems;
 import net.tianben.tlsywen.item.group.ModItemGroups;
@@ -31,14 +32,17 @@ public final class TheLastSwordYouWillEverNeed {
 
     public TheLastSwordYouWillEverNeed(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
-        ModConfig.register();
 
-        context.registerExtensionPoint(
-                ConfigScreenHandler.ConfigScreenFactory.class,
-                () -> new ConfigScreenHandler.ConfigScreenFactory(
-                        (mc, screen) -> AutoConfig.getConfigScreen(ModConfig.class, screen).get()
-                )
-        );
+        ConfigManager.init();
+
+        if (ConfigManager.isClothConfigLoaded()) {
+            context.registerExtensionPoint(
+                    ConfigScreenHandler.ConfigScreenFactory.class,
+                    () -> new ConfigScreenHandler.ConfigScreenFactory(
+                            (mc, screen) -> AutoConfig.getConfigScreen(ModConfig.class, screen).get()
+                    )
+            );
+        }
 
         ModItemGroups.registerItemGroups(modEventBus);
         ModBlocks.registerModBlocks(modEventBus);

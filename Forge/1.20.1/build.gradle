@@ -80,7 +80,8 @@ dependencies {
 
     implementation fg.deobf("curse.maven:touhou-little-maid-355044:8061847")
 
-    implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:11.1.136")
+    compileOnly fg.deobf("me.shedaniel.cloth:cloth-config-forge:11.1.136")
+    runtimeOnly fg.deobf("me.shedaniel.cloth:cloth-config-forge:11.1.136")
 
     implementation 'org.spongepowered:mixin:0.8.5'
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'

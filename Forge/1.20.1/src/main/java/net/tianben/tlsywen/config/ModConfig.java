@@ -23,9 +23,4 @@ public class ModConfig implements ConfigData {
     public static void register() {
         AutoConfig.register(ModConfig.class, Toml4jConfigSerializer::new);
     }
-
-    @Override
-    public void validatePostLoad() throws ValidationException {
-        ConfigData.super.validatePostLoad();
-    }
 }

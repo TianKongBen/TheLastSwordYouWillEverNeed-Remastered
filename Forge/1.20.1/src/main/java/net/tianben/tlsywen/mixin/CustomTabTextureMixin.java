@@ -7,7 +7,7 @@ import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
-import net.tianben.tlsywen.config.ModConfig;
+import net.tianben.tlsywen.config.ConfigManager;
 import net.tianben.tlsywen.item.group.ModItemGroups;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -18,13 +18,14 @@ import static net.tianben.tlsywen.TheLastSwordYouWillEverNeed.MOD_ID;
 
 @Mixin(CreativeModeInventoryScreen.class)
 public abstract class CustomTabTextureMixin {
+
     @Unique
     private static final ResourceLocation TLSYWEN_TAB_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(MOD_ID, "textures/gui/container/creative_inventory/tabs_tlsywen.png");
 
     @Unique
     private static final ResourceLocation VANILLA_BACKGROUND_TEXTURE =
-            ResourceLocation.parse("textures/gui/container/creative_inventory/tab_items.png");
+            ResourceLocation.fromNamespaceAndPath("minecraft", "textures/gui/container/creative_inventory/tab_items.png");
 
     @Redirect(
             method = "renderTabButton",
@@ -41,9 +42,7 @@ public abstract class CustomTabTextureMixin {
             int width, int height,
             @Local(argsOnly = true) CreativeModeTab tab
     ) {
-        ModConfig config = ModConfig.getInstance();
-
-        if (config.enableCustomTab &&
+        if (ConfigManager.isEnableCustomTab() &&
                 tab == ModItemGroups.the_last_sword_you_will_ever_need.get()) {
             guiGraphics.blit(TLSYWEN_TAB_TEXTURE, x, y, u, v, width, height);
         } else {
@@ -66,11 +65,10 @@ public abstract class CustomTabTextureMixin {
             int u, int v,
             int width, int height
     ) {
-        ModConfig config = ModConfig.getInstance();
         CreativeModeTab selectedTab = CreativeModeInventoryScreenAccessor.getSelectedTab();
 
         if (selectedTab == ModItemGroups.the_last_sword_you_will_ever_need.get()) {
-            if (config.enableCustomTab) {
+            if (ConfigManager.isEnableCustomTab()) {
                 guiGraphics.blit(texture, x, y, u, v, width, height);
             } else {
                 guiGraphics.blit(VANILLA_BACKGROUND_TEXTURE, x, y, u, v, width, height);
@@ -88,16 +86,12 @@ public abstract class CustomTabTextureMixin {
             )
     )
     private Component redirectDisplayName(CreativeModeTab tab) {
-        ModConfig config = ModConfig.getInstance();
-
         if (tab == ModItemGroups.the_last_sword_you_will_ever_need.get()) {
-            if (config.enableCustomTab) {
+            if (ConfigManager.isEnableCustomTab()) {
                 return tab.getDisplayName().copy().withStyle(ChatFormatting.WHITE);
-            } else {
-                return tab.getDisplayName();
             }
+            return tab.getDisplayName();
         }
-
         return tab.getDisplayName();
     }
 }

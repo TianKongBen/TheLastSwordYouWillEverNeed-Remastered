@@ -4,7 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.world.item.CreativeModeTab;
-import net.tianben.tlsywen.config.ModConfig;
+import net.tianben.tlsywen.config.ConfigManager;
 import net.tianben.tlsywen.item.group.ModItemGroups;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -89,7 +89,6 @@ public abstract class CreativeModeInventoryScreenMixin {
                 return tab;
             }
         }
-
         return null;
     }
 
@@ -99,9 +98,7 @@ public abstract class CreativeModeInventoryScreenMixin {
             cancellable = true
     )
     private void onRenderTabButton(GuiGraphics guiGraphics, CreativeModeTab tab, CallbackInfo ci) {
-        ModConfig config = ModConfig.getInstance();
-
-        if (!config.enableModItemGroups &&
+        if (!ConfigManager.isEnableModItemGroups() &&
                 tab == ModItemGroups.the_last_sword_you_will_ever_need.get()) {
             ci.cancel();
         }
@@ -114,9 +111,7 @@ public abstract class CreativeModeInventoryScreenMixin {
     )
     private void onCheckTabClicked(CreativeModeTab tab, double mouseX, double mouseY,
                                    CallbackInfoReturnable<Boolean> cir) {
-        ModConfig config = ModConfig.getInstance();
-
-        if (!config.enableModItemGroups &&
+        if (!ConfigManager.isEnableModItemGroups() &&
                 tab == ModItemGroups.the_last_sword_you_will_ever_need.get()) {
             cir.setReturnValue(false);
         }
@@ -129,9 +124,7 @@ public abstract class CreativeModeInventoryScreenMixin {
     )
     private void onCheckTabHovering(GuiGraphics guiGraphics, CreativeModeTab tab, int mouseX, int mouseY,
                                     CallbackInfoReturnable<Boolean> cir) {
-        ModConfig config = ModConfig.getInstance();
-
-        if (!config.enableModItemGroups &&
+        if (!ConfigManager.isEnableModItemGroups() &&
                 tab == ModItemGroups.the_last_sword_you_will_ever_need.get()) {
             cir.setReturnValue(false);
         }
@@ -142,15 +135,13 @@ public abstract class CreativeModeInventoryScreenMixin {
             at = @At("TAIL")
     )
     private void onInit(CallbackInfo ci) {
-        ModConfig config = ModConfig.getInstance();
         CreativeModeInventoryScreen screen = (CreativeModeInventoryScreen) (Object) this;
 
-        if (!config.enableModItemGroups) {
+        if (!ConfigManager.isEnableModItemGroups()) {
             CreativeModeTab selectedTab = _1_20_1$getSelectedTab();
 
             if (selectedTab == ModItemGroups.the_last_sword_you_will_ever_need.get()) {
                 CreativeModeTab firstAvailableTab = _1_20_1$findFirstAvailableTab(screen);
-
                 if (firstAvailableTab != null) {
                     _1_20_1$callSelectTab(screen, firstAvailableTab);
                 }
@@ -163,13 +154,11 @@ public abstract class CreativeModeInventoryScreenMixin {
             at = @At("HEAD")
     )
     private void onRender(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci) {
-        ModConfig config = ModConfig.getInstance();
         CreativeModeInventoryScreen screen = (CreativeModeInventoryScreen) (Object) this;
         Minecraft minecraft = Minecraft.getInstance();
 
-        if (config.enableModItemGroups != _1_20_1$lastEnableModItemGroups) {
-            _1_20_1$lastEnableModItemGroups = config.enableModItemGroups;
-
+        if (ConfigManager.isEnableModItemGroups() != _1_20_1$lastEnableModItemGroups) {
+            _1_20_1$lastEnableModItemGroups = ConfigManager.isEnableModItemGroups();
             screen.init(minecraft, screen.width, screen.height);
         }
     }
