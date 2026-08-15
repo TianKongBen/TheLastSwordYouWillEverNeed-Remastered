@@ -4,63 +4,64 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraftforge.common.CreativeModeTabRegistry;
 import net.tianben.tlsywen.config.ConfigManager;
 import net.tianben.tlsywen.item.group.ModItemGroups;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 @Mixin(CreativeModeInventoryScreen.class)
 public abstract class CreativeModeInventoryScreenMixin {
 
     @Unique
-    private static Field _1_20_1$selectedTabField;
+    private static Field tlsywen$selectedTabField;
 
     @Unique
-    private static Method _1_20_1$selectTabMethod;
+    private static Method tlsywen$selectTabMethod;
 
     @Unique
-    private static boolean _1_20_1$lastEnableModItemGroups = true;
+    private static boolean tlsywen$lastEnableModItemGroups = true;
 
     @Unique
-    private static Field _1_20_1$getSelectedTabField() {
-        if (_1_20_1$selectedTabField == null) {
+    private static Field tlsywen$getSelectedTabField() {
+        if (tlsywen$selectedTabField == null) {
             try {
-                _1_20_1$selectedTabField = CreativeModeInventoryScreen.class.getDeclaredField("selectedTab");
-                _1_20_1$selectedTabField.setAccessible(true);
+                tlsywen$selectedTabField = CreativeModeInventoryScreen.class.getDeclaredField("selectedTab");
+                tlsywen$selectedTabField.setAccessible(true);
             } catch (NoSuchFieldException e) {
                 e.fillInStackTrace();
             }
         }
-        return _1_20_1$selectedTabField;
+        return tlsywen$selectedTabField;
     }
 
     @Unique
-    private static Method _1_20_1$getSelectTabMethod() {
-        if (_1_20_1$selectTabMethod == null) {
+    private static Method tlsywen$getSelectTabMethod() {
+        if (tlsywen$selectTabMethod == null) {
             try {
-                _1_20_1$selectTabMethod = CreativeModeInventoryScreen.class.getDeclaredMethod("selectTab", CreativeModeTab.class);
-                _1_20_1$selectTabMethod.setAccessible(true);
+                tlsywen$selectTabMethod = CreativeModeInventoryScreen.class.getDeclaredMethod("selectTab", CreativeModeTab.class);
+                tlsywen$selectTabMethod.setAccessible(true);
             } catch (NoSuchMethodException e) {
                 e.fillInStackTrace();
             }
         }
-        return _1_20_1$selectTabMethod;
+        return tlsywen$selectTabMethod;
     }
 
     @Unique
-    private static CreativeModeTab _1_20_1$getSelectedTab() {
+    private static CreativeModeTab tlsywen$getSelectedTab() {
         try {
-            Field field = _1_20_1$getSelectedTabField();
-            if (field != null) {
-                return (CreativeModeTab) field.get(null);
-            }
+            Field field = tlsywen$getSelectedTabField();
+            if (field != null) return (CreativeModeTab) field.get(null);
         } catch (IllegalAccessException e) {
             e.fillInStackTrace();
         }
@@ -68,85 +69,49 @@ public abstract class CreativeModeInventoryScreenMixin {
     }
 
     @Unique
-    private static void _1_20_1$callSelectTab(CreativeModeInventoryScreen screen, CreativeModeTab tab) {
+    private static void tlsywen$setSelectedTabField(CreativeModeTab tab) {
         try {
-            Method method = _1_20_1$getSelectTabMethod();
-            if (method != null) {
-                method.invoke(screen, tab);
-            }
+            Field field = tlsywen$getSelectedTabField();
+            if (field != null) field.set(null, tab);
+        } catch (IllegalAccessException e) {
+            e.fillInStackTrace();
+        }
+    }
+
+    @Unique
+    private static void tlsywen$callSelectTab(CreativeModeInventoryScreen screen, CreativeModeTab tab) {
+        try {
+            Method method = tlsywen$getSelectTabMethod();
+            if (method != null) method.invoke(screen, tab);
         } catch (Exception e) {
             e.fillInStackTrace();
         }
     }
 
     @Unique
-    private static CreativeModeTab _1_20_1$findFirstAvailableTab(CreativeModeInventoryScreen screen) {
-        var currentPage = screen.getCurrentPage();
-        var visibleTabs = currentPage.getVisibleTabs();
-
-        for (CreativeModeTab tab : visibleTabs) {
+    private static List<CreativeModeTab> tlsywen$getFilteredTabs() {
+        List<CreativeModeTab> filtered = new ArrayList<>();
+        for (CreativeModeTab tab : CreativeModeTabRegistry.getSortedCreativeModeTabs()) {
             if (tab != ModItemGroups.the_last_sword_you_will_ever_need.get()) {
-                return tab;
+                filtered.add(tab);
             }
         }
-        return null;
+        return filtered;
     }
 
-    @Inject(
-            method = "renderTabButton",
-            at = @At("HEAD"),
-            cancellable = true
-    )
-    private void onRenderTabButton(GuiGraphics guiGraphics, CreativeModeTab tab, CallbackInfo ci) {
-        if (!ConfigManager.isEnableModItemGroups() &&
-                tab == ModItemGroups.the_last_sword_you_will_ever_need.get()) {
-            ci.cancel();
-        }
-    }
-
-    @Inject(
-            method = "checkTabClicked",
-            at = @At("HEAD"),
-            cancellable = true
-    )
-    private void onCheckTabClicked(CreativeModeTab tab, double mouseX, double mouseY,
-                                   CallbackInfoReturnable<Boolean> cir) {
-        if (!ConfigManager.isEnableModItemGroups() &&
-                tab == ModItemGroups.the_last_sword_you_will_ever_need.get()) {
-            cir.setReturnValue(false);
-        }
-    }
-
-    @Inject(
-            method = "checkTabHovering",
-            at = @At("HEAD"),
-            cancellable = true
-    )
-    private void onCheckTabHovering(GuiGraphics guiGraphics, CreativeModeTab tab, int mouseX, int mouseY,
-                                    CallbackInfoReturnable<Boolean> cir) {
-        if (!ConfigManager.isEnableModItemGroups() &&
-                tab == ModItemGroups.the_last_sword_you_will_ever_need.get()) {
-            cir.setReturnValue(false);
-        }
-    }
-
-    @Inject(
+    @Redirect(
             method = "init",
-            at = @At("TAIL")
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraftforge/common/CreativeModeTabRegistry;getSortedCreativeModeTabs()Ljava/util/List;"
+            ),
+            remap = false
     )
-    private void onInit(CallbackInfo ci) {
-        CreativeModeInventoryScreen screen = (CreativeModeInventoryScreen) (Object) this;
-
+    private List<CreativeModeTab> redirectGetSortedCreativeModeTabs() {
         if (!ConfigManager.isEnableModItemGroups()) {
-            CreativeModeTab selectedTab = _1_20_1$getSelectedTab();
-
-            if (selectedTab == ModItemGroups.the_last_sword_you_will_ever_need.get()) {
-                CreativeModeTab firstAvailableTab = _1_20_1$findFirstAvailableTab(screen);
-                if (firstAvailableTab != null) {
-                    _1_20_1$callSelectTab(screen, firstAvailableTab);
-                }
-            }
+            return tlsywen$getFilteredTabs();
         }
+        return CreativeModeTabRegistry.getSortedCreativeModeTabs();
     }
 
     @Inject(
@@ -155,11 +120,29 @@ public abstract class CreativeModeInventoryScreenMixin {
     )
     private void onRender(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick, CallbackInfo ci) {
         CreativeModeInventoryScreen screen = (CreativeModeInventoryScreen) (Object) this;
-        Minecraft minecraft = Minecraft.getInstance();
+        Minecraft client = Minecraft.getInstance();
 
-        if (ConfigManager.isEnableModItemGroups() != _1_20_1$lastEnableModItemGroups) {
-            _1_20_1$lastEnableModItemGroups = ConfigManager.isEnableModItemGroups();
-            screen.init(minecraft, screen.width, screen.height);
+        if (ConfigManager.isEnableModItemGroups() == tlsywen$lastEnableModItemGroups) return;
+
+        tlsywen$lastEnableModItemGroups = ConfigManager.isEnableModItemGroups();
+
+        if (!ConfigManager.isEnableModItemGroups()) {
+            CreativeModeTab selectedTab = tlsywen$getSelectedTab();
+            if (selectedTab == ModItemGroups.the_last_sword_you_will_ever_need.get()) {
+                List<CreativeModeTab> filtered = tlsywen$getFilteredTabs();
+                if (!filtered.isEmpty()) {
+                    tlsywen$setSelectedTabField(filtered.get(0));
+                }
+            }
+        }
+
+        screen.init(client, screen.width, screen.height);
+
+        if (!ConfigManager.isEnableModItemGroups()) {
+            CreativeModeTab currentTab = tlsywen$getSelectedTab();
+            if (currentTab != ModItemGroups.the_last_sword_you_will_ever_need.get()) {
+                tlsywen$callSelectTab(screen, currentTab);
+            }
         }
     }
 }

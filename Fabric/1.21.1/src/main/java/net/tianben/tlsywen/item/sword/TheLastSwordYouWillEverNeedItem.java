@@ -1,5 +1,6 @@
 package net.tianben.tlsywen.item.sword;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.UnbreakableComponent;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,16 +16,22 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import net.tianben.tlsywen.entity.LDEntity;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class TheLastSwordYouWillEverNeedItem extends MiningToolItem {
+    private static final float MINING_SPEED = 2400.0f;
     private static final float PROJECTILE_SPEED = 1.5f;
     private static final float PROJECTILE_INACCURACY = 1.0f;
 
     public TheLastSwordYouWillEverNeedItem(ToolMaterial material, Item.Settings settings) {
         super(material, BlockTags.PICKAXE_MINEABLE, settings
                 .component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(false)));
+    }
+
+    public float getMiningSpeed(@NotNull ItemStack stack, @NotNull BlockState state) {
+        return MINING_SPEED;
     }
 
     @Override

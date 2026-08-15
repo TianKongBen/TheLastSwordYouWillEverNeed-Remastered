@@ -3,6 +3,7 @@ package net.tianben.tlsywen;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
 import net.tianben.tlsywen.block.ModBlocks;
+import net.tianben.tlsywen.config.ConfigManager;
 import net.tianben.tlsywen.item.ModItems;
 import net.tianben.tlsywen.item.group.ModItemGroups;
 import net.tianben.tlsywen.util.ResourceManager;
@@ -19,6 +20,8 @@ public class TheLastSwordYouWillEverNeed implements ModInitializer {
 
     @Override
 	public void onInitialize() {
+		ConfigManager.init();
+
 		ModItemGroups.registerItemGroups();
 
 		ModItems.registerModItems();

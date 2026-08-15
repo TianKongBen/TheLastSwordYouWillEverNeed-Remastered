@@ -1,7 +1,15 @@
 {
   "modmenu.nameTranslation.tlsywen": "The Last Sword You Will Ever Need: Remastered",
-  "modmenu.descriptionTranslation.tlsywen": "A mod for minecraft that adds an incredible sword. It is a sword that can one hit KO the Ender Dragon.",
+  "modmenu.descriptionTranslation.tlsywen": "A mod for Minecraft that adds an incredible sword. It is a sword that can one hit KO the Ender Dragon.",
   "modmenu.summaryTranslation.tlsywen": "This is a remastered version of The Last Sword You Will Ever Need, trying to restore the setting of version 1.7.10 as much as possible!",
+
+  "text.autoconfig.tlsywen.title": "TLSYWEN Configuration",
+  "text.autoconfig.tlsywen.option.enableCustomTab": "Enable Custom Tab Style",
+  "text.autoconfig.tlsywen.option.enableCustomTab.@Tooltip": "Enable custom tab background texture and tab button texture",
+  "text.autoconfig.tlsywen.option.enableCustomTab.@PrefixText": "Client Settings",
+  "text.autoconfig.tlsywen.option.enableModItemGroups": "Enable Mod Item Groups",
+  "text.autoconfig.tlsywen.option.enableModItemGroups.@Tooltip": "Enable the custom creative mode tab",
+  "text.autoconfig.tlsywen.option.enableModItemGroups.@PrefixText": "Client Settings",
 
   "resourcePack.tlsywen.classic_look.name": "Classic Look",
   "resourcePack.tlsywen.classic_look.description": "The classic look of The Last Sword You Will Ever Need",
@@ -41,5 +49,9 @@
   "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv8": "Rank: 8",
   "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv9": "Rank: 9",
   "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv10": "Rank: 10",
-  "tooltip.tlsywen.really_the_last_sword_you_will_ever_need": "Rank: AWESOME"
+  "tooltip.tlsywen.really_the_last_sword_you_will_ever_need": "Rank: AWESOME",
+
+  "task.tlsywen.last_sword_attack.name": "Last Sword·Combat Mode",
+  "task.tlsywen.last_sword_attack.desc": "Maid wielding the Last Sword auto-attacks, melee triggers lightning, ranged throws LDEntity",
+  "task.tlsywen.last_sword_attack.condition.holding_final_sword": "Holding the Last Sword"
 }

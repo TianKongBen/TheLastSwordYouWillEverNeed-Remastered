@@ -9,9 +9,10 @@ import net.minecraft.sound.SoundEvents;
 import static net.tianben.tlsywen.TheLastSwordYouWillEverNeed.MOD_ID;
 
 public enum ModArmorMaterials implements ArmorMaterial {
+
     DRAGON_CRYSTAL(
             "dragon_crystal",
-            new int[]{ 1, 2, 1, 1},
+            new int[]{1, 2, 1, 1},
             20,
             SoundEvents.ENTITY_ENDER_DRAGON_GROWL,
             0f,
@@ -24,7 +25,6 @@ public enum ModArmorMaterials implements ArmorMaterial {
     private final SoundEvent equipSound;
     private final float toughness;
     private final float knockbackResistance;
-
 
     ModArmorMaterials(String name, int[] protectionAmounts, int enchantability,
                       SoundEvent equipSound, float toughness, float knockbackResistance) {
@@ -58,7 +58,7 @@ public enum ModArmorMaterials implements ArmorMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems();
+        return Ingredient.EMPTY;
     }
 
     @Override

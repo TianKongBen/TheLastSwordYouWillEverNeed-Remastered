@@ -1,7 +1,15 @@
 {
   "modmenu.nameTranslation.tlsywen": "最終之劍:重製版",
-  "modmenu.descriptionTranslation.tlsywen": "一個 Minecraft 的模組，增加了一把令人難以置信的劍，這是一把可以一擊終結末影龍的劍。",
+  "modmenu.descriptionTranslation.tlsywen": "一個 Minecraft 的模組，增加了一把令人難以置信的劍，這是一把可以一擊終結終界龍的劍。",
   "modmenu.summaryTranslation.tlsywen": "這是最終之劍的重製版，儘量還原了1.7.10版本的設定!",
+
+  "text.autoconfig.tlsywen.title": "最終之劍 設定",
+  "text.autoconfig.tlsywen.option.enableCustomTab": "啟用自訂標籤頁樣式",
+  "text.autoconfig.tlsywen.option.enableCustomTab.@Tooltip": "啟用自訂標籤頁背景紋理和標籤頁按鈕紋理",
+  "text.autoconfig.tlsywen.option.enableCustomTab.@PrefixText": "用戶端設定",
+  "text.autoconfig.tlsywen.option.enableModItemGroups": "啟用模組物品組",
+  "text.autoconfig.tlsywen.option.enableModItemGroups.@Tooltip": "啟用模組自訂創造模式標籤頁",
+  "text.autoconfig.tlsywen.option.enableModItemGroups.@PrefixText": "用戶端設定",
 
   "resourcePack.tlsywen.classic_look.name": "經典外觀",
   "resourcePack.tlsywen.classic_look.description": "最終之劍的經典外觀",
@@ -9,8 +17,8 @@
   "itemgroup.the_last_sword_you_will_ever_need": "最終之劍:重製版",
 
   "block.tlsywen.compressed_star": "壓縮星",
-  "block.tlsywen.dragon_crystal_block": "龍晶塊",
-  "block.tlsywen.dragon_crystal_ore": "龍晶礦石",
+  "block.tlsywen.dragon_crystal_block": "龍晶方塊",
+  "block.tlsywen.dragon_crystal_ore": "龍晶礦",
 
   "item.tlsywen.the_last_sword_you_will_ever_need_lv1": "最終之劍",
   "item.tlsywen.the_last_sword_you_will_ever_need_lv2": "最終之劍",
@@ -41,5 +49,9 @@
   "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv8": "等級: 8",
   "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv9": "等級: 9",
   "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv10": "等級: 10",
-  "tooltip.tlsywen.really_the_last_sword_you_will_ever_need": "等級: 終極"
+  "tooltip.tlsywen.really_the_last_sword_you_will_ever_need": "等級: 終極",
+
+  "task.tlsywen.last_sword_attack.name": "最終之劍攻擊",
+  "task.tlsywen.last_sword_attack.desc": "女僕會主動用弓箭攻擊周圍的敵對生物",
+  "task.tlsywen.last_sword_attack.condition.holding_final_sword": "主手持有最終之劍"
 }

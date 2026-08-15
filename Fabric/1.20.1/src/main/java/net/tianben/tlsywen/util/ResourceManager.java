@@ -8,25 +8,22 @@ import net.minecraft.util.Identifier;
 import static net.fabricmc.fabric.api.resource.ResourcePackActivationType.NORMAL;
 import static net.tianben.tlsywen.TheLastSwordYouWillEverNeed.MOD_ID;
 
-public class ResourceManager {
+public final class ResourceManager {
+
     private static final String PACK_NAME = "classic_look";
-    private static final Identifier MOD_RESOURCE_PACK_ID =
-            new Identifier(MOD_ID, PACK_NAME);
+    private static final Identifier MOD_RESOURCE_PACK_ID = new Identifier(MOD_ID, PACK_NAME);
+
+    private ResourceManager() {}
 
     //注册资源包
     public static void init() {
         FabricLoader.getInstance()
                 .getModContainer(MOD_ID)
-                .ifPresent(modContainer ->
-                        ResourceManagerHelper.registerBuiltinResourcePack(
-                                MOD_RESOURCE_PACK_ID,
-                                modContainer,
-                                createPackTitle(),
-                                NORMAL
-                        ));
-    }
-
-    private static Text createPackTitle() {
-        return Text.translatable("resourcePack." + MOD_ID + "." + PACK_NAME + ".name");
+                .ifPresent(modContainer -> ResourceManagerHelper.registerBuiltinResourcePack(
+                        MOD_RESOURCE_PACK_ID,
+                        modContainer,
+                        Text.translatable("resourcePack." + MOD_ID + "." + PACK_NAME + ".name"),
+                        NORMAL
+                ));
     }
 }

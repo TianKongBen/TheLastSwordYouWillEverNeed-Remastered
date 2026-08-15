@@ -3,9 +3,10 @@ package net.tianben.tlsywen.sound;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.SoundType;
 
-public class ModSounds {
-    private static final float VOLUME = 1.0f;
-    private static final float PITCH = 1.0f;
+public final class ModSounds {
+
+    private static final float VOLUME = 1.0F;
+    private static final float PITCH = 1.0F;
 
     public static final SoundType DRAGON_CRYSTAL_BLOCK_SOUNDS = new SoundType(
             VOLUME, PITCH,

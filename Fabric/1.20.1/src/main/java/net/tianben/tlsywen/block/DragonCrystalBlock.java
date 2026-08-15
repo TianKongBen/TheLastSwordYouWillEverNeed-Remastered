@@ -21,7 +21,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+@SuppressWarnings("deprecation")
 public class DragonCrystalBlock extends BlockWithEntity {
+
     public static final BooleanProperty ACTIVATED = Properties.POWERED;
 
     public DragonCrystalBlock(Settings settings) {
@@ -29,43 +31,46 @@ public class DragonCrystalBlock extends BlockWithEntity {
         setDefaultState(getStateManager().getDefaultState().with(ACTIVATED, false));
     }
 
+    @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
         super.onPlaced(world, pos, state, placer, stack);
         world.setBlockState(pos, state.with(ACTIVATED, false), 2);
     }
 
+    @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ActionResult useResult = player.getStackInHand(hand).useOnBlock(new ItemUsageContext(player, hand, hit));
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof DragonCrystalBlockEntity crystal) {
+        if (world.getBlockEntity(pos) instanceof DragonCrystalBlockEntity crystal) {
             crystal.playSound(world, pos);
             return ActionResult.success(world.isClient());
-        } else {
-            return useResult;
         }
+        return useResult;
     }
 
+    @Override
     public void onBlockBreakStart(BlockState state, World world, BlockPos pos, PlayerEntity player) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof DragonCrystalBlockEntity crystal) {
+        if (world.getBlockEntity(pos) instanceof DragonCrystalBlockEntity crystal) {
             crystal.playSound(world, pos);
         }
-
         super.onBlockBreakStart(state, world, pos, player);
     }
 
+    @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new DragonCrystalBlockEntity(pos, state);
     }
 
+    @Override
     public BlockRenderType getRenderType(BlockState state) {
         return BlockRenderType.MODEL;
     }
 
+    @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(ACTIVATED);
     }
 
+    @Override
     public <T extends BlockEntity> @Nullable BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return null;
     }

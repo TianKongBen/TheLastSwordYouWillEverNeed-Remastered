@@ -5,6 +5,5 @@ import org.jetbrains.annotations.ApiStatus;
 @ApiStatus.Internal
 public interface IClientHelper {
     boolean forceDisableDetailArmorBarSupport();
-
     boolean isModLoaded(String modId);
 }

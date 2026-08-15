@@ -3,10 +3,14 @@
   "minVersion": "0.8",
   "package": "net.tianben.tlsywen.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [],
+  "mixins": [
+    "LivingEntityMixin"
+  ],
   "client": [
+    "AbstractContainerScreenAccessor",
+    "CreativeModeInventoryScreenMixin",
     "CustomTabTextureMixin",
-    "NoNightVisionFlashingMixin"
+    "EffectDurationDisplayMixin"
   ],
   "server": [],
   "injectors": {

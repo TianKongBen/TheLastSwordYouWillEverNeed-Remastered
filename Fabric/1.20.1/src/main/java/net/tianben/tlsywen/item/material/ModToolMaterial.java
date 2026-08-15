@@ -4,26 +4,27 @@ import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 
 public enum ModToolMaterial implements ToolMaterial {
-    THELASTSWORDYOUWILLEVERNEEDLV1(10.0f, 1600f, 20),
-    THELASTSWORDYOUWILLEVERNEEDLV2(10.0f, 2400f, 20),
-    THELASTSWORDYOUWILLEVERNEEDLV3(10.0f, 3200f, 20),
-    THELASTSWORDYOUWILLEVERNEEDLV4(10.0f, 4000f, 20),
-    THELASTSWORDYOUWILLEVERNEEDLV5(10.0f, 4800f, 20),
-    THELASTSWORDYOUWILLEVERNEEDLV6(10.0f, 5600f, 20),
-    THELASTSWORDYOUWILLEVERNEEDLV7(10.0f, 6400f, 20),
-    THELASTSWORDYOUWILLEVERNEEDLV8(10.0f, 7200f, 20),
-    THELASTSWORDYOUWILLEVERNEEDLV9(10.0f, 8000f, 20),
-    THELASTSWORDYOUWILLEVERNEEDLV10(10.0f, 8800f, 20),
-    REALLYTHELASTSWORDYOUWILLEVERNEED(10.0f, 7999999874453995500f, 20);
 
-    private final float miningSpeed;
+    THELASTSWORDYOUWILLEVERNEEDLV1(1600f),
+    THELASTSWORDYOUWILLEVERNEEDLV2(2400f),
+    THELASTSWORDYOUWILLEVERNEEDLV3(3200f),
+    THELASTSWORDYOUWILLEVERNEEDLV4(4000f),
+    THELASTSWORDYOUWILLEVERNEEDLV5(4800f),
+    THELASTSWORDYOUWILLEVERNEEDLV6(5600f),
+    THELASTSWORDYOUWILLEVERNEEDLV7(6400f),
+    THELASTSWORDYOUWILLEVERNEEDLV8(7200f),
+    THELASTSWORDYOUWILLEVERNEEDLV9(8000f),
+    THELASTSWORDYOUWILLEVERNEEDLV10(8800f),
+    REALLYTHELASTSWORDYOUWILLEVERNEED(7999999874453995500f);
+
+    private static final float MINING_SPEED = 10.0f;
+    private static final int ENCHANTABILITY = 20;
+    private static final int MINING_LEVEL = 5;
+
     private final float attackDamage;
-    private final int enchantability;
 
-    ModToolMaterial(float miningSpeed, float attackDamage, int enchantability) {
-        this.miningSpeed = miningSpeed;
+    ModToolMaterial(float attackDamage) {
         this.attackDamage = attackDamage;
-        this.enchantability = enchantability;
     }
 
     @Override
@@ -33,26 +34,26 @@ public enum ModToolMaterial implements ToolMaterial {
 
     @Override
     public float getMiningSpeedMultiplier() {
-        return this.miningSpeed;
+        return MINING_SPEED;
     }
 
     @Override
     public float getAttackDamage() {
-        return this.attackDamage;
+        return attackDamage;
     }
 
     @Override
     public int getMiningLevel() {
-        return 5;
+        return MINING_LEVEL;
     }
 
     @Override
     public int getEnchantability() {
-        return enchantability;
+        return ENCHANTABILITY;
     }
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems();
+        return Ingredient.EMPTY;
     }
 }

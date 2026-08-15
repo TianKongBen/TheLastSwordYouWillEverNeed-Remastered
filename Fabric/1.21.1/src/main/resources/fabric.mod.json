@@ -21,6 +21,9 @@
 		],
 		"client": [
 			"net.tianben.tlsywen.TheLastSwordYouWillEverNeedClient"
+		],
+		"modmenu": [
+			"net.tianben.tlsywen.config.ModMenuIntegration"
 		]
 	},
 	"mixins": [
@@ -33,7 +36,9 @@
 		"fabric-api": "*"
 	},
 	"suggests": {
-		"another-mod": "*"
+		"cloth-config": "=>15.0.140",
+		"modmenu": ">=11.0.4",
+		"touhou_little_maid": "*"
 	},
 	"custom": {
 		"modmenu": {

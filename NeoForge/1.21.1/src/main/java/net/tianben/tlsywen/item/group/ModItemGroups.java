@@ -1,6 +1,5 @@
 package net.tianben.tlsywen.item.group;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -14,6 +13,8 @@ import net.tianben.tlsywen.item.ModItems;
 
 import java.util.function.Supplier;
 
+import static net.tianben.tlsywen.TheLastSwordYouWillEverNeed.MOD_ID;
+
 public class ModItemGroups {
     private static final String GROUP_ID = "the_last_sword_you_will_ever_need";
     private static final ResourceLocation BACKGROUND = ResourceLocation
@@ -21,42 +22,47 @@ public class ModItemGroups {
 
     public static final ResourceKey<CreativeModeTab> THE_LAST_SWORD_YOU_WILL_EVER_NEED_GROUP = ResourceKey.create(
             Registries.CREATIVE_MODE_TAB,
-            ResourceLocation.fromNamespaceAndPath(TheLastSwordYouWillEverNeed.MOD_ID, GROUP_ID)
+            ResourceLocation.fromNamespaceAndPath(MOD_ID, GROUP_ID)
     );
 
     private static final DeferredRegister<CreativeModeTab> TABS =
-            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, TheLastSwordYouWillEverNeed.MOD_ID);
+            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
 
     public static final Supplier<CreativeModeTab> the_last_sword_you_will_ever_need = TABS.register(GROUP_ID,
             () -> CreativeModeTab.builder()
-                    .title(Component.translatable("itemgroup." + GROUP_ID).withStyle(ChatFormatting.WHITE))
-                    .backgroundTexture(BACKGROUND)
+                    .title(Component.translatable("itemgroup." + GROUP_ID))
                     .icon(() -> new ItemStack(ModItems.REALLYTHELASTSWORDYOUWILLEVERNEED.get()))
+                    .backgroundTexture(BACKGROUND)
                     .displayItems((params, output) -> {
+                        // 方块
                         output.accept(ModItems.COMPRESSED_STAR.get());
                         output.accept(ModItems.DRAGON_CRYSTAL_BLOCK.get());
                         output.accept(ModItems.DRAGON_CRYSTAL_ORE.get());
-                        output.accept(ModItems.THELASTSWORDYOUWILLEVERNEEDLV1);
-                        output.accept(ModItems.THELASTSWORDYOUWILLEVERNEEDLV2);
-                        output.accept(ModItems.THELASTSWORDYOUWILLEVERNEEDLV3);
-                        output.accept(ModItems.THELASTSWORDYOUWILLEVERNEEDLV4);
-                        output.accept(ModItems.THELASTSWORDYOUWILLEVERNEEDLV5);
-                        output.accept(ModItems.THELASTSWORDYOUWILLEVERNEEDLV6);
-                        output.accept(ModItems.THELASTSWORDYOUWILLEVERNEEDLV7);
-                        output.accept(ModItems.THELASTSWORDYOUWILLEVERNEEDLV8);
-                        output.accept(ModItems.THELASTSWORDYOUWILLEVERNEEDLV9);
-                        output.accept(ModItems.THELASTSWORDYOUWILLEVERNEEDLV10);
-                        output.accept(ModItems.REALLYTHELASTSWORDYOUWILLEVERNEED);
-                        output.accept(ModItems.DRAGON_CRYSTAL_HELMET);
-                        output.accept(ModItems.DRAGON_CRYSTAL_CHESTPLATE);
-                        output.accept(ModItems.DRAGON_CRYSTAL_LEGGINGS);
-                        output.accept(ModItems.DRAGON_CRYSTAL_BOOTS);
-                        output.accept(ModItems.DRAGON_CRYSTAL);
+                        // 最终之剑
+                        output.accept(ModItems.THELASTSWORDYOUWILLEVERNEEDLV1.get());
+                        output.accept(ModItems.THELASTSWORDYOUWILLEVERNEEDLV2.get());
+                        output.accept(ModItems.THELASTSWORDYOUWILLEVERNEEDLV3.get());
+                        output.accept(ModItems.THELASTSWORDYOUWILLEVERNEEDLV4.get());
+                        output.accept(ModItems.THELASTSWORDYOUWILLEVERNEEDLV5.get());
+                        output.accept(ModItems.THELASTSWORDYOUWILLEVERNEEDLV6.get());
+                        output.accept(ModItems.THELASTSWORDYOUWILLEVERNEEDLV7.get());
+                        output.accept(ModItems.THELASTSWORDYOUWILLEVERNEEDLV8.get());
+                        output.accept(ModItems.THELASTSWORDYOUWILLEVERNEEDLV9.get());
+                        output.accept(ModItems.THELASTSWORDYOUWILLEVERNEEDLV10.get());
+                        output.accept(ModItems.REALLYTHELASTSWORDYOUWILLEVERNEED.get());
+                        // 龙晶套
+                        output.accept(ModItems.DRAGON_CRYSTAL_HELMET.get());
+                        output.accept(ModItems.DRAGON_CRYSTAL_CHESTPLATE.get());
+                        output.accept(ModItems.DRAGON_CRYSTAL_LEGGINGS.get());
+                        output.accept(ModItems.DRAGON_CRYSTAL_BOOTS.get());
+                        // 材料
+                        output.accept(ModItems.DRAGON_CRYSTAL.get());
                     })
                     .build()
     );
 
     public static void register(IEventBus eventBus) {
+        TheLastSwordYouWillEverNeed.LOGGER.info("注册模组物品组" + MOD_ID);
         TABS.register(eventBus);
     }
 }

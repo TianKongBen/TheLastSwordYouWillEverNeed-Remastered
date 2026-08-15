@@ -7,26 +7,26 @@ import net.minecraft.world.level.block.Block;
 import net.tianben.tlsywen.util.ModTags;
 
 public enum ModToolTiers implements Tier {
-    THELASTSWORDYOUWILLEVERNEEDLV1(2400f, 1600f, 20),
-    THELASTSWORDYOUWILLEVERNEEDLV2(2400f, 2400f, 20),
-    THELASTSWORDYOUWILLEVERNEEDLV3(2400f, 3200f, 20),
-    THELASTSWORDYOUWILLEVERNEEDLV4(2400f, 4000f, 20),
-    THELASTSWORDYOUWILLEVERNEEDLV5(2400f, 4800f, 20),
-    THELASTSWORDYOUWILLEVERNEEDLV6(2400f, 5600f, 20),
-    THELASTSWORDYOUWILLEVERNEEDLV7(2400f, 6400f, 20),
-    THELASTSWORDYOUWILLEVERNEEDLV8(2400f, 7200f, 20),
-    THELASTSWORDYOUWILLEVERNEEDLV9(2400f, 8000f, 20),
-    THELASTSWORDYOUWILLEVERNEEDLV10(2400f, 8800f, 20),
-    REALLYTHELASTSWORDYOUWILLEVERNEED(2400f, 7999999874453995500f, 20);
+    THELASTSWORDYOUWILLEVERNEEDLV1(1600f),
+    THELASTSWORDYOUWILLEVERNEEDLV2(2400f),
+    THELASTSWORDYOUWILLEVERNEEDLV3(3200f),
+    THELASTSWORDYOUWILLEVERNEEDLV4(4000f),
+    THELASTSWORDYOUWILLEVERNEEDLV5(4800f),
+    THELASTSWORDYOUWILLEVERNEEDLV6(5600f),
+    THELASTSWORDYOUWILLEVERNEEDLV7(6400f),
+    THELASTSWORDYOUWILLEVERNEEDLV8(7200f),
+    THELASTSWORDYOUWILLEVERNEEDLV9(8000f),
+    THELASTSWORDYOUWILLEVERNEEDLV10(8800f),
+    REALLYTHELASTSWORDYOUWILLEVERNEED(7999999874453995500f);
 
-    private final float speed;
+    private static final float SPEED = 2_400.0F;
+
+    private static final int ENCHANTMENT_VALUE = 20;
+
     private final float damage;
-    private final int enchantmentValue;
 
-    ModToolTiers(float speed, float damage, int enchantmentValue) {
-        this.speed = speed;
+    ModToolTiers(float damage) {
         this.damage = damage;
-        this.enchantmentValue = enchantmentValue;
     }
 
     @Override
@@ -36,7 +36,7 @@ public enum ModToolTiers implements Tier {
 
     @Override
     public float getSpeed() {
-        return speed;
+        return SPEED;
     }
 
     @Override
@@ -51,7 +51,7 @@ public enum ModToolTiers implements Tier {
 
     @Override
     public int getEnchantmentValue() {
-        return enchantmentValue;
+        return ENCHANTMENT_VALUE;
     }
 
     @Override

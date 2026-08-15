@@ -10,7 +10,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.tianben.tlsywen.block.ModBlocks;
 import net.tianben.tlsywen.item.armor.ModArmorItem;
-import net.tianben.tlsywen.item.material.ModArmorMaterials;
+import net.tianben.tlsywen.item.material.ModArmorTiers;
 import net.tianben.tlsywen.item.material.ModToolTiers;
 import net.tianben.tlsywen.item.sword.TheLastSwordYouWillEverNeedItem;
 
@@ -67,13 +67,13 @@ public class ModItems {
 
     // 注册装备
     public static final DeferredItem<ArmorItem> DRAGON_CRYSTAL_HELMET = ITEMS.register("dragon_crystal_helmet",
-            () -> new ModArmorItem(ModArmorMaterials.DRAGON_CRYSTAL, ArmorItem.Type.HELMET, new Item.Properties()));
+            () -> new ModArmorItem(ModArmorTiers.DRAGON_CRYSTAL, ArmorItem.Type.HELMET, new Item.Properties()));
     public static final DeferredItem<ArmorItem> DRAGON_CRYSTAL_CHESTPLATE = ITEMS.register("dragon_crystal_chestplate",
-            () -> new ModArmorItem(ModArmorMaterials.DRAGON_CRYSTAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+            () -> new ModArmorItem(ModArmorTiers.DRAGON_CRYSTAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final DeferredItem<ArmorItem> DRAGON_CRYSTAL_LEGGINGS = ITEMS.register("dragon_crystal_leggings",
-            () -> new ModArmorItem(ModArmorMaterials.DRAGON_CRYSTAL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+            () -> new ModArmorItem(ModArmorTiers.DRAGON_CRYSTAL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final DeferredItem<ArmorItem> DRAGON_CRYSTAL_BOOTS = ITEMS.register("dragon_crystal_boots",
-            () -> new ModArmorItem(ModArmorMaterials.DRAGON_CRYSTAL, ArmorItem.Type.BOOTS, new Item.Properties()));
+            () -> new ModArmorItem(ModArmorTiers.DRAGON_CRYSTAL, ArmorItem.Type.BOOTS, new Item.Properties()));
 
     // 注册材料
     public static final DeferredItem<Item> DRAGON_CRYSTAL = ITEMS.register("dragon_crystal",

@@ -24,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.POWERED;
 
 public class DragonCrystalBlock extends BaseEntityBlock {
+
     public static final BooleanProperty ACTIVATED = POWERED;
 
     public static final MapCodec<DragonCrystalBlock> CODEC = simpleCodec(DragonCrystalBlock::new);
@@ -39,29 +40,26 @@ public class DragonCrystalBlock extends BaseEntityBlock {
     }
 
     @Override
-    public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        world.setBlock(pos, state.setValue(ACTIVATED, false), 2);
+    public void setPlacedBy(Level world, BlockPos pos, BlockState state,
+                            @Nullable LivingEntity placer, ItemStack stack) {
+        world.setBlock(pos, state.setValue(ACTIVATED, false), Block.UPDATE_CLIENTS);
     }
 
-    public InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
-        ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-        if (world.isClientSide) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof DragonCrystalBlockEntity crystal) {
-                crystal.playSound(world, pos);
-            }
-            return InteractionResult.SUCCESS;
-        } else {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof DragonCrystalBlockEntity crystal) {
-                crystal.playSound(world, pos);
-            }
-            if (stack.getItem() instanceof BlockItem) {
-                return stack.useOn(new UseOnContext(player, player.getUsedItemHand(), hit));
-            } else {
-                return InteractionResult.CONSUME;
-            }
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos,
+                                               Player player, BlockHitResult hit) {
+        if (world.getBlockEntity(pos) instanceof DragonCrystalBlockEntity crystal) {
+            crystal.playSound(world, pos);
         }
+
+        if (world.isClientSide) {
+            return InteractionResult.SUCCESS;
+        }
+
+        var stack = player.getItemInHand(player.getUsedItemHand());
+        return stack.getItem() instanceof BlockItem
+                ? stack.useOn(new UseOnContext(player, player.getUsedItemHand(), hit))
+                : InteractionResult.CONSUME;
     }
 
     @Override
@@ -88,7 +86,8 @@ public class DragonCrystalBlock extends BaseEntityBlock {
     }
 
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state,
+                                                                  BlockEntityType<T> type) {
         return null;
     }
 }

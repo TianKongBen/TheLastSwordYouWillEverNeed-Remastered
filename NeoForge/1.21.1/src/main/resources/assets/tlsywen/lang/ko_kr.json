@@ -1,0 +1,57 @@
+{
+  "modmenu.nameTranslation.tlsywen": "최종의 검:리마스터판",
+  "modmenu.descriptionTranslation.tlsywen": "Minecraft 모드로, 엔더 드래곤을 한 번에 쓰러뜨릴 수 있는 믿을 수 없을 정도로 강력한 검을 추가합니다.",
+  "modmenu.summaryTranslation.tlsywen": "이것은 최종의 검의 리마스터 버전으로, 1.7.10 버전의 설정을 최대한 재현했습니다!",
+
+  "text.autoconfig.tlsywen.title": "최종의 검 설정",
+  "text.autoconfig.tlsywen.option.enableCustomTab": "사용자 지정 탭 스타일 활성화",
+  "text.autoconfig.tlsywen.option.enableCustomTab.@Tooltip": "사용자 지정 탭 배경 텍스처와 탭 버튼 텍스처를 활성화합니다",
+  "text.autoconfig.tlsywen.option.enableCustomTab.@PrefixText": "클라이언트 설정",
+  "text.autoconfig.tlsywen.option.enableModItemGroups": "모드 아이템 그룹 활성화",
+  "text.autoconfig.tlsywen.option.enableModItemGroups.@Tooltip": "모드 사용자 지정 크리에이티브 탭을 활성화합니다",
+  "text.autoconfig.tlsywen.option.enableModItemGroups.@PrefixText": "클라이언트 설정",
+
+  "resourcePack.tlsywen.classic_look.name": "클래식 룩",
+  "resourcePack.tlsywen.classic_look.description": "최종의 검의 클래식한 외형",
+
+  "itemgroup.the_last_sword_you_will_ever_need": "최종의 검:리마스터판",
+
+  "block.tlsywen.compressed_star": "압축된 별",
+  "block.tlsywen.dragon_crystal_block": "드래곤 수정 블록",
+  "block.tlsywen.dragon_crystal_ore": "드래곤 수정 광석",
+
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv1": "최종의 검",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv2": "최종의 검",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv3": "최종의 검",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv4": "최종의 검",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv5": "최종의 검",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv6": "최종의 검",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv7": "최종의 검",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv8": "최종의 검",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv9": "최종의 검",
+  "item.tlsywen.the_last_sword_you_will_ever_need_lv10": "최종의 검",
+  "item.tlsywen.really_the_last_sword_you_will_ever_need": "진최종의 검",
+
+  "item.tlsywen.dragon_crystal_helmet": "드래곤 수정 헬멧",
+  "item.tlsywen.dragon_crystal_chestplate": "드래곤 수정 흉갑",
+  "item.tlsywen.dragon_crystal_leggings": "드래곤 수정 레깅스",
+  "item.tlsywen.dragon_crystal_boots": "드래곤 수정 부츠",
+
+  "item.tlsywen.dragon_crystal": "드래곤 수정",
+
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv1": "레벨: 1",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv2": "레벨: 2",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv3": "레벨: 3",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv4": "레벨: 4",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv5": "레벨: 5",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv6": "레벨: 6",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv7": "레벨: 7",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv8": "레벨: 8",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv9": "레벨: 9",
+  "tooltip.tlsywen.the_last_sword_you_will_ever_need_lv10": "레벨: 10",
+  "tooltip.tlsywen.really_the_last_sword_you_will_ever_need": "레벨: 궁극",
+
+  "task.tlsywen.last_sword_attack.name": "최종의 검 공격",
+  "task.tlsywen.last_sword_attack.desc": "메이드가 활을 사용하여 주변의 적대적 몹을 능동적으로 공격합니다",
+  "task.tlsywen.last_sword_attack.condition.holding_final_sword": "주 손에 최종의 검을 소지"
+}

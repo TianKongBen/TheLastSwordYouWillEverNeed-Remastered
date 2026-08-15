@@ -1,40 +1,78 @@
 package net.tianben.tlsywen;
 
+import com.mojang.logging.LogUtils;
+import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.tianben.tlsywen.attachment.PlayerFlightAttachment;
 import net.tianben.tlsywen.block.ModBlocks;
+import net.tianben.tlsywen.config.ConfigManager;
+import net.tianben.tlsywen.config.ModConfig;
 import net.tianben.tlsywen.entity.ModEntities;
 import net.tianben.tlsywen.item.ModItems;
 import net.tianben.tlsywen.item.group.ModItemGroups;
 import net.tianben.tlsywen.render.RenderLD;
-import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
-import com.mojang.logging.LogUtils;
-
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import java.util.List;
+import java.util.function.Supplier;
 
 @Mod(TheLastSwordYouWillEverNeed.MOD_ID)
 public class TheLastSwordYouWillEverNeed {
+
     public static final String MOD_ID = "tlsywen";
     public static final Logger LOGGER = LogUtils.getLogger();
 
+    private static final CreativeModeTab.TabVisibility VISIBILITY =
+            CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS;
+
+    private static final List<Supplier<? extends Item>> SWORD_TIERS = List.of(
+            ModItems.THELASTSWORDYOUWILLEVERNEEDLV1,
+            ModItems.THELASTSWORDYOUWILLEVERNEEDLV2,
+            ModItems.THELASTSWORDYOUWILLEVERNEEDLV3,
+            ModItems.THELASTSWORDYOUWILLEVERNEEDLV4,
+            ModItems.THELASTSWORDYOUWILLEVERNEEDLV5,
+            ModItems.THELASTSWORDYOUWILLEVERNEEDLV6,
+            ModItems.THELASTSWORDYOUWILLEVERNEEDLV7,
+            ModItems.THELASTSWORDYOUWILLEVERNEEDLV8,
+            ModItems.THELASTSWORDYOUWILLEVERNEEDLV9,
+            ModItems.THELASTSWORDYOUWILLEVERNEEDLV10,
+            ModItems.REALLYTHELASTSWORDYOUWILLEVERNEED
+    );
+
+    private static final List<Supplier<? extends Item>> DRAGON_CRYSTAL_ARMOR = List.of(
+            ModItems.DRAGON_CRYSTAL_HELMET,
+            ModItems.DRAGON_CRYSTAL_CHESTPLATE,
+            ModItems.DRAGON_CRYSTAL_LEGGINGS,
+            ModItems.DRAGON_CRYSTAL_BOOTS
+    );
+
     public TheLastSwordYouWillEverNeed(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
+
+        ConfigManager.init();
+
+        if (ConfigManager.isClothConfigLoaded()) {
+            modContainer.registerExtensionPoint(
+                    IConfigScreenFactory.class,
+                    (container, parent) -> AutoConfig.getConfigScreen(ModConfig.class, parent).get()
+            );
+        }
 
         ModItemGroups.register(modEventBus);
         ModBlocks.register(modEventBus);
@@ -43,7 +81,6 @@ public class TheLastSwordYouWillEverNeed {
         PlayerFlightAttachment.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(this);
-
         modEventBus.addListener(this::addCreative);
     }
 
@@ -51,139 +88,56 @@ public class TheLastSwordYouWillEverNeed {
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            addBuildingBlocks(event);
-        } else if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
-            addNaturalBlocks(event);
-        } else if (event.getTabKey() == CreativeModeTabs.COMBAT) {
-            addCombatItems(event);
-        } else if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-            addIngredients(event);
+        switch (event.getTabKey().location().getPath()) {
+            case "building_blocks" -> addBuildingBlocks(event);
+            case "natural_blocks" -> addNaturalBlocks(event);
+            case "combat" -> addCombatItems(event);
+            case "ingredients" -> addIngredients(event);
         }
     }
 
     private void addBuildingBlocks(BuildCreativeModeTabContentsEvent event) {
-        event.insertAfter(
-                new ItemStack(Items.NETHERITE_BLOCK),
-                new ItemStack(ModItems.COMPRESSED_STAR.get()),
-                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
-        );
-        event.insertAfter(
-                new ItemStack(ModItems.COMPRESSED_STAR.get()),
-                new ItemStack(ModItems.DRAGON_CRYSTAL_BLOCK.get()),
-                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
-        );
+        insertChain(event, Items.NETHERITE_BLOCK, List.of(
+                ModItems.COMPRESSED_STAR,
+                ModItems.DRAGON_CRYSTAL_BLOCK
+        ));
     }
 
-    private void addNaturalBlocks(@NotNull BuildCreativeModeTabContentsEvent event) {
-        event.insertAfter(
-                new ItemStack(Items.ANCIENT_DEBRIS),
-                new ItemStack(ModItems.DRAGON_CRYSTAL_ORE.get()),
-                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
-        );
+    private void addNaturalBlocks(BuildCreativeModeTabContentsEvent event) {
+        insertChain(event, Items.ANCIENT_DEBRIS, List.of(ModItems.DRAGON_CRYSTAL_ORE));
     }
 
-    private void addCombatItems(@NotNull BuildCreativeModeTabContentsEvent event) {
-        addWeapons(event);
-        addArmor(event);
+    private void addCombatItems(BuildCreativeModeTabContentsEvent event) {
+        insertChain(event, Items.NETHERITE_SWORD, SWORD_TIERS);
+        insertChain(event, Items.NETHERITE_BOOTS, DRAGON_CRYSTAL_ARMOR);
     }
 
-    private void addWeapons(@NotNull BuildCreativeModeTabContentsEvent event) {
-        event.insertAfter(
-                new ItemStack(Items.NETHERITE_SWORD),
-                new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV1.get()),
-                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
-        );
-        event.insertAfter(
-                new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV1.get()),
-                new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV2.get()),
-                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
-        );
-        event.insertAfter(
-                new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV2.get()),
-                new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV3.get()),
-                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
-        );
-        event.insertAfter(
-                new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV3.get()),
-                new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV4.get()),
-                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
-        );
-        event.insertAfter(
-                new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV4.get()),
-                new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV5.get()),
-                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
-        );
-        event.insertAfter(
-                new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV5.get()),
-                new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV6.get()),
-                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
-        );
-        event.insertAfter(
-                new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV6.get()),
-                new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV7.get()),
-                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
-        );
-        event.insertAfter(
-                new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV7.get()),
-                new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV8.get()),
-                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
-        );
-        event.insertAfter(
-                new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV8.get()),
-                new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV9.get()),
-                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
-        );
-        event.insertAfter(
-                new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV9.get()),
-                new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV10.get()),
-                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
-        );
-        event.insertAfter(
-                new ItemStack(ModItems.THELASTSWORDYOUWILLEVERNEEDLV10.get()),
-                new ItemStack(ModItems.REALLYTHELASTSWORDYOUWILLEVERNEED.get()),
-                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
-        );
+    private void addIngredients(BuildCreativeModeTabContentsEvent event) {
+        insertChain(event, Items.NETHERITE_INGOT, List.of(ModItems.DRAGON_CRYSTAL));
     }
 
-    private void addArmor(@NotNull BuildCreativeModeTabContentsEvent event) {
-        event.insertAfter(
-                new ItemStack(Items.NETHERITE_BOOTS),
-                new ItemStack(ModItems.DRAGON_CRYSTAL_HELMET.get()),
-                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
-        );
-        event.insertAfter(
-                new ItemStack(ModItems.DRAGON_CRYSTAL_HELMET.get()),
-                new ItemStack(ModItems.DRAGON_CRYSTAL_CHESTPLATE.get()),
-                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
-        );
-        event.insertAfter(
-                new ItemStack(ModItems.DRAGON_CRYSTAL_CHESTPLATE.get()),
-                new ItemStack(ModItems.DRAGON_CRYSTAL_LEGGINGS.get()),
-                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
-        );
-        event.insertAfter(
-                new ItemStack(ModItems.DRAGON_CRYSTAL_LEGGINGS.get()),
-                new ItemStack(ModItems.DRAGON_CRYSTAL_BOOTS.get()),
-                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
-        );
+    private static void insertChain(BuildCreativeModeTabContentsEvent event,
+                                    Item anchor,
+                                    List<Supplier<? extends Item>> items) {
+        Item previous = anchor;
+        for (var supplier : items) {
+            Item current = supplier.get();
+            event.insertAfter(
+                    new ItemStack(previous),
+                    new ItemStack(current),
+                    VISIBILITY
+            );
+            previous = current;
+        }
     }
 
-    private void addIngredients(@NotNull BuildCreativeModeTabContentsEvent event) {
-        event.insertAfter(
-                new ItemStack(Items.NETHERITE_INGOT),
-                new ItemStack(ModItems.DRAGON_CRYSTAL.get()),
-                CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS
-        );
-    }
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
     }
 
-    @EventBusSubscriber(modid = TheLastSwordYouWillEverNeed.MOD_ID, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = MOD_ID, value = Dist.CLIENT)
     static class ClientModEvents {
-        private static boolean hasRegistered = false;
 
         @SubscribeEvent
         static void onClientSetup(FMLClientSetupEvent event) {
@@ -191,13 +145,7 @@ public class TheLastSwordYouWillEverNeed {
 
         @SubscribeEvent
         public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-            if (!hasRegistered && ModEntities.LD.isBound()) {
-                event.registerEntityRenderer(
-                        ModEntities.LD.get(),
-                        RenderLD::new
-                );
-                hasRegistered = true;
-            }
+            event.registerEntityRenderer(ModEntities.LD.get(), RenderLD::new);
         }
     }
 }

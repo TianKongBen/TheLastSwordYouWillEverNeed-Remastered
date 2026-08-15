@@ -8,11 +8,16 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class DragonCrystalBlockEntity extends BlockEntity {
+
+    private static final float VOLUME = 1.0F;
+    private static final float PITCH = 1.0F;
+
     public DragonCrystalBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlocks.DRAGON_CRYSTAL_BE.get(), pos, state);
     }
 
     public void playSound(Level level, BlockPos pos) {
-        level.playSound(null, pos, SoundEvents.ENDER_DRAGON_GROWL, SoundSource.BLOCKS, 1.0F, 1.0F);
+        level.playSound(null, pos, SoundEvents.ENDER_DRAGON_GROWL,
+                SoundSource.BLOCKS, VOLUME, PITCH);
     }
 }

@@ -8,7 +8,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.tianben.tlsywen.TheLastSwordYouWillEverNeed;
 import net.tianben.tlsywen.item.ModItems;
@@ -25,7 +24,7 @@ public class ModItemGroups {
 
     public static final ItemGroup the_last_sword_you_will_ever_need = Registry.register(Registries.ITEM_GROUP,
             Identifier.of(MOD_ID, GROUP_ID),
-            FabricItemGroup.builder().displayName(Text.translatable("itemgroup." + GROUP_ID).formatted(Formatting.WHITE))
+            FabricItemGroup.builder().displayName(Text.translatable("itemgroup." + GROUP_ID))
                     .texture(BACKGROUND)
                     .icon(() -> new ItemStack(ModItems.REALLYTHELASTSWORDYOUWILLEVERNEED))
                     .entries((displayContext, entries) -> {
